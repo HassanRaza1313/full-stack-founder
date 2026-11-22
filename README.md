@@ -14,61 +14,72 @@ You can build it. Full Stack Founder runs the other half of a startup: research,
 /founder:ceo is my meal-planner idea worth building?
 ```
 
-## Your journey, from first idea to a whole portfolio
+## Your journey
 
-**Minute one: try it before you set anything up.**
-Install, then ask `/founder:ceo` about one idea. You get a quick read with a score out of 40, the strongest case against the idea, its top objections and three sharper versions, with nothing else installed.
-
-**When you're ready, set up once.**
-`/founder:setup` checks your machine, installs the basics in one batch you approve, and makes a private workspace for all your ideas. It asks only for what your next stage needs, so accounts for hosting and payments wait until a product needs them.
-
-**Then just say where an idea should go.** Every journey stops for your call.
+1. **Try it:** ask `/founder:ceo` about one idea. No setup needed.
+2. **Set up once:** `/founder:setup` installs only what your next stage needs.
+3. **Say where an idea should go.** It runs the journey and stops for your decisions.
 
 | You say | It runs |
 |---|---|
-| "Find me ideas in fintech" | A hunt through real complaints, reviews and competitor gaps, ranked with sources |
-| "Is this worth building?" | Customer and competitor research, pricing, the numbers, and a board vote |
-| "Build it" | Its own repo, a spec you approve, design, the build and tests |
-| "Launch it" | A case study and demo, plus posts and outreach as drafts you send |
-| "Add dark mode to Fraud Guard" | A product and technical review, then spec, build and release |
+| "Find me ideas in fintech" | A hunt through real complaints, reviews and competitor gaps |
+| "Is this worth building?" | Research, pricing, the numbers and a board vote |
+| "Build it" | Repo, spec, design, build and tests |
+| "Launch it" | Case study, demo, posts and outreach, as drafts you send |
+| "Add dark mode to Fraud Guard" | Review, spec, build and release |
 
-**Run every project from one place.**
-`/founder:ceo` on its own gives a CEO brief across your whole portfolio: where each product and idea stands, the decisions waiting for you with a recommendation for each, what's at risk, and the best next moves. A weekly journey checks what customers said, chases follow-ups and drafts next week's posts. Each product keeps its own repo. Ideas, decisions and lessons live in one workspace, so what one project teaches, the next one starts with.
-
-**Stop when you stop.**
-`/founder:pause` saves your work and shuts everything down. `/founder:resume` brings back only what the next task needs.
+4. **Run your portfolio:** `/founder:ceo` on its own gives one brief across every product.
+5. **Stop when you stop:** `/founder:pause` shuts everything down. `/founder:resume` brings back only what's needed.
 
 ## Built for what actually goes wrong
 
 **"I can build it. Selling it is the problem."**
-Every department of a startup sits behind one front door: research, pricing, design, build, marketing, sales, support and legal, plus a board for the big calls. Twelve journeys chain them, from "is this worth it?" to your first paying customer.
+- Every department behind one command: research, pricing, design, build, marketing, sales, support, legal.
+- A board for the big calls.
+- 12 journeys, from "is this worth it?" to your first paying customer.
 
-**"I have five half-built projects and no idea where each one stands."**
-One brief covers all of them: each product's stage, its key number and its next step, then the decisions waiting on you and the three best next moves. Your whole portfolio, run like an agency.
+**"Five half-built projects, and no idea where each stands."**
+- One brief: each product's stage, key number and next step.
+- The decisions waiting on you, each with a recommendation.
 
 **"All-in-one tools are average at everything."**
-Each job goes to the most-used specialist for it. Matt Pocock's skills build. Impeccable and Meng To design. Corey Haines's skills research, market and sell. founder-skill runs the board and the numbers, and Anthropic's skills handle legal and support. That's 51 skills with more than 650,000 GitHub stars between them.
+- Each job goes to the best-known specialist for it:
+  - **Build:** Matt Pocock
+  - **Design:** Impeccable, Meng To
+  - **Research, marketing, sales:** Corey Haines
+  - **Board and numbers:** founder-skill
+  - **Legal and support:** Anthropic
+- 51 skills, 650,000+ GitHub stars between them.
 
 **"Skills eat my context and my usage limit."**
-A fresh session with Full Stack Founder starts about 700 tokens heavier. The same 51 skills installed the usual way add about 3,400 to every session, in every project. Each skill loads only when a job needs it, so you get the same skills, with the same instructions, at a fraction of the weight. Before a journey runs, you see what it will cost; a full research step measured about 100k tokens.
+- About **700 tokens** added to a session, against about **3,400** for the same 51 skills installed the usual way.
+- Skills load only when a job needs them. Same skills, same instructions.
+- You see the cost before every journey.
 
 **"Installs break, and updates break them again."**
-Setup installs only the basics, such as Git and the GitHub CLI. Each release ships the exact skill versions it was tested with, so an upstream change reaches you only after it passes our tests.
+- Setup installs only the basics.
+- Each release ships the exact skill versions it was tested with.
+- Upstream changes reach you only after they pass our tests.
 
-**"It asks me everything, or it does things I never approved."**
-It works on its own between your decisions and stops only for them. Posts, emails and outreach arrive as drafts, and you send them.
+**"It asks me everything, or does things I never approved."**
+- It works on its own between your decisions.
+- Posts, emails and outreach arrive as drafts. You send them.
 
 **"AI tells me every idea is brilliant."**
-Every verdict opens with the strongest case against the idea, with sources. A deliberately weak test idea, a paid social network for left-handed people, scored 11 out of 40, then got three sharper versions and a pick it could build.
+- Every verdict opens with the case against the idea, with sources.
+- A deliberately weak idea scored 11/40, then got three sharper versions.
 
 **"I researched this once. Where did it go?"**
-Every result is a dated file with a summary and its sources. Months later, `/founder:ask` answers from them with links, and flags anything out of date.
+- Every result is a dated file, with sources.
+- `/founder:ask` answers from them, and flags what's out of date.
 
 **"I'm paying for servers before I have a customer."**
-Every idea you build becomes a case study, a demo and posts, for about $0. Only ideas that real customers ask for move to paid infrastructure.
+- Case studies, demos and posts on free hosting.
+- Paid infrastructure only once real customers ask.
 
 **"Docker is eating my RAM again."**
-`/founder:pause` saves and pushes your work, then stops Docker, WSL and everything else the product runs. In testing it freed 1.9 GB. `/founder:resume` starts only what the next task needs.
+- `/founder:pause` saves your work and stops Docker, WSL and every service. In testing it freed 1.9 GB.
+- `/founder:resume` starts only what the next task needs.
 
 ## Install
 
@@ -116,12 +127,12 @@ Start with these. Everything else runs behind them.
 
 | | |
 |---|---|
-| `/founder:ceo` | The front door: a CEO brief, or "do this" in plain words ("validate my meal-planner idea", "can this make money?"). It shows the cost before it runs a journey |
+| `/founder:ceo` | The front door. A portfolio brief, or any request in plain words |
 | `/founder:hunt` | Find product ideas from real complaints, reviews and competitor gaps |
 | `/founder:board` | Your board of directors for any decision |
 | `/founder:ask` | Answers from everything already researched and decided |
 | `/founder:setup` | Get this machine ready for the next stage |
-| `/founder:pause` · `/founder:resume` | Stop everything a product runs; start only what the next task needs |
+| `/founder:pause` · `/founder:resume` | Stop everything; start only what's needed |
 
 <details>
 <summary>Every command, for direct control</summary>
@@ -139,13 +150,13 @@ Run `/founder:portfolio help` for one line per command, or ask `/founder:ceo` in
 
 ## What it doesn't do
 
-- **It doesn't act in public for you.** It drafts posts, emails and outreach; you send them. Nothing is published, deployed or paid for without your yes.
-- **It doesn't replace a lawyer, an accountant or real customers.** Legal output is marked "not legal advice", and simulated customer reactions never count as evidence.
-- **It doesn't scrape or sign in anywhere.** Sites that block automated reading are read through your own browser, read-only, or the result says they were only partly read.
-- **It doesn't make big jobs free.** A full validation journey is several hundred thousand tokens; you see the estimate before it starts, and where you can stop.
-- **It isn't hosted.** Everything runs in your Claude Code, your files and your GitHub.
-- **It isn't affiliated with the skills' authors.** It ships their open-source skills with credit and their licences; they haven't endorsed it.
-- **It doesn't run paid production yet.** Moving a product with paying customers to production hosting, billing and monitoring is coming in a later release.
+- **Act in public for you.** You send every post and message. Nothing is published, deployed or paid for without your yes.
+- **Replace a lawyer, an accountant or real customers.** Legal output is "not legal advice". Simulated customers never count as evidence.
+- **Scrape or sign in anywhere.** Blocked sites are read through your own browser, read-only.
+- **Make big jobs free.** A full validation is several hundred thousand tokens. You see the estimate first.
+- **Run on a server.** It runs in your Claude Code, with your files and your GitHub.
+- **Speak for the skills' authors.** It ships their open-source skills with credit and licences. They haven't endorsed it.
+- **Run paid production yet.** Hosting, billing and monitoring for paying customers come in a later release.
 
 ## Tested
 
@@ -155,7 +166,9 @@ Run `/founder:portfolio help` for one line per command, or ask `/founder:ceo` in
 
 ## Credits
 
-Full Stack Founder orchestrates excellent open-source skills by Matt Pocock, Corey Haines, ferdinandobons, Paul Bakaus (Impeccable), Cloudflare, GreenSock, HeyGen, Meng To, Anthropic and others. Each release ships pinned, unchanged copies of their skills with their original licences in [`plugin/vendor/`](plugin/vendor/); see [CREDITS.md](CREDITS.md). Want one of these skills for work outside Full Stack Founder? Install the original from its author's repo.
+- Built on open-source skills by Matt Pocock, Corey Haines, ferdinandobons, Paul Bakaus (Impeccable), Cloudflare, GreenSock, HeyGen, Meng To, Anthropic and others.
+- Pinned, unchanged copies ship with their original licences in [`plugin/vendor/`](plugin/vendor/). See [CREDITS.md](CREDITS.md).
+- Want a skill outside Full Stack Founder? Install the original from its author.
 
 ## License
 
