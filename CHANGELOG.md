@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.5 · 2026-11-23
+
+- **One source for status.** The brief and the portfolio read every product's status from GitHub, so every computer shows the same picture. The copy on your computer is only checked for sync: "3 changes not pushed" or "2 commits not pulled" appear as warnings with the command that fixes them. If GitHub can't be reached, the brief shows your computer's copy and says so.
+- **No computer paths in the catalog.** A product's catalog entry stores only `repo: owner/name` and its media folder's name. Each computer finds the code under its own products folder and the media under its own media folder, both chosen in `/founder:setup`.
+
 ## 0.2.4 · 2026-11-23
 
 - **The catalog is the register.** The brief and the portfolio now start from your workspace repo's idea issues: an idea with `repo:` is a product. Each product's status comes from its own repo (`product/STATE.md`), read from the copy on this computer, or straight from GitHub when it isn't here. Products on another machine now show up, and unrelated folders in your products folder no longer do. Nothing scans the drive.

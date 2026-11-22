@@ -16,7 +16,10 @@ With no direction, run `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs"` once, wi
 
 ## No direction: the brief
 
-1. **Gather** in one call: `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs"`. It returns JSON in a few seconds. It starts from the catalog (the workspace repo's idea issues): an idea with `repo:` is a product, and its status comes from that repo's `product/STATE.md`, read from the copy on this computer or, if there isn't one, from GitHub (`onThisComputer: false`). It also returns open ideas, the newest listen, finance and pipeline summaries, stale results, launch blockers and unfinished runs. Use only this: no agent, no searching, no other reads. Open a file only when a decision needs a detail the JSON doesn't have.
+1. **Gather** in one call: `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs"`. It returns JSON in a few seconds. Use only this: no agent, no searching, no other reads. Open a file only when a decision needs a detail the JSON doesn't have.
+   - **Products** are the catalog's ideas with `repo:`. Their status always comes from GitHub (`source: github`), so every computer gives the same brief.
+   - **`sync`** compares the copy on this computer with GitHub. Mention it only when it's off, in one line per product: "<n> changes on this computer not pushed: `/founder:pause` saves them", or "<n> commits on GitHub not on this computer: `/founder:resume` pulls them".
+   - **`source` isn't `github`:** say "offline: showing this computer's copy" or "couldn't read <repo>".
    - **Nothing yet** (0 products, 0 ideas): skip the template and reply in three lines: the workspace is ready, then the two ways to start (`/founder:ceo is <idea> worth building?`, or "find me ideas in <space>").
    - `ghOk: false`: the catalog couldn't be read (GitHub offline or signed out). Say so in one line, with `gh auth status` as the check, and list only the unfinished idea runs.
 2. **Write it in at most 15 lines:**

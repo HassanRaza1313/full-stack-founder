@@ -126,7 +126,8 @@ if (!local) {
   const issue = issues.find((i) => new RegExp(`^slug:\\s*${slug}\\s*$`, 'm').test(i.body));
   if (issue) {
     let body = issue.body;
-    const values = { repo: `${owner}/${repoName}`, local: target, drive: mediaFolder, next: '/spec', updated: new Date().toLocaleDateString('en-CA') };
+    // Only machine-independent values: each computer finds the repo under its own productsDir and the media under its own driveRoot.
+    const values = { repo: `${owner}/${repoName}`, drive: mediaFolder ? name : '', next: '/spec', updated: new Date().toLocaleDateString('en-CA') };
     for (const [k, v] of Object.entries(values)) {
       const re = new RegExp(`^${k}:.*$`, 'm');
       body = re.test(body) ? body.replace(re, `${k}: ${v}`) : body.replace(/^-->/m, `${k}: ${v}\n-->`);

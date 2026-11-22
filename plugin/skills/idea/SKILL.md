@@ -24,13 +24,13 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Settings come from `node "
 
 ```
 <!-- studio
-slug · track · score (/40) · repo · local · drive · site · demo · demo_url · signals   ← product ideas
+slug · track · score (/40) · repo · drive · site · demo · demo_url · signals   ← product ideas
 impact · confidence · ease · score (/125) · review · spec · evidence                   ← enhancements
 next · updated
 -->
 ```
 
-Write it one `key: value` per line.
+Write it one `key: value` per line. Never store a path from this computer: `repo` is `owner/name` (each computer finds it under its own products folder) and `drive` is the product's folder name inside the media folder.
 
 No idea yet? `/founder:hunt` finds them from real complaints and competitor gaps.
 

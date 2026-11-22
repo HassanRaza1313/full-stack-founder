@@ -2,10 +2,12 @@
 // Usage: node brief.mjs [--all]  compact JSON: ideas, products (state, newest results, stale count, blockers), unfinished runs.
 //        --all adds closed ideas, issue bodies, idea folders (score, phase) and recent learnings, for /founder:portfolio.
 //
-// The catalog (the workspace repo's idea issues) is the register: an idea whose metadata has `repo:` is a product.
-// Each product's status lives in its own repo (product/STATE.md). It's read from the copy on this computer when there
-// is one (`local:`, or <productsDir>/<repo name>), otherwise straight from GitHub. Nothing else is searched.
-import { execFile } from 'node:child_process';
+// One source for status, so every computer gives the same brief:
+// - The catalog (the workspace repo's idea issues) is the register: an idea whose metadata has `repo:` is a product.
+// - Each product's status is read from GitHub: product/STATE.md and friends at the default branch (two calls per product).
+// - The copy on this computer (<productsDir>/<repo name>) is only checked for sync: changes not pushed yet, commits
+//   not pulled yet. It's used for status only when GitHub can't be reached, and then it says so.
+import { execFile, spawn } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { promisify } from 'node:util';
@@ -16,13 +18,28 @@ const all = process.argv.includes('--all');
 const dir = workspaceDir();
 const config = loadConfig(dir);
 const read = (f) => (f && existsSync(f) ? readFileSync(f, 'utf8') : '');
+const quote = (a) => (/^[\w@%+=:,./\\-]+$/.test(a) ? a : `"${String(a).replace(/"/g, '\\"')}"`);
 
-async function gh(args, json = true) {
-  try {
-    const out = (await exec('gh', args, { shell: isWin, timeout: 20000, windowsHide: true, maxBuffer: 1 << 24 })).stdout;
-    return json ? JSON.parse(out || '[]') : out;
-  } catch { return null; }
+// gh, with an optional stdin. On Windows a shell finds gh's shims, so arguments are quoted.
+function gh(args, { json = true, input } = {}) {
+  return new Promise((done) => {
+    const child = spawn(isWin ? `gh ${args.map(quote).join(' ')}` : 'gh', isWin ? [] : args, { shell: isWin, windowsHide: true });
+    let out = '';
+    const timer = setTimeout(() => child.kill(), 20000);
+    child.stdout.on('data', (d) => { out += d; });
+    child.on('error', () => { clearTimeout(timer); done(null); });
+    child.on('close', (code) => {
+      clearTimeout(timer);
+      if (code !== 0) return done(null);
+      try { done(json ? JSON.parse(out || '[]') : out); } catch { done(null); }
+    });
+    if (input) child.stdin.end(input); else child.stdin.end();
+  });
 }
+const graphql = (query, variables) => gh(['api', 'graphql', '--input', '-'], { input: JSON.stringify({ query, variables }) }).then((r) => r?.data ?? null);
+const git = async (cwd, args, timeout = 15000) => {
+  try { return (await exec('git', ['-C', cwd, ...args], { timeout, windowsHide: true })).stdout; } catch { return null; }
+};
 
 // The `key: value` lines inside an issue's <!-- studio ... --> block.
 function meta(body = '') {
@@ -48,23 +65,6 @@ function state(text) {
   return s;
 }
 
-// The newest dated result in a folder: its file and summary line.
-function newest(folder) {
-  if (!existsSync(folder)) return null;
-  const files = [];
-  const walk = (d, depth) => {
-    for (const e of readdirSync(d, { withFileTypes: true })) {
-      if (e.isDirectory() && depth < 2) walk(join(d, e.name), depth + 1);
-      else if (/^\d{4}-\d{2}-\d{2}.*\.md$/.test(e.name)) files.push(join(d, e.name));
-    }
-  };
-  walk(folder, 0);
-  const name = (f) => f.split(/[\\/]/).pop();
-  const f = files.sort((a, b) => (name(a) < name(b) ? 1 : -1))[0];
-  if (!f) return null;
-  return { file: f, summary: ((read(f).match(/^summary:\s*(.+)$/m) ?? [])[1] ?? '').slice(0, 200) };
-}
-
 // Runs whose latest line for a playbook stopped or failed.
 function unfinished(text, target) {
   const last = {};
@@ -75,10 +75,70 @@ function unfinished(text, target) {
   return Object.values(last).filter((r) => !r.status.startsWith('done') && !r.status.startsWith('skipped'));
 }
 
-// A file from a product's GitHub repo, for products that aren't on this computer.
-async function remoteFile(repo, path) {
-  const b64 = await gh(['api', `repos/${repo}/contents/${path}`, '--jq', '.content'], false);
-  return b64 ? Buffer.from(b64.replace(/\s/g, ''), 'base64').toString('utf8') : '';
+const summaryOf = (text) => ((text.match(/^summary:\s*(.+)$/m) ?? [])[1] ?? '').slice(0, 200);
+const stale = (text) => (text.match(/\*\*\(stale\)\*\*/g) ?? []).length;
+const dated = (n) => /^\d{4}-\d{2}-\d{2}.*\.md$/.test(n);
+const FOLDERS = { listen: 'product/listen', finance: 'product/finance', pipeline: 'product/sales/pipeline' };
+
+// A product's status from GitHub: one call for the files and folder listings, one for the newest results' summaries.
+const TREE = 'fragment T on Tree { entries { name type object { ... on Tree { entries { name type } } } } }';
+async function fromGitHub(repo) {
+  const [owner, name] = repo.split('/');
+  const blob = (alias, path) => `${alias}: object(expression: "HEAD:${path}") { ... on Blob { text } }`;
+  const tree = (alias, path) => `${alias}: object(expression: "HEAD:${path}") { ...T }`;
+  const q1 = `query($owner: String!, $name: String!) { repository(owner: $owner, name: $name) {
+    ${blob('state', 'product/STATE.md')} ${blob('runs', 'product/runs.md')} ${blob('index', 'product/INDEX.md')}
+    ${Object.entries(FOLDERS).map(([k, p]) => tree(k, p)).join(' ')} } } ${TREE}`;
+  const r = (await graphql(q1, { owner, name }))?.repository;
+  if (!r) return null;
+  // The newest dated file in each folder, one level of subfolders deep (names start with their date).
+  const newestPath = (k) => {
+    const files = [];
+    for (const e of r[k]?.entries ?? []) {
+      if (e.type === 'blob' && dated(e.name)) files.push(`${FOLDERS[k]}/${e.name}`);
+      for (const s of e.object?.entries ?? []) if (s.type === 'blob' && dated(s.name)) files.push(`${FOLDERS[k]}/${e.name}/${s.name}`);
+    }
+    return files.sort((a, b) => (a.split('/').pop() < b.split('/').pop() ? 1 : -1))[0] ?? null;
+  };
+  const paths = Object.fromEntries(Object.keys(FOLDERS).map((k) => [k, newestPath(k)]));
+  const wanted = Object.entries(paths).filter(([, p]) => p);
+  const r2 = wanted.length
+    ? (await graphql(`query($owner: String!, $name: String!) { repository(owner: $owner, name: $name) { ${wanted.map(([k, p]) => blob(k, p.replace(/"/g, '\\"'))).join(' ')} } }`, { owner, name }))?.repository ?? {}
+    : {};
+  const result = (k) => (paths[k] ? { file: `https://github.com/${repo}/blob/HEAD/${paths[k]}`, summary: summaryOf(r2[k]?.text ?? '') } : null);
+  return {
+    stateText: r.state?.text ?? '', runsText: r.runs?.text ?? '', staleResults: stale(r.index?.text ?? ''),
+    listen: result('listen'), finance: result('finance'), pipeline: result('pipeline'),
+  };
+}
+
+// The same, from the copy on this computer: used only when GitHub can't be reached.
+function fromLocal(local) {
+  const p = join(local, 'product');
+  const newest = (folder) => {
+    if (!existsSync(folder)) return null;
+    const files = [];
+    for (const e of readdirSync(folder, { withFileTypes: true })) {
+      if (e.isFile() && dated(e.name)) files.push(join(folder, e.name));
+      if (e.isDirectory()) for (const s of readdirSync(join(folder, e.name))) if (dated(s)) files.push(join(folder, e.name, s));
+    }
+    const f = files.sort((a, b) => (a.split(/[\\/]/).pop() < b.split(/[\\/]/).pop() ? 1 : -1))[0];
+    return f ? { file: f, summary: summaryOf(read(f)) } : null;
+  };
+  return {
+    stateText: read(join(p, 'STATE.md')), runsText: read(join(p, 'runs.md')), staleResults: stale(read(join(p, 'INDEX.md'))),
+    listen: newest(join(p, 'listen')), finance: newest(join(p, 'finance')), pipeline: newest(join(p, 'sales', 'pipeline')),
+  };
+}
+
+// How the copy on this computer differs from GitHub: changes not committed, commits not pushed, commits not pulled.
+async function sync(local) {
+  const fetched = (await git(local, ['fetch', '--quiet'])) !== null;
+  const status = await git(local, ['status', '--porcelain=v1', '--branch'], 5000);
+  if (status === null) return null;
+  const [head, ...rest] = status.split(/\r?\n/).filter(Boolean);
+  const n = (word) => Number((head.match(new RegExp(`${word} (\\d+)`)) ?? [])[1] ?? 0);
+  return { uncommitted: rest.length, unpushed: n('ahead'), notPulled: fetched ? n('behind') : null, inSync: rest.length === 0 && n('ahead') === 0 && (!fetched || n('behind') === 0) };
 }
 
 // 1. The register.
@@ -89,24 +149,27 @@ const status = (i) => (i.labels.find((l) => l.name.startsWith('status:'))?.name 
 const ended = new Set(['rejected', 'sunset', 'shelved']);
 const entries = (issues ?? []).map((i) => ({ issue: i, meta: meta(i.body), status: status(i) }));
 
-// 2. Products: each catalogued repo, read locally when it's here, otherwise from GitHub.
+// 2. Products: status from GitHub; the local copy only for sync, or as the fallback when offline.
 const products = await Promise.all(entries.filter((e) => e.meta.repo && !ended.has(e.status)).map(async ({ issue, meta: m, status: st }) => {
   const repoName = m.repo.split('/').pop();
-  const local = [m.local, config.productsDir && join(config.productsDir, repoName)].find((d) => d && existsSync(join(d, 'product', 'STATE.md')));
-  const p = local ? join(local, 'product') : null;
-  const [stateText, runsText, blockers] = await Promise.all([
-    p ? read(join(p, 'STATE.md')) : remoteFile(m.repo, 'product/STATE.md'),
-    p ? read(join(p, 'runs.md')) : remoteFile(m.repo, 'product/runs.md'),
+  const local = config.productsDir && existsSync(join(config.productsDir, repoName, '.git')) ? join(config.productsDir, repoName) : null;
+  const [remote, localSync, blockers] = await Promise.all([
+    fromGitHub(m.repo),
+    local ? sync(local) : null,
     gh(['issue', 'list', '-R', m.repo, '--state', 'open', '--label', 'launch-blocker', '--limit', '20', '--json', 'number,title']),
   ]);
+  const src = remote ?? (local ? fromLocal(local) : null);
+  const media = m.drive && config.driveRoot ? join(config.driveRoot, m.drive) : null;
   return {
     name: issue.title, slug: m.slug ?? repoName, issue: issue.number, catalogStatus: st, repo: m.repo,
-    onThisComputer: Boolean(local), local: local ?? null, drive: m.drive ?? null, demo: m.demo_url ?? m.demo ?? null,
-    ...(stateText ? state(stateText) : { stateMissing: true }),
-    listen: p ? newest(join(p, 'listen')) : null, finance: p ? newest(join(p, 'finance')) : null, pipeline: p ? newest(join(p, 'sales', 'pipeline')) : null,
-    staleResults: p ? (read(join(p, 'INDEX.md')).match(/\*\*\(stale\)\*\*/g) ?? []).length : null,
-    runs: unfinished(runsText, repoName),
+    source: remote ? 'github' : local ? 'this computer (GitHub unreachable)' : 'unavailable',
+    ...(src?.stateText ? state(src.stateText) : { stateMissing: true }),
+    listen: src?.listen ?? null, finance: src?.finance ?? null, pipeline: src?.pipeline ?? null,
+    staleResults: src?.staleResults ?? null,
+    runs: unfinished(src?.runsText ?? '', repoName),
     blockers: blockers ?? [],
+    onThisComputer: Boolean(local), sync: localSync,
+    media: media && existsSync(media) ? media : null, demo: m.demo_url ?? m.demo ?? null,
   };
 }));
 
@@ -135,6 +198,12 @@ console.log(JSON.stringify({
   date: new Date().toLocaleDateString('en-CA'),
   workspace: dir, studioRepo: config.studioRepo ?? null,
   ghOk: issues !== null,
-  counts: { products: products.length, ideas: ideas.length, notOnThisComputer: products.filter((p) => !p.onThisComputer).length, unfinishedRuns: ideaRuns.length + products.reduce((n, p) => n + p.runs.length, 0) },
+  counts: {
+    products: products.length, ideas: ideas.length,
+    outOfSync: products.filter((p) => p.sync && !p.sync.inSync).length,
+    offline: products.filter((p) => p.source.startsWith('this computer')).length,
+    unavailable: products.filter((p) => p.source === 'unavailable').length,
+    unfinishedRuns: ideaRuns.length + products.reduce((n, p) => n + p.runs.length, 0),
+  },
   products, ideas, ideaRuns, ideaFolders, learnings,
 }, null, 1));

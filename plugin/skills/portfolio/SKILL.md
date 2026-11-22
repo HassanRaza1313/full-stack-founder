@@ -12,7 +12,7 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Settings come from `worksp
 ## Gather (one call)
 
 Run `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs" --all`. It returns JSON in a few seconds, with no agent or searching. It starts from the catalog, the workspace repo's idea issues:
-- **Products:** every idea with `repo:`. Status comes from that repo's `product/STATE.md`, from the copy on this computer or else from GitHub (`onThisComputer: false`), plus the newest listen, finance and pipeline summaries, stale results, launch blockers, unfinished runs, and the `drive:` and demo links.
+- **Products:** every idea with `repo:`. Status always comes from GitHub, so every computer shows the same portfolio: each product's `STATE.md`, newest listen, finance and pipeline summaries, stale results, launch blockers and unfinished runs, plus its media folder and demo link. `sync` flags work on this computer that isn't pushed, or GitHub commits not pulled yet: show it as a warning.
 - **Ideas:** every other idea issue, open and closed (and retired products), with its stage, labels and metadata.
 - **Idea folders:** each one's latest score out of 40, its discovery phase, and whether it has a brief.
 - **Learnings:** the newest 5 lines of `LEARNINGS.md`.
