@@ -52,11 +52,15 @@
         "domain-modeling": {
           "path": "skills/engineering/domain-modeling",
           "hash": "9400f8867aeb5c7e"
+        },
+        "grilling": {
+          "path": "skills/productivity/grilling",
+          "hash": "d954f950271ad258"
         }
       },
       "sha": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
       "license": "MIT",
-      "synced": "2026-11-22"
+      "synced": "2026-11-23"
     },
     "marketingskills": {
       "repo": "coreyhaines31/marketingskills",

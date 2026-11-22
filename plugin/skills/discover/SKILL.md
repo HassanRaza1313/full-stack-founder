@@ -1,7 +1,7 @@
 ---
 name: discover
 description: Product judgment. New product → quick read or deep discovery with the refinement loop. Enhancement → product + technical review and a score. No code.
-argument-hint: "<idea> [--quick] | <product>#<n>"
+argument-hint: "<idea> [--quick | --frame] | <product>#<n>"
 disable-model-invocation: true
 ---
 
@@ -26,10 +26,28 @@ Write to `<workspace>/ideas/<slug>/`:
 7. Refresh the index, then commit `discover(<slug>): v0 <n>/40`.
 8. **Gate:** build, pick a variant, park, or reject. Show the case against in two lines next to the score.
 
+## A2 · Frame: `<idea> --frame`
+
+The idea is a hypothesis in the founder's head. Turn it into their full picture before anything judges it.
+
+1. **Interview:** load Pocock's `grilling` (`node "${CLAUDE_PLUGIN_ROOT}/scripts/skill.mjs" grilling`) and follow it. Seed its design tree with these branches, and skip any the quick read, the issue or the notes already settle:
+   - **Who:** the first customer, as one specific person.
+   - **Problem:** what hurts, how often, and what it costs them.
+   - **Today:** what they do instead, and why that falls short.
+   - **The picture:** the core experience in a few steps, and the one thing it must do well.
+   - **Why now, why you:** the change that makes it possible, and your edge.
+   - **Money:** who pays, roughly how much, and how.
+   - **Success:** what "working" looks like in 90 days.
+   - **Limits:** time, budget, and what you won't build.
+   Facts (competitors, prices, market) are research's job later: note them as open questions, don't look them up here. Keep it to about three rounds.
+2. **Save** `00-intake/brief.md`: one short section per branch, in the founder's words, each unconfirmed point marked `[assumption]`, then **Open questions** for research.
+3. Commit `discover(<slug>): brief`, and comment a three-line summary on the issue.
+4. **Gate:** the founder confirms the brief. Every later step reads it first and asks nothing it already answers.
+
 ## B · Deep: `<idea>`
 
 1. Label `status:researching`. Say the run is resumable (`PROGRESS.md`).
-2. Run **startup-design** in full mode from `<workspace>/ideas/`, with project name `<slug>`. Feed it the issue, the quick read and the notes as intake, so it only asks what's unknown. At its interview gate, suggest `/founder:sales prospects --signal`, and respect a "defer".
+2. Run **startup-design** in full mode from `<workspace>/ideas/`, with project name `<slug>`. Feed it the issue, the brief (`00-intake/brief.md`), the quick read and the notes as intake, so it only asks what's unknown. At its interview gate, suggest `/founder:sales prospects --signal`, and respect a "defer".
 3. **Add:**
    - In `02-strategy/value-proposition.md`: the USP ("Only we ___ for ___ because ___") and a comparison with the top 3 competitors.
    - In `01-discovery/target-audience.md`: 3 personas, each with job, current alternative, switching trigger, objections, willingness to pay, and where they spend time online. These become the early-access qualifier.

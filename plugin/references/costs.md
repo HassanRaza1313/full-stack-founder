@@ -5,6 +5,7 @@ Tokens used per command, including its subagents. **Measured** values come from 
 | Command | About | Basis |
 |---|---|---|
 | `/founder:discover --quick` | 80k | estimate |
+| `/founder:discover --frame` | 40k | estimate: a three-round interview |
 | `/founder:research <one topic>` | 100k | measured: 82k and 101k (competitors and customers, 2026-11-22) |
 | `/founder:board` | 180k | measured: 165k for the three lens members (2026-11-22), plus the chair |
 | `/founder:hunt` | 350k | estimate: three research legs and a synthesis |

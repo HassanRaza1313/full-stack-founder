@@ -23,7 +23,7 @@ You can build it. Full Stack Founder runs the other half of a startup: research,
 | You say | It runs |
 |---|---|
 | "Find me ideas in fintech" | A hunt through real complaints, reviews and competitor gaps |
-| "Is this worth building?" | Research, pricing, the numbers and a board vote |
+| "Is this worth building?" | A short interview to pin down your idea, then research, pricing, the numbers and a board vote |
 | "Build it" | Repo, spec, design, build and tests |
 | "Launch it" | Case study, demo, posts and outreach, as drafts you send |
 | "Add dark mode to Fraud Guard" | Review, spec, build and release |
@@ -49,10 +49,10 @@ You can build it. Full Stack Founder runs the other half of a startup: research,
   - **Research, marketing, sales:** Corey Haines
   - **Board and numbers:** founder-skill
   - **Legal and support:** Anthropic
-- 51 skills, 650,000+ GitHub stars between them.
+- 52 skills, 650,000+ GitHub stars between them.
 
 **"Skills eat my context and my usage limit."**
-- About **700 tokens** added to a session, against about **3,400** for the same 51 skills installed the usual way.
+- About **700 tokens** added to a session, against about **3,400** for the same 52 skills installed the usual way.
 - Skills load only when a job needs them. Same skills, same instructions.
 - You see the cost before every journey.
 

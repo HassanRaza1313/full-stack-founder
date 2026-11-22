@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.2.2 · 2026-11-23
+
+- **Frame the idea first.** Validation now starts with a short interview (Matt Pocock's `grilling`): who it's for, the problem, the picture in your head, money, success and limits. It's saved as `brief.md`, and research, pricing, the board and the spec all work from it. `/founder:discover <idea> --frame` runs it on its own.
+- **Fix:** the spec interview (`grill-with-docs`) depends on Pocock's `grilling` skill, which wasn't shipped. It's now pinned, making 52 skills.
+- **README:** short bullets in place of long paragraphs.
+
 ## 0.2.1 · 2026-11-23
 
 - **Free hosting by default.** Showcase no longer needs a domain: case studies and demos can live at a free `.vercel.app` address. Your own domain (about $10 a year) is an optional upgrade, any time.

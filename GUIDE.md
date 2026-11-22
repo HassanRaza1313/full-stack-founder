@@ -151,13 +151,23 @@ Say it in plain words to `/founder:ceo`, or run each step yourself. Before each 
 - **You get:** a score out of 40, the case against the idea, its objections, and three sharper versions.
 - **You decide:** continue, refine, park or drop.
 
-### Step 2: Refine and validate
+### Step 2: Frame the idea
+
+The idea starts as a guess in your head. A short interview turns it into a clear picture first.
+
+- **It asks** in rounds, each question with a suggested answer. Say "yes" to accept one.
+- **It covers:** who it's for, the problem, what they do today, what you picture, why now, money, what success looks like, and your limits.
+- **You get:** `brief.md`, your idea in your own words, with open questions for research.
+- **You decide:** confirm the brief, or change it.
+- Every later step works from the brief, and doesn't ask you the same things again.
+
+### Step 3: Validate
 
 ```
 /founder:ceo validate <idea>
 ```
 
-It runs on its own:
+This starts with the interview (step 2), then runs on its own:
 - **Customers:** who has the problem, and in their own words.
 - **Competitors:** who already solves it, and where they fall short.
 - **Pricing and numbers:** what to charge, the cost to serve, and unit economics.
@@ -169,7 +179,7 @@ It runs on its own:
 - Want a second opinion on a big call? `/founder:board should I build <idea>?`
 - Every result is saved as a dated file with its sources.
 
-### Step 3: Build
+### Step 4: Build
 
 ```
 /founder:ceo build <idea>
@@ -186,7 +196,7 @@ It runs on its own:
 - Stop for the day: `/founder:pause`. It saves your work and frees memory.
 - Come back: `/founder:resume`. It recaps where you left off.
 
-### Step 4: Launch
+### Step 5: Launch
 
 ```
 /founder:ceo launch <product>
@@ -202,7 +212,7 @@ It runs on its own:
 - **You decide:** approve each public piece.
 - **You send:** every post and message. Nothing goes out without you.
 
-### Step 5: Listen
+### Step 6: Listen
 
 - `/founder:listen` weekly: signups, what customers said, and how close the product is to real demand.
 - When customers start paying, the product moves to paid infrastructure.

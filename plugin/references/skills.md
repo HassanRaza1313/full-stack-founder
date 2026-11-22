@@ -14,6 +14,7 @@ Studio skills target, add context, save and track. The work itself is done by th
 | Brief, copy, CRO, social, SEO, launch, plan, calendar, emails, onboarding, ASO, directories | `product-marketing`, `copywriting`, `cro`, `social`, `seo-audit`, `launch`, `marketing-plan`, `content-strategy`, `emails`, `onboarding`, `aso`, `directory-submissions` (Corey Haines) | market, showcase |
 | Prospects, outreach, sales assets | `prospecting`, `cold-email`, `sales-enablement` (Corey Haines) | sales |
 | Retention | `churn-prevention` (Corey Haines) | support |
+| Framing the idea | `grilling` (Matt Pocock) | discover --frame |
 | Spec and tickets | `grill-with-docs`, `to-spec`, `to-tickets` (Matt Pocock) | spec |
 | Build | `implement-spec`, `tdd`, `code-review` (Matt Pocock) | build |
 | Repo setup | `setup-matt-pocock-skills` (Matt Pocock) | setup-product |
