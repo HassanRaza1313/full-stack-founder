@@ -1,0 +1,17 @@
+{
+  "name": "{{SLUG}}",
+  "private": true,
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "typecheck": "turbo typecheck",
+    "test": "turbo test",
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:reset": "supabase db reset",
+    "db:types": "supabase gen types typescript --local > packages/shared/src/database.types.ts",
+    "db:push": "supabase db push"
+  }
+}

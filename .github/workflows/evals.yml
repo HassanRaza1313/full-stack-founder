@@ -1,0 +1,31 @@
+name: Evals
+# Manual only: every case runs a real Claude session and costs tokens. Run before each release, after a vendor sync.
+# Needs an ANTHROPIC_API_KEY repository secret. Linux gives the shell cases the sandbox Windows lacks.
+on:
+  workflow_dispatch:
+    inputs:
+      max_cost_usd:
+        description: Hard cost ceiling for the whole run
+        default: '5'
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+      - name: Run the suite
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: claude plugin eval plugin --ablation none --trust-plugin --allow-tools Bash Write Edit WebFetch WebSearch --max-cost-usd ${{ inputs.max_cost_usd }} --json evals.json --no-publish
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eval-results
+          path: |
+            evals.json
+            plugin/evals/results/

@@ -1,0 +1,207 @@
+[
+  {
+    "name": "type:idea",
+    "color": "1d76db",
+    "description": "A feature idea to try"
+  },
+  {
+    "name": "type:spec",
+    "color": "0e8a16",
+    "description": "A spec; its tickets are sub-issues"
+  },
+  {
+    "name": "type:task",
+    "color": "c2e0c6",
+    "description": "A ticket to build"
+  },
+  {
+    "name": "type:bug",
+    "color": "d73a4a",
+    "description": "Something broken"
+  },
+  {
+    "name": "type:chore",
+    "color": "ededed",
+    "description": "Maintenance"
+  },
+  {
+    "name": "status:new",
+    "color": "ededed",
+    "description": "Captured, not yet scored"
+  },
+  {
+    "name": "status:exploring",
+    "color": "c5def5",
+    "description": "Gathering evidence"
+  },
+  {
+    "name": "status:validated",
+    "color": "bfd4f2",
+    "description": "Worth building"
+  },
+  {
+    "name": "status:specced",
+    "color": "0e8a16",
+    "description": "Spec written and in the backlog; not being built yet"
+  },
+  {
+    "name": "status:parked",
+    "color": "cccccc",
+    "description": "Not now; reason in a comment"
+  },
+  {
+    "name": "status:building",
+    "color": "fbca04",
+    "description": "Spec or tickets in progress"
+  },
+  {
+    "name": "status:shipped",
+    "color": "0e8a16",
+    "description": "Released; outcome being measured"
+  },
+  {
+    "name": "status:rejected",
+    "color": "b60205",
+    "description": "Not doing; reason in comments"
+  },
+  {
+    "name": "source:team",
+    "color": "f2f2f2",
+    "description": "From you or a co-worker"
+  },
+  {
+    "name": "source:feedback",
+    "color": "f2f2f2",
+    "description": "From a user or reader"
+  },
+  {
+    "name": "source:analytics",
+    "color": "f2f2f2",
+    "description": "From product data"
+  },
+  {
+    "name": "source:support",
+    "color": "f2f2f2",
+    "description": "From support email"
+  },
+  {
+    "name": "source:review",
+    "color": "f2f2f2",
+    "description": "From an app store review"
+  },
+  {
+    "name": "source:waitlist",
+    "color": "f2f2f2",
+    "description": "From early-access signups"
+  },
+  {
+    "name": "source:discovery",
+    "color": "f2f2f2",
+    "description": "From research"
+  },
+  {
+    "name": "source:competitor",
+    "color": "f2f2f2",
+    "description": "From watching a competitor"
+  },
+  {
+    "name": "complexity:low",
+    "color": "c2e0c6",
+    "description": "Routine; builder agent"
+  },
+  {
+    "name": "complexity:medium",
+    "color": "fef2c0",
+    "description": "Builder agent"
+  },
+  {
+    "name": "complexity:high",
+    "color": "f9d0c4",
+    "description": "Architect agent; you approve the PR"
+  },
+  {
+    "name": "risk:security",
+    "color": "b60205",
+    "description": "Always architect; you approve"
+  },
+  {
+    "name": "risk:payments",
+    "color": "b60205",
+    "description": "Always architect; you approve"
+  },
+  {
+    "name": "risk:data",
+    "color": "b60205",
+    "description": "Always architect; you approve"
+  },
+  {
+    "name": "area:web",
+    "color": "bfdadc",
+    "description": ""
+  },
+  {
+    "name": "area:mobile",
+    "color": "bfdadc",
+    "description": ""
+  },
+  {
+    "name": "area:backend",
+    "color": "bfdadc",
+    "description": ""
+  },
+  {
+    "name": "area:design",
+    "color": "bfdadc",
+    "description": ""
+  },
+  {
+    "name": "area:marketing",
+    "color": "bfdadc",
+    "description": ""
+  },
+  {
+    "name": "area:infra",
+    "color": "bfdadc",
+    "description": ""
+  },
+  {
+    "name": "needs-triage",
+    "color": "ededed",
+    "description": "Not yet sorted"
+  },
+  {
+    "name": "needs-info",
+    "color": "d876e3",
+    "description": "Waiting for more information"
+  },
+  {
+    "name": "ready-for-agent",
+    "color": "0e8a16",
+    "description": "An agent can build this"
+  },
+  {
+    "name": "ready-for-human",
+    "color": "fbca04",
+    "description": "Needs a person"
+  },
+  {
+    "name": "wontfix",
+    "color": "ffffff",
+    "description": "Won't be done"
+  },
+  {
+    "name": "approved",
+    "color": "2ea44f",
+    "description": "You approved this gate"
+  },
+  {
+    "name": "launch-blocker",
+    "color": "e99695",
+    "description": "Must ship before production"
+  },
+  {
+    "name": "hotfix",
+    "color": "d93f0b",
+    "description": "Fast lane fix"
+  }
+]

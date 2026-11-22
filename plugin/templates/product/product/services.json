@@ -1,0 +1,6 @@
+{
+  "$comment": "What this product needs running while you work on it. /founder:resume starts only what the next task needs; /founder:pause stops everything. 'use' is a built-in (docker, supabase); anything else gives 'run' (a long-running command) or 'start' and 'stop'. Remove supabase if the product has no database.",
+  "services": [
+    { "id": "supabase", "use": "supabase", "why": "Local database, auth and storage" }
+  ]
+}

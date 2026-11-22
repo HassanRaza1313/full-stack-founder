@@ -1,0 +1,16 @@
+{
+  "name": "full-stack-founder",
+  "owner": {
+    "name": "Hassan Raza Mahmood"
+  },
+  "metadata": {
+    "description": "Full Stack Founder: your one-person product agency, inside Claude Code. The founder OS for research, build, launch and sales."
+  },
+  "plugins": [
+    {
+      "name": "founder",
+      "source": "./plugin",
+      "description": "Your one-person product agency, inside Claude Code: guided setup, research, finance, product, engineering, marketing and sales departments, playbooks that combine them, searchable results, and pause/resume that frees your machine."
+    }
+  ]
+}

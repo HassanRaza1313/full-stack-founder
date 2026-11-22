@@ -1,0 +1,20 @@
+[
+  { "name": "type:idea", "color": "1d76db", "description": "A product idea" },
+  { "name": "type:process", "color": "5319e7", "description": "An improvement to a studio flow, skill or agent" },
+  { "name": "status:new", "color": "ededed", "description": "Captured, not yet assessed" },
+  { "name": "status:exploring", "color": "c5def5", "description": "Quick read done, deciding whether to build" },
+  { "name": "status:researching", "color": "bfd4f2", "description": "Deep discovery and refinement loop" },
+  { "name": "status:building", "color": "fbca04", "description": "Product repo exists; spec, design, build, verify" },
+  { "name": "status:showcased", "color": "0e8a16", "description": "Built and published as a portfolio project" },
+  { "name": "status:graduated", "color": "006b75", "description": "Chosen to become a real product" },
+  { "name": "status:live", "color": "0052cc", "description": "Deployed to production with real users" },
+  { "name": "status:parked", "color": "d4c5f9", "description": "Not now; not built" },
+  { "name": "status:shelved", "color": "f9d0c4", "description": "Built and showcased, not being pursued" },
+  { "name": "status:rejected", "color": "b60205", "description": "Not worth building; reason in comments" },
+  { "name": "status:sunset", "color": "5c5c5c", "description": "Was live, now shut down" },
+  { "name": "source:team", "color": "f2f2f2", "description": "Came from you or a co-worker" },
+  { "name": "source:feedback", "color": "f2f2f2", "description": "Came from a customer or reader" },
+  { "name": "source:competitor", "color": "f2f2f2", "description": "Came from watching a competitor" },
+  { "name": "source:discovery", "color": "f2f2f2", "description": "Came out of research" },
+  { "name": "approved", "color": "2ea44f", "description": "You approved this gate" }
+]

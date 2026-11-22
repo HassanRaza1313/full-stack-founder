@@ -1,0 +1,287 @@
+{
+  "$comment": "Pinned third-party skills shipped with this plugin version, copied unchanged with their licences. Maintained by scripts/vendor.mjs; never edit the copies.",
+  "repos": {
+    "pocock": {
+      "repo": "mattpocock/skills",
+      "ref": "v1.3.2",
+      "skills": {
+        "grill-with-docs": {
+          "path": "skills/engineering/grill-with-docs",
+          "hash": "bbf60554b6f102ed"
+        },
+        "to-spec": {
+          "path": "skills/engineering/to-spec",
+          "hash": "23e7133ad3781b22"
+        },
+        "to-tickets": {
+          "path": "skills/engineering/to-tickets",
+          "hash": "629fdfcc1f6c77fd"
+        },
+        "implement-spec": {
+          "path": "skills/engineering/implement-spec",
+          "hash": "32bf6846d1ce8ef8"
+        },
+        "implement": {
+          "path": "skills/engineering/implement",
+          "hash": "4315afe0e13693ea"
+        },
+        "setup-matt-pocock-skills": {
+          "path": "skills/engineering/setup-matt-pocock-skills",
+          "hash": "20dfa4781de1df55"
+        },
+        "tdd": {
+          "path": "skills/engineering/tdd",
+          "hash": "dddc88810ee2900b"
+        },
+        "code-review": {
+          "path": "skills/engineering/code-review",
+          "hash": "4acdbb888582562e"
+        },
+        "retro": {
+          "path": "skills/engineering/retro",
+          "hash": "e7b2f28bf8e88e53"
+        },
+        "triage": {
+          "path": "skills/engineering/triage",
+          "hash": "029d4d7c1b399085"
+        },
+        "diagnosing-bugs": {
+          "path": "skills/engineering/diagnosing-bugs",
+          "hash": "3a68c5587ff73df8"
+        },
+        "domain-modeling": {
+          "path": "skills/engineering/domain-modeling",
+          "hash": "9400f8867aeb5c7e"
+        }
+      },
+      "sha": "d1478fcb140db0b93c0c8df17bcfd311844749d0",
+      "license": "MIT",
+      "synced": "2026-11-22"
+    },
+    "marketingskills": {
+      "repo": "coreyhaines31/marketingskills",
+      "ref": "v2.14.25",
+      "skills": {
+        "customer-research": {
+          "path": "skills/customer-research",
+          "hash": "be0dea2e64715fec"
+        },
+        "competitor-profiling": {
+          "path": "skills/competitor-profiling",
+          "hash": "5c2e62c1522aa2fc"
+        },
+        "pricing": {
+          "path": "skills/pricing",
+          "hash": "13036d069528d2b4"
+        },
+        "offers": {
+          "path": "skills/offers",
+          "hash": "d637225368600336"
+        },
+        "product-marketing": {
+          "path": "skills/product-marketing",
+          "hash": "52a1ce654463a3da"
+        },
+        "copywriting": {
+          "path": "skills/copywriting",
+          "hash": "45273eb74265f9a9"
+        },
+        "launch": {
+          "path": "skills/launch",
+          "hash": "32cdc465c05301b3"
+        },
+        "cro": {
+          "path": "skills/cro",
+          "hash": "e83993b5493aacdd"
+        },
+        "social": {
+          "path": "skills/social",
+          "hash": "11dcca847dd3d1c8"
+        },
+        "seo-audit": {
+          "path": "skills/seo-audit",
+          "hash": "d3e9fca3b56c7a6f"
+        },
+        "onboarding": {
+          "path": "skills/onboarding",
+          "hash": "350322fd61b42c88"
+        },
+        "emails": {
+          "path": "skills/emails",
+          "hash": "c891b4677ce84cb8"
+        },
+        "directory-submissions": {
+          "path": "skills/directory-submissions",
+          "hash": "4ba555ada0cef1f3"
+        },
+        "aso": {
+          "path": "skills/aso",
+          "hash": "0559fe9c3eec59c1"
+        },
+        "marketing-plan": {
+          "path": "skills/marketing-plan",
+          "hash": "e3fd20b4ff82e322"
+        },
+        "content-strategy": {
+          "path": "skills/content-strategy",
+          "hash": "a087147996370d00"
+        },
+        "prospecting": {
+          "path": "skills/prospecting",
+          "hash": "0bdc4556cdb30f6d"
+        },
+        "cold-email": {
+          "path": "skills/cold-email",
+          "hash": "5e6ac7e5fbe6933a"
+        },
+        "sales-enablement": {
+          "path": "skills/sales-enablement",
+          "hash": "32d0668bdb35352a"
+        },
+        "churn-prevention": {
+          "path": "skills/churn-prevention",
+          "hash": "a579fce61fbcb944"
+        }
+      },
+      "sha": "5b2b400eec1e7e1cec76245a715d0b0d4fd2a9c1",
+      "license": "MIT",
+      "synced": "2026-11-22"
+    },
+    "startup-skill": {
+      "repo": "ferdinandobons/startup-skill",
+      "ref": "v1.10.0",
+      "skills": {
+        "startup-design": {
+          "path": "startup-design",
+          "hash": "ddc2f8222d3074c7"
+        },
+        "startup-positioning": {
+          "path": "startup-positioning",
+          "hash": "a3f1748ed8097ae9"
+        },
+        "startup-pitch": {
+          "path": "startup-pitch",
+          "hash": "8a2bb2ec0ac9b9f7"
+        }
+      },
+      "sha": "a5f97c317b93caedbb49d28f20e9ec283b2ec087",
+      "license": "MIT",
+      "synced": "2026-11-22"
+    },
+    "founder-skill": {
+      "repo": "Jakeschincariol/founder-skill",
+      "ref": null,
+      "skills": {
+        "founder-board": {
+          "path": "skills/founder-board",
+          "hash": "1bd7c561812244ca"
+        },
+        "founder-cfo": {
+          "path": "skills/founder-cfo",
+          "hash": "4628a35c2bbb2869"
+        }
+      },
+      "sha": "fd9385b0cfe1b96bebce3898fbd506d73eff5a9d",
+      "license": "MIT",
+      "synced": "2026-11-22"
+    },
+    "mengto": {
+      "repo": "MengTo/Skills",
+      "ref": null,
+      "skills": {
+        "build-awwwards-quality-sites": {
+          "path": "agent-skills/web-design/build-awwwards-quality-sites",
+          "hash": "c2343d3fcf57a959"
+        },
+        "no-ai-design-slop": {
+          "path": "agent-skills/ui/no-ai-design-slop",
+          "hash": "7f9bc49a82560c47"
+        }
+      },
+      "sha": "de18eaeebcad273d8c289b823b47b0b656379d0c",
+      "license": "MIT",
+      "synced": "2026-11-22"
+    },
+    "gsap": {
+      "repo": "greensock/gsap-skills",
+      "ref": null,
+      "skills": {
+        "gsap-core": {
+          "path": "skills/gsap-core",
+          "hash": "68109a2311d5f30f"
+        },
+        "gsap-timeline": {
+          "path": "skills/gsap-timeline",
+          "hash": "4eefc97633ea1b85"
+        },
+        "gsap-scrolltrigger": {
+          "path": "skills/gsap-scrolltrigger",
+          "hash": "ac4dd4c9ff65e2bd"
+        },
+        "gsap-react": {
+          "path": "skills/gsap-react",
+          "hash": "dc80731cf5cb58e1"
+        },
+        "gsap-performance": {
+          "path": "skills/gsap-performance",
+          "hash": "9b4fbbd3e744aba6"
+        }
+      },
+      "sha": "aed9cfd3277740755f6bfc1155c7aa645403b760",
+      "license": "MIT",
+      "synced": "2026-11-22"
+    },
+    "cloudflare": {
+      "repo": "cloudflare/security-audit-skill",
+      "ref": null,
+      "skills": {
+        "security-audit": {
+          "path": "skills/security-audit",
+          "hash": "1b8c341ae172e52d"
+        }
+      },
+      "sha": "c1c8a8c1471069fb0e188eeaff69b8e8db6564a8",
+      "license": "MIT",
+      "synced": "2026-11-22"
+    },
+    "anthropic": {
+      "repo": "anthropics/knowledge-work-plugins",
+      "ref": null,
+      "skills": {
+        "compliance-check": {
+          "path": "legal/skills/compliance-check",
+          "hash": "b0e39c329aef3540"
+        },
+        "review-contract": {
+          "path": "legal/skills/review-contract",
+          "hash": "707c49a919501c04"
+        },
+        "triage-nda": {
+          "path": "legal/skills/triage-nda",
+          "hash": "7b398530a21e2703"
+        },
+        "ticket-triage": {
+          "path": "customer-support/skills/ticket-triage",
+          "hash": "7b721f983c1b837b"
+        },
+        "draft-response": {
+          "path": "customer-support/skills/draft-response",
+          "hash": "10646fb4ea750238"
+        },
+        "kb-article": {
+          "path": "customer-support/skills/kb-article",
+          "hash": "b2178093346b5016"
+        }
+      },
+      "sha": "0e0fcacddcc892eb92a1b7873ff9d68159c47571",
+      "license": "Apache-2.0",
+      "synced": "2026-11-22"
+    }
+  },
+  "external": {
+    "impeccable": "Claude Code plugin \"impeccable\" (pbakaus/impeccable, Apache-2.0); not vendored, because it ships an engine and tools",
+    "hyperframes": "Installed at the showcase stage, pinned: heygen-com/hyperframes@v0.9.80 (Apache-2.0). Not vendored: it bundles fonts under their own licences and needs its own CLI",
+    "hyperframes-cli": "With hyperframes, same pin",
+    "brag": "Installed at the showcase stage, pinned: latent-spaces/brag@v0.6.0 (MIT; its bundled music is CC BY 4.0)"
+  }
+}

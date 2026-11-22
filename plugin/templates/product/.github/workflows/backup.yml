@@ -1,0 +1,26 @@
+name: Database backup
+on:
+  workflow_dispatch:
+  # /founder:deploy switches the schedule on, once there's a production database.
+  # schedule:
+  #   - cron: "0 3 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  backup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dump the production database
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          test -n "$SUPABASE_DB_URL" || { echo "SUPABASE_DB_URL secret is not set"; exit 1; }
+          sudo apt-get install -y postgresql-client >/dev/null
+          pg_dump "$SUPABASE_DB_URL" --no-owner --format=custom --file=backup.dump
+      - uses: actions/upload-artifact@v4
+        with:
+          name: db-backup-${{ github.run_id }}
+          path: backup.dump
+          retention-days: 90

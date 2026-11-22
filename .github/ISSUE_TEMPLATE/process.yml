@@ -1,0 +1,21 @@
+name: Process improvement
+description: A change to a studio flow, skill or agent
+labels: ["type:process"]
+body:
+  - type: input
+    id: flow
+    attributes:
+      label: Flow or component
+      description: e.g. /founder:discover, builder agent, install script
+    validations:
+      required: true
+  - type: textarea
+    id: observed
+    attributes:
+      label: What happened
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed change

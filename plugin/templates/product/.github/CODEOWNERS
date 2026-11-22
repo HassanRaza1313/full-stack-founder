@@ -1,0 +1,3 @@
+# Changes to migrations, auth and payments need the owner's review.
+/supabase/migrations/ @{{OWNER}}
+/apps/web/lib/adapters/ @{{OWNER}}

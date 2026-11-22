@@ -1,0 +1,35 @@
+name: Upstream skills
+# Monthly: have any pinned skills moved, been removed, or released a newer version? Opens (or updates) one issue.
+on:
+  schedule:
+    - cron: '0 6 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Compare pins with upstream
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set +e
+          node plugin/scripts/vendor.mjs check > report.md
+          code=$?
+          cat report.md
+          if grep -q '^## Upstream changes' report.md; then
+            n=$(gh issue list --label upstream --state open --json number --jq '.[0].number')
+            if [ -n "$n" ]; then gh issue comment "$n" --body-file report.md
+            else gh label create upstream --color BFD4F2 --description "Pinned skills changed upstream" --force
+                 gh issue create --title "Pinned skills changed upstream" --label upstream --body-file report.md; fi
+          fi
+          exit $code

@@ -1,0 +1,710 @@
+{
+  "$comment": "Everything studio needs, by stage. doctor.mjs checks these; /founder:setup fixes the automatic ones in one approved batch and guides the manual ones one at a time. Stages are cumulative: ideas < build < showcase < graduate. 'when' limits an item to machines or products that need it ('service' means a product's product/services.json lists it). 'fix' is a command or {fn}, either for all platforms or per platform. In strings, {{key}} is a value from studio.config(.local).json; a manual line whose values are empty is skipped. An item with no 'check' can't be verified and shows as a reminder.",
+  "stages": {
+    "ideas": "Capture ideas and research them",
+    "build": "Build products locally",
+    "showcase": "Publish case studies, demos and content",
+    "graduate": "Run a real product with paying customers"
+  },
+  "items": [
+    {
+      "id": "machine",
+      "stage": "ideas",
+      "title": "A capable computer",
+      "why": "Local databases, browsers and builds need memory and disk space.",
+      "check": {
+        "fn": "machine",
+        "minRamGb": 8,
+        "goodRamGb": 16,
+        "minFreeGb": 30
+      },
+      "manual": [
+        "8 GB of RAM works; 16 GB is comfortable.",
+        "Keep at least 30 GB free on the drive that holds your products."
+      ]
+    },
+    {
+      "id": "homebrew",
+      "stage": "ideas",
+      "title": "Homebrew",
+      "when": {
+        "platform": "mac"
+      },
+      "why": "Installs Git, Node, the GitHub CLI and FFmpeg on a Mac.",
+      "check": {
+        "cmd": "brew --version"
+      },
+      "url": "https://brew.sh",
+      "manual": [
+        "Open Terminal and paste the install command from brew.sh. It asks for your Mac password.",
+        "Run the two \"Next steps\" lines it prints, so `brew` is on your PATH."
+      ]
+    },
+    {
+      "id": "claude-code",
+      "stage": "ideas",
+      "title": "Claude Code with a Pro or Max plan",
+      "why": "Runs every studio flow.",
+      "cost": "Claude Pro or Max subscription",
+      "check": {
+        "cmd": "claude --version"
+      },
+      "url": "https://claude.com/product/claude-code",
+      "manual": [
+        "Install Claude Code from the link.",
+        "Run `claude` in a terminal and sign in with your Claude account."
+      ]
+    },
+    {
+      "id": "git",
+      "stage": "ideas",
+      "title": "Git",
+      "why": "Version control for every repo.",
+      "check": {
+        "cmd": "git --version"
+      },
+      "fix": {
+        "win": "winget install --id Git.Git -e --source winget --accept-source-agreements",
+        "mac": "xcode-select --install",
+        "linux": "sudo apt-get install -y git"
+      },
+      "needs": [
+        "homebrew"
+      ],
+      "manual": {
+        "linux": [
+          "Install Git with your package manager, for example `sudo apt install git`."
+        ]
+      }
+    },
+    {
+      "id": "git-longpaths",
+      "stage": "ideas",
+      "title": "Long file paths in Git",
+      "when": {
+        "platform": "win"
+      },
+      "why": "Windows limits paths to 260 characters unless Git is told otherwise; deep skill and package folders break installs without it.",
+      "check": {
+        "cmd": "git config --global core.longpaths",
+        "equals": "true"
+      },
+      "fix": {
+        "win": "git config --global core.longpaths true"
+      },
+      "needs": [
+        "git"
+      ]
+    },
+    {
+      "id": "node",
+      "stage": "ideas",
+      "title": "Node.js 22 or newer",
+      "why": "Runs the studio scripts and every product.",
+      "check": {
+        "fn": "nodeVersion",
+        "min": 22
+      },
+      "fix": {
+        "win": "winget install --id OpenJS.NodeJS.LTS -e --source winget --accept-source-agreements",
+        "mac": "brew install node"
+      },
+      "url": "https://nodejs.org",
+      "needs": [
+        "homebrew"
+      ],
+      "manual": {
+        "linux": [
+          "Install Node 22 or newer, for example with `nvm install 22` (https://github.com/nvm-sh/nvm)."
+        ]
+      }
+    },
+    {
+      "id": "tools-dir",
+      "stage": "ideas",
+      "title": "Heavy tools off the system drive",
+      "when": {
+        "config": "toolsDir"
+      },
+      "why": "Keeps global npm tools off a full system drive.",
+      "check": {
+        "fn": "npmPrefixUnder",
+        "dir": "{{toolsDir}}"
+      },
+      "fix": {
+        "fn": "moveNpmPrefix",
+        "dir": "{{toolsDir}}/npm-global"
+      }
+    },
+    {
+      "id": "pnpm",
+      "stage": "ideas",
+      "title": "pnpm",
+      "needs": [
+        "node"
+      ],
+      "why": "The package manager every product uses.",
+      "check": {
+        "cmd": "pnpm --version"
+      },
+      "fix": {
+        "all": "npm install -g pnpm"
+      }
+    },
+    {
+      "id": "gh",
+      "stage": "ideas",
+      "title": "GitHub CLI",
+      "why": "Ideas, backlogs and repos live on GitHub.",
+      "check": {
+        "cmd": "gh --version"
+      },
+      "fix": {
+        "win": "winget install --id GitHub.cli -e --source winget --accept-source-agreements",
+        "mac": "brew install gh"
+      },
+      "url": "https://cli.github.com",
+      "needs": [
+        "homebrew"
+      ],
+      "manual": {
+        "linux": [
+          "Install the GitHub CLI: https://github.com/cli/cli/blob/trunk/docs/install_linux.md"
+        ]
+      }
+    },
+    {
+      "id": "github-account",
+      "stage": "ideas",
+      "title": "Signed in to GitHub",
+      "needs": [
+        "gh"
+      ],
+      "why": "Lets studio create your private repos and issues.",
+      "check": {
+        "cmd": "gh auth token"
+      },
+      "url": "https://github.com/signup",
+      "manual": [
+        "Create a free GitHub account if you don't have one.",
+        "In a terminal, run `gh auth login --web` and choose GitHub.com, HTTPS, and sign in with your browser.",
+        "Then run `gh auth setup-git` so git pushes as that account."
+      ]
+    },
+    {
+      "id": "git-identity",
+      "stage": "ideas",
+      "title": "Your git name and email",
+      "needs": [
+        "git",
+        "github-account"
+      ],
+      "why": "Every commit is signed with them.",
+      "check": {
+        "cmd": "git config --global user.name && git config --global user.email"
+      },
+      "manual": [
+        "Studio asks for your name and uses GitHub's private no-reply email, so your real address stays private."
+      ],
+      "fix": {
+        "fn": "gitIdentity"
+      }
+    },
+    {
+      "id": "vendored-skills",
+      "stage": "ideas",
+      "title": "Specialist skills (shipped with the plugin)",
+      "why": "The research, board, design, marketing, sales, legal and support skills ship as pinned copies inside the plugin: nothing to download, and nothing added to your other sessions.",
+      "check": {
+        "cmd": "node \"{{pluginRoot}}/scripts/vendor.mjs\" verify"
+      },
+      "manual": {
+        "all": [
+          "Reinstall the plugin: `claude plugin update founder@full-stack-founder`."
+        ]
+      }
+    },
+    {
+      "id": "workspace",
+      "stage": "ideas",
+      "title": "Your private studio workspace",
+      "needs": [
+        "github-account",
+        "git-identity"
+      ],
+      "why": "Holds your ideas, portfolio view, lessons and settings, separate from the plugin.",
+      "check": {
+        "fn": "workspace"
+      },
+      "manual": [
+        "/founder:setup asks a few questions, then creates the repo for you."
+      ]
+    },
+    {
+      "id": "workspace-labels",
+      "stage": "ideas",
+      "title": "Idea labels in your workspace",
+      "needs": [
+        "workspace"
+      ],
+      "why": "Stages like status:building are labels.",
+      "check": {
+        "fn": "ghLabel",
+        "repo": "{{studioRepo}}",
+        "label": "status:building"
+      },
+      "fix": {
+        "fn": "createLabels",
+        "repo": "{{studioRepo}}",
+        "file": "templates/labels-studio.json"
+      }
+    },
+    {
+      "id": "subagent-model",
+      "stage": "ideas",
+      "title": "Routine helpers run on Sonnet",
+      "why": "Keeps cost down: only hard reasoning uses Opus.",
+      "check": {
+        "fn": "claudeEnv",
+        "key": "CLAUDE_CODE_SUBAGENT_MODEL",
+        "value": "sonnet"
+      },
+      "fix": {
+        "fn": "claudeEnv",
+        "key": "CLAUDE_CODE_SUBAGENT_MODEL",
+        "value": "sonnet"
+      }
+    },
+    {
+      "id": "python",
+      "stage": "ideas",
+      "title": "Python 3",
+      "why": "Runs founder-cfo's unit-economics calculator, so the numbers are computed, not estimated.",
+      "check": {
+        "cmd": "python --version || python3 --version"
+      },
+      "fix": {
+        "win": "winget install --id Python.Python.3.12 -e --source winget --accept-source-agreements --accept-package-agreements",
+        "mac": "brew install python",
+        "linux": "sudo apt-get install -y python3"
+      },
+      "url": "https://www.python.org/downloads/"
+    },
+    {
+      "id": "typescript-lsp",
+      "stage": "build",
+      "title": "TypeScript language server",
+      "needs": [
+        "node"
+      ],
+      "why": "Lets Claude jump to definitions and see type errors as it edits.",
+      "check": {
+        "fn": "plugin",
+        "name": "typescript-lsp"
+      },
+      "fix": {
+        "all": "npm install -g typescript typescript-language-server && claude plugin install typescript-lsp@claude-plugins-official"
+      }
+    },
+    {
+      "id": "context7",
+      "stage": "build",
+      "title": "Context7 (current library docs)",
+      "why": "Stops Claude coding against outdated APIs.",
+      "check": {
+        "fn": "mcp",
+        "name": "context7"
+      },
+      "fix": {
+        "all": "claude mcp add --transport http --scope user context7 https://mcp.context7.com/mcp"
+      }
+    },
+    {
+      "id": "impeccable",
+      "stage": "build",
+      "title": "Design review (Impeccable)",
+      "why": "Product UI design and reviews, and writes DESIGN.md. Its own plugin (it has an engine and tools), so it isn't pinned with the other skills.",
+      "check": {
+        "fn": "plugin",
+        "name": "impeccable"
+      },
+      "fix": {
+        "all": "claude plugin marketplace add pbakaus/impeccable && claude plugin install impeccable@impeccable"
+      }
+    },
+    {
+      "id": "browser-paths",
+      "stage": "build",
+      "title": "Browser downloads off the system drive",
+      "when": {
+        "config": "toolsDir",
+        "platform": "win"
+      },
+      "why": "Playwright and Puppeteer browsers are several hundred MB each.",
+      "check": {
+        "fn": "userEnv",
+        "names": [
+          "PLAYWRIGHT_BROWSERS_PATH",
+          "PUPPETEER_CACHE_DIR"
+        ]
+      },
+      "fix": {
+        "fn": "userEnv",
+        "values": {
+          "PLAYWRIGHT_BROWSERS_PATH": "{{toolsDir}}/ms-playwright",
+          "PUPPETEER_CACHE_DIR": "{{toolsDir}}/puppeteer"
+        }
+      }
+    },
+    {
+      "id": "playwright",
+      "stage": "build",
+      "title": "Playwright CLI and its browser",
+      "needs": [
+        "node"
+      ],
+      "why": "Claude clicks through your app to test it and record demos, and renders launch videos. Pinned to the version this release was tested with.",
+      "check": {
+        "fn": "skills",
+        "names": [
+          "playwright-cli"
+        ],
+        "alsoCmd": "playwright-cli --version"
+      },
+      "fix": {
+        "all": "npm install -g @playwright/cli@0.1.24 && playwright-cli install --skills -g && playwright-cli install-browser"
+      }
+    },
+    {
+      "id": "gitleaks",
+      "stage": "build",
+      "title": "gitleaks (secret scanner)",
+      "why": "/founder:verify and /founder:showcase check that no keys or passwords are in the code or its history.",
+      "check": {
+        "cmd": "gitleaks version"
+      },
+      "fix": {
+        "win": "winget install --id Gitleaks.Gitleaks -e --source winget --accept-source-agreements --accept-package-agreements",
+        "mac": "brew install gitleaks"
+      },
+      "url": "https://github.com/gitleaks/gitleaks"
+    },
+    {
+      "id": "docker",
+      "stage": "build",
+      "title": "Docker",
+      "when": {
+        "service": "docker"
+      },
+      "why": "Runs a product's local database. Only products that list a database need it.",
+      "check": {
+        "cmd": "docker --version"
+      },
+      "url": "https://docs.docker.com/desktop/",
+      "manual": {
+        "win": [
+          "Download Docker Desktop for Windows.",
+          "To keep its large files off C, run the installer from an administrator terminal: `Start-Process -Wait \".\\Docker Desktop Installer.exe\" -ArgumentList 'install','--installation-dir={{dockerDir}}\\app','--wsl-default-data-root={{dockerDir}}\\data'` (otherwise just double-click it).",
+          "Choose All-users installation with WSL 2; leave Windows Containers off.",
+          "Accept Docker's terms when asked, then in Settings → General turn off 'Start Docker Desktop when you sign in'. Studio starts it only when a product needs it."
+        ],
+        "mac": [
+          "Install OrbStack (lighter than Docker Desktop): `brew install orbstack`, then open it once."
+        ],
+        "linux": [
+          "Install Docker Engine for your distribution from the link."
+        ]
+      }
+    },
+    {
+      "id": "wsl-limits",
+      "stage": "build",
+      "title": "WSL memory limits",
+      "when": {
+        "service": "docker",
+        "platform": "win"
+      },
+      "needs": [
+        "docker"
+      ],
+      "why": "Caps the memory Docker's Linux VM can take, and gives it back when idle.",
+      "check": {
+        "fn": "wslConfig"
+      },
+      "fix": {
+        "fn": "wslConfig"
+      }
+    },
+    {
+      "id": "media-folder",
+      "stage": "showcase",
+      "title": "A folder for videos, images and slides",
+      "why": "Media is too big for git. A Google Drive synced folder lets you share it; any local folder works.",
+      "check": {
+        "fn": "configPath",
+        "key": "driveRoot"
+      },
+      "url": "https://www.google.com/drive/download/",
+      "manual": [
+        "Recommended: install Google Drive for desktop, sign in, and create a `Products` folder in My Drive.",
+        "/founder:setup asks for the folder path and saves it as driveRoot."
+      ]
+    },
+    {
+      "id": "ffmpeg",
+      "stage": "showcase",
+      "title": "FFmpeg",
+      "why": "Renders launch videos.",
+      "check": {
+        "cmd": "ffmpeg -version"
+      },
+      "fix": {
+        "win": {
+          "fn": "winget",
+          "id": "Gyan.FFmpeg",
+          "toolsSub": "ffmpeg"
+        },
+        "mac": "brew install ffmpeg",
+        "linux": "sudo apt-get install -y ffmpeg"
+      }
+    },
+    {
+      "id": "skills-video",
+      "stage": "showcase",
+      "title": "Video skills (HeyGen Hyperframes, brag), pinned",
+      "why": "Demo videos and launch clips. Installed from their own repos at the versions this release was tested with, because they bundle fonts and music under their own licences.",
+      "check": {
+        "fn": "skills",
+        "names": [
+          "hyperframes",
+          "hyperframes-cli",
+          "brag"
+        ]
+      },
+      "fix": {
+        "fn": "installSkills",
+        "sources": {
+          "heygen-com/hyperframes@v0.9.80": [
+            "hyperframes",
+            "hyperframes-cli"
+          ],
+          "latent-spaces/brag@v0.6.0": [
+            "brag"
+          ]
+        }
+      }
+    },
+    {
+      "id": "domain",
+      "stage": "showcase",
+      "title": "Your own domain",
+      "cost": "about $10 a year",
+      "why": "Case studies live at yourdomain.com/<product>; demos at <product>.yourdomain.com.",
+      "check": {
+        "fn": "domain",
+        "key": "site.domain"
+      },
+      "url": "https://domains.cloudflare.com",
+      "manual": [
+        "Create a Cloudflare account (free).",
+        "Buy your domain through Cloudflare Registrar: it charges cost price and handles DNS.",
+        "/founder:setup asks for the domain and saves it."
+      ]
+    },
+    {
+      "id": "cloudflare-dns",
+      "stage": "showcase",
+      "title": "The domain's DNS is on Cloudflare",
+      "needs": [
+        "domain"
+      ],
+      "why": "Free DNS, SSL and bot protection (Turnstile).",
+      "check": {
+        "fn": "nameservers",
+        "key": "site.domain",
+        "contains": "cloudflare"
+      },
+      "manual": [
+        "If you bought the domain elsewhere, add it to Cloudflare (Add a site) and change the nameservers at your registrar to the two Cloudflare gives you. It can take a few hours."
+      ]
+    },
+    {
+      "id": "vercel",
+      "stage": "showcase",
+      "title": "Signed in to Vercel",
+      "needs": [
+        "node"
+      ],
+      "why": "Free hosting for your portfolio site and demos (Hobby plan, non-commercial).",
+      "check": {
+        "cmd": "vercel whoami"
+      },
+      "url": "https://vercel.com/signup",
+      "fix": {
+        "all": "npm install -g vercel"
+      },
+      "manual": [
+        "Create a Vercel account with 'Continue with GitHub'.",
+        "In a terminal, run `vercel login`."
+      ]
+    },
+    {
+      "id": "supabase-cloud",
+      "stage": "showcase",
+      "title": "A shared Supabase project",
+      "needs": [
+        "node"
+      ],
+      "why": "One free cloud database for every product's early-access waitlist and demos.",
+      "check": {
+        "fn": "configSet",
+        "key": "supabase.studioProject"
+      },
+      "url": "https://supabase.com/dashboard",
+      "manual": [
+        "Create a Supabase account with GitHub.",
+        "Create one project named `studio` (free plan, nearest region).",
+        "Run `npx supabase login` in a terminal.",
+        "Give /founder:setup the project's reference ID (Project Settings → General). Keys stay in Vercel, never in chat."
+      ]
+    },
+    {
+      "id": "supabase-mcp",
+      "stage": "showcase",
+      "title": "Supabase's MCP server (read-only)",
+      "needs": [
+        "supabase-cloud"
+      ],
+      "why": "/founder:listen reads early-access signups from the shared project.",
+      "check": {
+        "fn": "mcp",
+        "name": "supabase"
+      },
+      "fix": {
+        "all": "claude mcp add --transport http --scope user supabase \"https://mcp.supabase.com/mcp?project_ref={{supabase.studioProject}}&read_only=true\""
+      },
+      "manual": [
+        "In Claude Code, run /mcp, choose supabase, and sign in with your Supabase account. It is read-only and limited to the studio project."
+      ],
+      "url": "https://supabase.com/docs/guides/ai-tools/mcp"
+    },
+    {
+      "id": "portfolio-site",
+      "stage": "showcase",
+      "title": "Your portfolio site",
+      "needs": [
+        "domain"
+      ],
+      "why": "Case studies and early-access forms are published to it.",
+      "check": {
+        "fn": "configPath",
+        "key": "site.repo"
+      },
+      "manual": [
+        "Build it with Full Stack Founder itself: /founder:setup-product portfolio \"Portfolio\", then /founder:spec mvp, /founder:design and /founder:build. Its specs cover the case-study pages, the early-access form and the shared waitlist table.",
+        "Deploy it on Vercel at your domain, then /founder:setup saves its folder as site.repo."
+      ]
+    },
+    {
+      "id": "turnstile",
+      "stage": "showcase",
+      "title": "Cloudflare Turnstile keys",
+      "needs": [
+        "cloudflare-dns"
+      ],
+      "why": "Free bot protection on your early-access forms.",
+      "url": "https://dash.cloudflare.com/?to=/:account/turnstile",
+      "manual": [
+        "Add a Turnstile widget for your domain.",
+        "Paste the site and secret keys into Vercel's environment variables when /founder:showcase asks. Never paste them in chat."
+      ]
+    },
+    {
+      "id": "linkedin",
+      "stage": "showcase",
+      "title": "LinkedIn",
+      "why": "Where your case studies, carousels and posts go. You always post them yourself.",
+      "url": "https://www.linkedin.com"
+    },
+    {
+      "id": "google-connectors",
+      "stage": "showcase",
+      "title": "Google Drive, Sheets and Gmail connectors (optional)",
+      "why": "Lets flows create the Content log and Pipeline Sheets and Gmail drafts directly. Without them, flows write local files instead.",
+      "url": "https://claude.ai/settings/connectors",
+      "manual": [
+        "Connect Google Drive, Sheets and Gmail under Claude → Settings → Connectors. If they don't appear in Claude Code's /mcp, flows fall back to local files."
+      ]
+    },
+    {
+      "id": "vercel-pro",
+      "stage": "graduate",
+      "title": "Vercel Pro",
+      "cost": "$20 a month",
+      "why": "Hobby is non-commercial; a product that earns money needs Pro.",
+      "url": "https://vercel.com/pricing"
+    },
+    {
+      "id": "stripe",
+      "stage": "graduate",
+      "title": "Stripe",
+      "when": {
+        "service": "stripe"
+      },
+      "why": "Payments.",
+      "url": "https://dashboard.stripe.com/register",
+      "check": {
+        "cmd": "stripe --version"
+      },
+      "fix": {
+        "win": "winget install Stripe.StripeCli -e --accept-source-agreements",
+        "mac": "brew install stripe/stripe-cli/stripe"
+      },
+      "manual": [
+        "Create a Stripe account, then run `stripe login`."
+      ]
+    },
+    {
+      "id": "resend",
+      "stage": "graduate",
+      "title": "Resend",
+      "why": "Sends email from your domain.",
+      "url": "https://resend.com/signup",
+      "manual": [
+        "Create an account and verify your domain (it gives DNS records to add in Cloudflare)."
+      ]
+    },
+    {
+      "id": "sentry",
+      "stage": "graduate",
+      "title": "Sentry",
+      "why": "Error alerts from production.",
+      "url": "https://sentry.io/signup/"
+    },
+    {
+      "id": "posthog",
+      "stage": "graduate",
+      "title": "PostHog",
+      "why": "Product analytics.",
+      "url": "https://posthog.com/signup"
+    },
+    {
+      "id": "upstash",
+      "stage": "graduate",
+      "title": "Upstash",
+      "why": "Rate limiting that works across servers.",
+      "url": "https://console.upstash.com"
+    },
+    {
+      "id": "app-stores",
+      "stage": "graduate",
+      "title": "Apple and Google developer accounts",
+      "when": {
+        "service": "mobile"
+      },
+      "cost": "Apple $99 a year; Google $25 once",
+      "why": "Publishing mobile apps.",
+      "url": "https://developer.apple.com/programs/"
+    }
+  ]
+}

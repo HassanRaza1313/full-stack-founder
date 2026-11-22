@@ -1,0 +1,72 @@
+name: Check
+# Runs on every change, on all three operating systems: the scripts parse and run, the pinned skills match their
+# lock and licences, and no path is long enough to break a Windows install.
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  plugin:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Scripts parse
+        shell: bash
+        run: for f in plugin/scripts/*.mjs plugin/templates/product/scripts/*.mjs; do node --check "$f"; done
+      - name: Pinned skills match their lock and licences
+        run: node plugin/scripts/vendor.mjs verify
+      - name: Setup doctor runs on a fresh machine
+        shell: bash
+        # Exit 2 means "items missing", which is expected on a bare runner; anything else is a crash.
+        run: |
+          set +e
+          node plugin/scripts/doctor.mjs --stage graduate --json --all > doctor.json
+          code=$?
+          [ "$code" = 0 ] || [ "$code" = 2 ] || exit "$code"
+          node -e "const r=JSON.parse(require('fs').readFileSync('doctor.json','utf8'));console.log((r.items??r).length,'items checked')"
+      - name: Paths stay short (the plugin cache adds about 90 characters on Windows)
+        shell: bash
+        run: |
+          long=$(git ls-files plugin | awk 'length($0) > 150')
+          [ -z "$long" ] || { echo "Paths over 150 characters:"; echo "$long"; exit 1; }
+
+  # Installs the plugin the way a user does, from the public repo, on a clean machine, then checks the installed copy.
+  install:
+    if: github.event_name != 'pull_request'
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install Claude Code
+        run: npm install -g @anthropic-ai/claude-code
+      - name: Add the marketplace and install the plugin, as the README says
+        shell: bash
+        run: |
+          claude plugin marketplace add ${{ github.repository }}
+          claude plugin install founder@full-stack-founder
+          claude plugin list --json > plugins.json
+          node -e "const p=JSON.parse(require('fs').readFileSync('plugins.json','utf8'));const f=p.find(x=>x.id==='founder@full-stack-founder');if(!f||!f.enabled){console.error('not installed',p);process.exit(1)}console.log('installed',f.version,f.installPath);require('fs').writeFileSync('path.txt',f.installPath)"
+      - name: The installed copy works
+        shell: bash
+        run: |
+          P="$(cat path.txt)"
+          node "$P/scripts/vendor.mjs" verify
+          node "$P/scripts/skill.mjs" founder-board
+          set +e
+          node "$P/scripts/doctor.mjs" --stage ideas --json > doctor.json
+          code=$?
+          [ "$code" = 0 ] || [ "$code" = 2 ] || exit "$code"
+          echo "setup check ran (exit $code)"
