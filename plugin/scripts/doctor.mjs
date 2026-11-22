@@ -116,6 +116,7 @@ const checks = {
   userEnv: (c) => c.names.every((n) => readUserEnv(n)),
   wslConfig: () => existsSync(join(homedir(), '.wslconfig')),
   configSet: (c) => Boolean(getPath(config, c.key)),
+  configAny: (c) => c.keys.some((k) => Boolean(getPath(config, k))),
   configPath: (c) => Boolean(getPath(config, c.key)) && existsSync(getPath(config, c.key)),
   // A registered domain has nameservers, even before any site is deployed on it.
   async domain(c) {

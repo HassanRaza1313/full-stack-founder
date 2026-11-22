@@ -28,7 +28,9 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Stages are cumulative; the
    1. … 2. …   Link: <url>
    Say "done" or "skip".
    ```
-   - Save values with `workspace.mjs set`: `site.domain` and `supabase.studioProject`; `site.repo`, `driveRoot`, `toolsDir` and `dockerDir` with `--local`.
+   - **Site address** (showcase): ask "free `<name>.vercel.app`, or your own domain (about $10 a year)?" Free is the default; a domain can come later. Save `site.url`, plus `site.domain` for a domain.
+   - **Media folder** (showcase): a detected Google Drive folder, any local folder, or "later".
+   - Save values with `workspace.mjs set`: `site.url`, `site.domain` and `supabase.studioProject`; `site.repo`, `driveRoot`, `toolsDir` and `dockerDir` with `--local`.
    - Re-check the item with `--only <id> --quiet --fresh`.
    - Never ask for passwords, keys or tokens.
 5. **Finish.** Re-run the doctor with `--quiet`. Next step:

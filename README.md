@@ -9,7 +9,7 @@
 You can build it. Full Stack Founder runs the other half of a startup: research, pricing, design, marketing and selling, all from one command. Each job goes to the specialist skill builders already trust, and it adds only about 700 tokens to a session.
 
 ```
-/plugin marketplace add HassanRaza1313/full-stack-founder
+/plugin marketplace add https://github.com/HassanRaza1313/full-stack-founder.git
 /plugin install founder@full-stack-founder
 /founder:ceo is my meal-planner idea worth building?
 ```
@@ -72,24 +72,43 @@ Every idea you build becomes a case study, a demo and posts, for about $0. Only 
 
 ## Install
 
-You need Claude Code with a Pro or Max plan. The two `/plugin` lines above install it, and `/founder:ceo` works straight away. When you want a workspace for your ideas, run `/founder:setup`: it checks your machine and handles Git, Node, pnpm, the GitHub CLI and sign-in, and your private workspace. The specialist skills already come with the plugin.
+You need Claude Code with a Pro or Max plan.
 
-The `/plugin` lines go in a Claude Code chat. To install from a terminal instead (PowerShell, Terminal, bash), use the `claude` command; it installs for your user, so every project gets it:
+**In a terminal** (PowerShell, Terminal or bash). This installs for your user, so every project gets it:
 
 ```
-claude plugin marketplace add HassanRaza1313/full-stack-founder
+claude plugin marketplace add https://github.com/HassanRaza1313/full-stack-founder.git
 claude plugin install founder@full-stack-founder
+claude plugin list
 ```
 
-Then start a new Claude Code session.
+**Or in a Claude Code chat:**
 
-**If the install stops:**
-- **"Git clone timed out":** the download is about 1 MB, but some networks reach GitHub slowly even when speed tests look fast (speed tests use nearby servers and many connections; Git uses one connection to GitHub). Give it longer: in your terminal, set `CLAUDE_CODE_PLUGIN_GIT_TIMEOUT_MS=600000`, restart Claude Code, and run the two lines again. A VPN often helps too.
-- **"Host key verification failed":** Claude Code tried SSH. Add the marketplace by its web address instead: `/plugin marketplace add https://github.com/HassanRaza1313/full-stack-founder.git`.
-- **"Plugin not found in marketplace":** the marketplace step didn't finish. Run `/plugin marketplace update full-stack-founder`, then install again.
-- **Anything else:** run `/founder:setup check` and it tells you what's missing, or [open an issue](https://github.com/HassanRaza1313/full-stack-founder/issues).
+```
+/plugin marketplace add https://github.com/HassanRaza1313/full-stack-founder.git
+/plugin install founder@full-stack-founder
+```
 
-**Platforms:** built for Windows, macOS and Linux. So far it has been tested end to end only on Windows; the setup scripts run automated checks on all three on every change.
+Then **start a new Claude Code session**, and type `/founder` to see the commands. Install stuck? See [If something breaks](GUIDE.md#7-if-something-breaks).
+
+## Set up
+
+Try `/founder:ceo` on one idea first. It needs no setup. When you're ready:
+
+```
+/founder:setup
+```
+
+- **It checks your machine** and lists what's ready, what it installs, and what needs you.
+- **Claude installs** the tools (Git, Node, the GitHub CLI and more) in one batch you approve.
+- **You do** only the sign-ins and accounts, one step at a time. No passwords in chat.
+- **You choose:**
+  - your folders
+  - a free `.vercel.app` site, or your own domain (about $10 a year)
+  - a local media folder, or Google Drive
+- **Set up in stages:** ideas, then build, then showcase, each only when you need it.
+
+**[The guide](GUIDE.md)** walks through every step, from setup to your first launch.
 
 ## The commands
 
@@ -126,43 +145,13 @@ Run `/founder:portfolio help` for one line per command, or ask `/founder:ceo` in
 - **It doesn't make big jobs free.** A full validation journey is several hundred thousand tokens; you see the estimate before it starts, and where you can stop.
 - **It isn't hosted.** Everything runs in your Claude Code, your files and your GitHub.
 - **It isn't affiliated with the skills' authors.** It ships their open-source skills with credit and their licences; they haven't endorsed it.
-- **Not built yet:** `/founder:graduate` and `/founder:deploy`, which arrive with the first product that graduates.
+- **It doesn't run paid production yet.** Moving a product with paying customers to production hosting, billing and monitoring is coming in a later release.
 
 ## Tested
 
-Before launch, we ran Full Stack Founder's own research and board on itself, and changed what they found: lighter sessions, pinned skills, a cost estimate before every journey, and a first run with no setup.
-
-<!-- evals:start -->
-**Test suite** (`claude plugin eval`, 2026-11-22, Windows; each case starts in a fresh, empty environment with only this plugin):
-
-| Case | What it checks | Result |
-|---|---|---|
-| First run | A brand-new user is offered a no-setup quick read, and nothing is installed or created | 2/2 passed |
-| Routing | "Can my idea make money?" maps to the finance-check journey, with its token cost and stops, without starting it | 2/2 passed |
-| Honest verdict | A deliberately weak idea (a $15/month social network for left-handed people) gets a low score and leads with the case against it | 1/1 passed: scored 11/40 |
-| Pinned skills | The lookup finds the plugin's own pinned copy of each skill | runs in CI on Linux (Windows can't sandbox a shell inside a test) |
-
-The three cases cost $1.52 in total. The suite is in [`plugin/evals/`](plugin/evals/).
-<!-- evals:end -->
-
-## How it's organised
-
-```
-plugin/
-  skills/        one folder per command
-  agents/        scout (Haiku, lookups), builder (Sonnet), architect (Opus)
-  playbooks/     the built-in journeys; add your own in your workspace
-  references/    the journey and knowledge rules every skill follows
-  vendor/        pinned, unchanged copies of the specialist skills, with their licences (vendor.json)
-  requirements.json   everything it needs, by stage
-  scripts/       Node, no dependencies: doctor, workspace, setup-product, session, index, skill, vendor
-  templates/     the product repo template, label sets, the workspace template
-  evals/         the test suite, run with `claude plugin eval`
-```
-
-The repo holds only what the plugin needs to run, plus its tests and checks.
-
-Your ideas, settings and lessons never live here. They're in your private workspace (your *studio*), which `/founder:setup` creates.
+- **Tested end to end on Windows.**
+- **Built for macOS and Linux too.** Automated install checks pass on both on every change. Full end-to-end testing there is still to come.
+- A test suite checks the first run, routing, honest verdicts and pinned skills ([`plugin/evals/`](plugin/evals/)).
 
 ## Credits
 

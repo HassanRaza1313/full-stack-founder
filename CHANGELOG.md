@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.2.1 · 2026-11-23
+
+- **Free hosting by default.** Showcase no longer needs a domain: case studies and demos can live at a free `.vercel.app` address. Your own domain (about $10 a year) is an optional upgrade, any time.
+- **Setup asks your choices up front:** a free site or your own domain, and a local media folder or Google Drive.
+- **A step-by-step guide** (`GUIDE.md`): install, setup by stage (what Claude does, what you do, your options), and the journey from idea to launch.
+- **Install by the GitHub web address**, which avoids SSH errors.
+
 ## 0.2.0 · 2026-11-22
 
 The plugin becomes a product anyone can install.

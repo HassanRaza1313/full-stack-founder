@@ -12,7 +12,7 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Gate: `showcase`. The case
 ## Showcase
 
 1. **Ready:** a `/founder:verify` from the last 7 days with no P1 bugs, and the MVP milestone done apart from `launch-blocker` tickets.
-2. **Case study:** `/founder:market case-study`, then publish it as `content/<slug>.mdx` in `site.repo`, at `<site.domain>/<slug>`, with the video and the form block.
+2. **Case study:** `/founder:market case-study`, then publish it as `content/<slug>.mdx` in `site.repo`, at `<site.url>/<slug>` (or `https://<site.domain>/<slug>` when only a domain is set), with the video and the form block.
 3. **Early-access form:**
    - email
    - a qualifier, "Which describes you best?", with the 3 personas plus "Just curious"
@@ -38,7 +38,7 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Gate: `showcase`. The case
 2. **(the user)** creates the Vercel Hobby project. Point to the exact screen.
 3. **The database:** its own Supabase project if a slot is free, otherwise a schema in `studio`.
 4. Seed it, create a demo account (no sign-up), and set up a nightly `pg_cron` reset.
-5. Point `<slug>.<site.domain>` at the deployment with a Cloudflare DNS record, once the user confirms.
+5. **Address:** with `site.domain` set, point `<slug>.<site.domain>` at the deployment with a Cloudflare DNS record, once the user confirms. Without one, use the project's free `<project>.vercel.app` address.
 6. Set `demo: live` and `demo_url:`. Free Supabase projects pause after about a week without use; `/founder:listen` checks for that.
 
-**off:** remove the domain, pause the database (deleting it needs its own confirmation), and set `demo: none`.
+**off:** remove the custom address if there is one, pause the database (deleting it needs its own confirmation), and set `demo: none`.

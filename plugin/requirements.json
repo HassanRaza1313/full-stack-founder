@@ -495,21 +495,41 @@
       }
     },
     {
+      "id": "site-address",
+      "stage": "showcase",
+      "title": "Where your site lives (free or your own domain)",
+      "why": "Your case studies and early-access forms need a public address.",
+      "check": {
+        "fn": "configAny",
+        "keys": [
+          "site.url",
+          "site.domain"
+        ]
+      },
+      "manual": [
+        "Free (default): a Vercel address such as `yourname.vercel.app`. No domain, no cost.",
+        "Your own domain (about $10 a year): case studies at yourdomain.com/<product>, demos at <product>.yourdomain.com. Buy it through Cloudflare Registrar (cost price, DNS included).",
+        "You can start free and add a domain later. /founder:setup saves your choice as site.url, and a domain as site.domain."
+      ]
+    },
+    {
       "id": "domain",
       "stage": "showcase",
-      "title": "Your own domain",
+      "title": "Your own domain (optional)",
       "cost": "about $10 a year",
-      "why": "Case studies live at yourdomain.com/<product>; demos at <product>.yourdomain.com.",
+      "why": "You chose your own domain: case studies live at yourdomain.com/<product>, demos at <product>.yourdomain.com.",
       "check": {
         "fn": "domain",
         "key": "site.domain"
       },
       "url": "https://domains.cloudflare.com",
       "manual": [
-        "Create a Cloudflare account (free).",
-        "Buy your domain through Cloudflare Registrar: it charges cost price and handles DNS.",
-        "/founder:setup asks for the domain and saves it."
-      ]
+        "Create a free Cloudflare account.",
+        "Buy the domain through Cloudflare Registrar: it charges cost price and handles DNS."
+      ],
+      "when": {
+        "config": "site.domain"
+      }
     },
     {
       "id": "cloudflare-dns",
@@ -526,7 +546,10 @@
       },
       "manual": [
         "If you bought the domain elsewhere, add it to Cloudflare (Add a site) and change the nameservers at your registrar to the two Cloudflare gives you. It can take a few hours."
-      ]
+      ],
+      "when": {
+        "config": "site.domain"
+      }
     },
     {
       "id": "vercel",
@@ -593,7 +616,7 @@
       "stage": "showcase",
       "title": "Your portfolio site",
       "needs": [
-        "domain"
+        "site-address"
       ],
       "why": "Case studies and early-access forms are published to it.",
       "check": {
@@ -602,20 +625,17 @@
       },
       "manual": [
         "Build it with Full Stack Founder itself: /founder:setup-product portfolio \"Portfolio\", then /founder:spec mvp, /founder:design and /founder:build. Its specs cover the case-study pages, the early-access form and the shared waitlist table.",
-        "Deploy it on Vercel at your domain, then /founder:setup saves its folder as site.repo."
+        "Deploy it on Vercel at your site address (the free .vercel.app one or your domain), then /founder:setup saves its folder as site.repo."
       ]
     },
     {
       "id": "turnstile",
       "stage": "showcase",
       "title": "Cloudflare Turnstile keys",
-      "needs": [
-        "cloudflare-dns"
-      ],
       "why": "Free bot protection on your early-access forms.",
       "url": "https://dash.cloudflare.com/?to=/:account/turnstile",
       "manual": [
-        "Add a Turnstile widget for your domain.",
+        "Create a free Cloudflare account and add a Turnstile widget for your site address.",
         "Paste the site and secret keys into Vercel's environment variables when /founder:showcase asks. Never paste them in chat."
       ]
     },
