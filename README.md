@@ -84,7 +84,7 @@ claude plugin install founder@full-stack-founder
 Then start a new Claude Code session.
 
 **If the install stops:**
-- **"Git clone timed out":** on a slow connection, give it longer. In your terminal, set `CLAUDE_CODE_PLUGIN_GIT_TIMEOUT_MS=300000`, restart Claude Code, and run the two lines again.
+- **"Git clone timed out":** the download is about 1 MB, but some networks reach GitHub slowly even when speed tests look fast (speed tests use nearby servers and many connections; Git uses one connection to GitHub). Give it longer: in your terminal, set `CLAUDE_CODE_PLUGIN_GIT_TIMEOUT_MS=600000`, restart Claude Code, and run the two lines again. A VPN often helps too.
 - **"Host key verification failed":** Claude Code tried SSH. Add the marketplace by its web address instead: `/plugin marketplace add https://github.com/HassanRaza1313/full-stack-founder.git`.
 - **"Plugin not found in marketplace":** the marketplace step didn't finish. Run `/plugin marketplace update full-stack-founder`, then install again.
 - **Anything else:** run `/founder:setup check` and it tells you what's missing, or [open an issue](https://github.com/HassanRaza1313/full-stack-founder/issues).
