@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.4 · 2026-11-23
+
+- **The catalog is the register.** The brief and the portfolio now start from your workspace repo's idea issues: an idea with `repo:` is a product. Each product's status comes from its own repo (`product/STATE.md`), read from the copy on this computer, or straight from GitHub when it isn't here. Products on another machine now show up, and unrelated folders in your products folder no longer do. Nothing scans the drive.
+- Retired products and closed ideas appear in `/founder:portfolio`, not in the brief.
+
 ## 0.2.3 · 2026-11-23
 
 - **A much faster brief.** `/founder:ceo` with no direction took over a minute, even with an empty portfolio: a lookup agent made about ten searches, some across the whole products drive. A new script, `scripts/brief.mjs`, gathers everything in one call in about two seconds, so the brief now takes about 15 seconds. An empty workspace gets a three-line answer.

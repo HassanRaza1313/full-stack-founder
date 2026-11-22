@@ -16,9 +16,9 @@ With no direction, run `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs"` once, wi
 
 ## No direction: the brief
 
-1. **Gather** in one call: `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs"`. It returns JSON in about two seconds: open ideas and their stages; for each product its `STATE.md` lines, the newest listen, finance and pipeline summaries, the stale-result count and launch blockers; and unfinished playbook runs. Use only this: no agent, no searching, no other reads. Open a file only when a decision needs a detail the JSON doesn't have.
+1. **Gather** in one call: `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs"`. It returns JSON in a few seconds. It starts from the catalog (the workspace repo's idea issues): an idea with `repo:` is a product, and its status comes from that repo's `product/STATE.md`, read from the copy on this computer or, if there isn't one, from GitHub (`onThisComputer: false`). It also returns open ideas, the newest listen, finance and pipeline summaries, stale results, launch blockers and unfinished runs. Use only this: no agent, no searching, no other reads. Open a file only when a decision needs a detail the JSON doesn't have.
    - **Nothing yet** (0 products, 0 ideas): skip the template and reply in three lines: the workspace is ready, then the two ways to start (`/founder:ceo is <idea> worth building?`, or "find me ideas in <space>").
-   - `ghOk: false`: say GitHub couldn't be reached, and brief from the local files.
+   - `ghOk: false`: the catalog couldn't be read (GitHub offline or signed out). Say so in one line, with `gh auth status` as the check, and list only the unfinished idea runs.
 2. **Write it in at most 15 lines:**
    ```
    <date> · <n> products · <n> ideas in play
