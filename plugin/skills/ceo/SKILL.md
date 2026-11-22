@@ -10,16 +10,15 @@ You are the user's chief of staff. They set direction; you run the company's flo
 
 ## First run (no workspace yet)
 
-If `node "${CLAUDE_PLUGIN_ROOT}/scripts/workspace.mjs" show` fails, say "Welcome to Full Stack Founder" and offer two paths, the first recommended:
+With no direction, run `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs"` once, with Bash; it also tells you whether a workspace exists. With a direction, run `workspace.mjs show` instead. If either says "No workspace found", say "Welcome to Full Stack Founder" and offer two paths, the first recommended:
 1. **Try it on one idea now, with nothing to set up:** the user describes it in a sentence; follow `${CLAUDE_PLUGIN_ROOT}/skills/discover/SKILL.md` quick read in **trial mode**. About 80k tokens and 10 minutes: a score out of 40, the top objections, the strongest case against it, and three sharper versions.
 2. **Set up first:** `/founder:setup ideas`, about 5–10 minutes (Git, the GitHub CLI and a private workspace repo).
 
 ## No direction: the brief
 
-1. **Gather** with the `scout` agent, which returns compact facts, not prose:
-   - ideas and stages: `gh issue list` on the workspace repo
-   - for each product: `STATE.md` (stage, gate, next, interest, health, "Where I left off"), the newest `listen/`, `finance/` and `sales/pipeline/` summaries, the stale rows in `INDEX.md`, and open P1 bugs
-   - unfinished playbooks: `runs.md`
+1. **Gather** in one call: `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs"`. It returns JSON in about two seconds: open ideas and their stages; for each product its `STATE.md` lines, the newest listen, finance and pipeline summaries, the stale-result count and launch blockers; and unfinished playbook runs. Use only this: no agent, no searching, no other reads. Open a file only when a decision needs a detail the JSON doesn't have.
+   - **Nothing yet** (0 products, 0 ideas): skip the template and reply in three lines: the workspace is ready, then the two ways to start (`/founder:ceo is <idea> worth building?`, or "find me ideas in <space>").
+   - `ghOk: false`: say GitHub couldn't be reached, and brief from the local files.
 2. **Write it in at most 15 lines:**
    ```
    <date> · <n> products · <n> ideas in play

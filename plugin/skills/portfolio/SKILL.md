@@ -9,13 +9,15 @@ disable-model-invocation: true
 
 Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Settings come from `workspace.mjs show`; if that fails, say "Welcome to Full Stack Founder" and offer `/founder:setup`. Read-only, except it writes `<workspace>/PORTFOLIO.md`. Never commit it.
 
-## Gather (the `scout` agent; it returns compact JSON, not prose)
+## Gather (one call)
 
-- **Ideas:** `gh issue list --repo <studioRepo> --label type:idea --state all --limit 200 --json number,title,labels,body`. Parse the stage and metadata.
-- **Products** (`local:` exists): from `STATE.md`, the `stage`, `gate`, `next`, `interest` and `health` lines; the newest `listen/` date; backlog counts by stage; the top `validated` idea.
-- **Ideas without a repo:** the phase in `PROGRESS.md`, and the newest `scorecard.md` total.
-- **Stale:** the rows marked stale in each `INDEX.md`.
+Run `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs" --all`. It returns JSON in a few seconds, with no agent or searching:
+- **Ideas:** every idea issue, open and closed, with its stage, labels and metadata (the issue body).
+- **Products:** each product's `STATE.md` lines, newest listen, finance and pipeline summaries, stale-result count, launch blockers and unfinished runs.
+- **Idea folders:** each one's latest score out of 40, its discovery phase, and whether it has a brief.
 - **Learnings:** the newest 5 lines of `LEARNINGS.md`.
+
+Read a product's backlog only for the counts by stage and its top `validated` idea.
 
 Missing values are `—`. Never guess one.
 

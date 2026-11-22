@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.3 · 2026-11-23
+
+- **A much faster brief.** `/founder:ceo` with no direction took over a minute, even with an empty portfolio: a lookup agent made about ten searches, some across the whole products drive. A new script, `scripts/brief.mjs`, gathers everything in one call in about two seconds, so the brief now takes about 15 seconds. An empty workspace gets a three-line answer.
+- **`/founder:portfolio`** uses the same script (`brief.mjs --all`), with closed ideas, scores, phases and learnings.
+
 ## 0.2.2 · 2026-11-23
 
 - **Frame the idea first.** Validation now starts with a short interview (Matt Pocock's `grilling`): who it's for, the problem, the picture in your head, money, success and limits. It's saved as `brief.md`, and research, pricing, the board and the spec all work from it. `/founder:discover <idea> --frame` runs it on its own.
