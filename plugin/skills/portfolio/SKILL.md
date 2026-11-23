@@ -41,6 +41,6 @@ Missing values are `—`. Never guess one.
 - **`learnings`:** `LEARNINGS.md` by heading, newest first.
 - **`help`:** lead with the six to start with, then everything else, one line each:
   - **Start here:** `/founder:ceo` (a brief, or a plain-words direction), `/founder:hunt`, `/founder:board`, `/founder:ask`, `/founder:setup`, `/founder:pause` / `/founder:resume`
-  - **Direct control:** journeys `/founder:run`; capture `/founder:idea`, `/founder:portfolio`, `/founder:next`; departments `/founder:research`, `/founder:finance`, `/founder:discover`, `/founder:market`, `/founder:sales`, `/founder:listen`, `/founder:support`, `/founder:legal`; engineering `/founder:setup-product`, `/founder:spec`, `/founder:design`, `/founder:build`, `/founder:verify`, `/founder:release`, `/founder:showcase`
+  - **Direct control:** journeys `/founder:run`; capture `/founder:idea`, `/founder:portfolio`, `/founder:next`; departments `/founder:research`, `/founder:finance`, `/founder:discover`, `/founder:market`, `/founder:sales`, `/founder:listen`, `/founder:support`, `/founder:legal`; engineering `/founder:setup-product` (new repo), `/founder:adopt` (existing repo), `/founder:spec`, `/founder:design`, `/founder:build`, `/founder:verify`, `/founder:release`, `/founder:showcase`
 
   Mark `/founder:graduate` and `/founder:deploy` as coming, with the first graduate.

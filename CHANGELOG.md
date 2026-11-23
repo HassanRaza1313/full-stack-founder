@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.3.0 · 2026-11-24
+
+- **Lean research, measured.** Two new agents. A `researcher` (Sonnet, only search, fetch and file tools, a fixed budget, few turns) gathers evidence once into a notes file. An `analyst` (Opus, no web) judges from those notes. On the same ideas:
+  - the quick read went from about 4.5M to 0.7M tokens, scoring 18/40 against 17/40 before;
+  - the hunt went from about 4M to 1.2M tokens;
+  - every agent now starts lighter, because it loads only the tools it needs.
+- **`/founder:adopt`** brings in a repo you already have: a catalog entry, a knowledge folder, and state, roadmap and engineering notes read from the repo. It never changes your code. Public repos keep their knowledge in your workspace (`products/<repo>/product/`), so research and pricing stay private.
+- **Measured costs** in `references/costs.md`, counting cached re-reads. Older estimates are flagged as probably low.
+- **Fixes:**
+  - the no-setup quick read now saves to `~/founder-trial/`, because Claude Code blocks writes inside `~/.claude`;
+  - adopting works when Google Drive isn't running.
+- **Guide:** a "Save tokens" section, and how to bring in an existing repo.
+
 ## 0.2.5 · 2026-11-23
 
 - **One source for status.** The brief and the portfolio read every product's status from GitHub, so every computer shows the same picture. The copy on your computer is only checked for sync: "3 changes not pushed" or "2 commits not pulled" appear as warnings with the command that fixes them. If GitHub can't be reached, the brief shows your computer's copy and says so.

@@ -27,6 +27,7 @@ You can build it. Full Stack Founder runs the other half of a startup: research,
 | "Build it" | Repo, spec, design, build and tests |
 | "Launch it" | Case study, demo, posts and outreach, as drafts you send |
 | "Add dark mode to Fraud Guard" | Review, spec, build and release |
+| `/founder:adopt you/my-app` | Brings a repo you already have into the catalog, without touching its code |
 
 4. **Run your portfolio:** `/founder:ceo` on its own gives one brief across every product.
 5. **Stop when you stop:** `/founder:pause` shuts everything down. `/founder:resume` brings back only what's needed.
@@ -52,9 +53,11 @@ You can build it. Full Stack Founder runs the other half of a startup: research,
 - 52 skills, 650,000+ GitHub stars between them.
 
 **"Skills eat my context and my usage limit."**
-- About **700 tokens** added to a session, against about **3,400** for the same 52 skills installed the usual way.
-- Skills load only when a job needs them. Same skills, same instructions.
-- You see the cost before every journey.
+- Research is gathered once by a cheaper model, then judged from the notes. Measured on the same ideas:
+  - a quick read went from about **4.5M to 0.7M** tokens;
+  - a hunt went from about **4M to 1.2M**.
+- You see the cost before every journey, and where you can stop.
+- Skills load only when a job needs them: about 700 tokens added to a session, against 3,400 for the same 52 skills installed the usual way.
 
 **"Installs break, and updates break them again."**
 - Setup installs only the basics.
@@ -100,7 +103,7 @@ claude plugin list
 /plugin install founder@full-stack-founder
 ```
 
-Then **start a new Claude Code session**, and type `/founder` to see the commands. Install stuck? See [If something breaks](GUIDE.md#7-if-something-breaks).
+Then **start a new Claude Code session**, and type `/founder` to see the commands. Install stuck? See [If something breaks](GUIDE.md#8-if-something-breaks).
 
 ## Set up
 
@@ -142,6 +145,7 @@ Start with these. Everything else runs behind them.
 | `/founder:run <playbook>` | A whole journey: validate, idea-to-launch, feature, customer-test, finance-check, first-customers, showcase, health, weekly, monthly-review, raise, graduate |
 | `/founder:idea` · `/founder:portfolio` · `/founder:next` | Capture ideas and enhancements; the detailed portfolio view; "what should I do now?" on one product |
 | `/founder:research` · `/founder:finance` · `/founder:discover` · `/founder:market` · `/founder:sales` · `/founder:listen` · `/founder:support` · `/founder:legal` | The departments, each runnable on its own |
+| `/founder:adopt` | Bring in a repo you already have: catalog entry, knowledge folder, state and roadmap from the repo |
 | `/founder:setup-product` · `/founder:spec` · `/founder:design` · `/founder:build` · `/founder:verify` · `/founder:release` · `/founder:showcase` | Engineering, built on Matt Pocock's skills and Impeccable, and the showcase |
 
 </details>

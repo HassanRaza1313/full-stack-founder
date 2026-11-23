@@ -11,7 +11,7 @@ You are the user's chief of staff. They set direction; you run the company's flo
 ## First run (no workspace yet)
 
 With no direction, run `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs"` once, with Bash; it also tells you whether a workspace exists. With a direction, run `workspace.mjs show` instead. If either says "No workspace found", say "Welcome to Full Stack Founder" and offer two paths, the first recommended:
-1. **Try it on one idea now, with nothing to set up:** the user describes it in a sentence; follow `${CLAUDE_PLUGIN_ROOT}/skills/discover/SKILL.md` quick read in **trial mode**. About 80k tokens and 10 minutes: a score out of 40, the top objections, the strongest case against it, and three sharper versions.
+1. **Try it on one idea now, with nothing to set up:** the user describes it in a sentence; follow `${CLAUDE_PLUGIN_ROOT}/skills/discover/SKILL.md` quick read in **trial mode**. About 700k tokens (most of them cached re-reads, which count far less) and 5–10 minutes: a score out of 40, the top objections, the strongest case against it, and three sharper versions.
 2. **Set up first:** `/founder:setup ideas`, about 5–10 minutes (Git, the GitHub CLI and a private workspace repo).
 
 ## No direction: the brief
@@ -46,6 +46,7 @@ With no direction, run `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs"` once, wi
    | New ideas found for them ("what should I build?", "find me ideas in fintech") | `/founder:hunt`, then playbook `validate` on their pick |
    | A new idea explored, or "is this worth it?" | `/founder:idea add`, then playbook `validate` |
    | An idea or product taken all the way ("build it", "take it to launch") | playbook `idea-to-launch`, from its current stage |
+   | A repo they already have ("add my repo", "bring in <owner/repo>") | `/founder:adopt` (the user types it; it changes their catalog) |
    | A feature, change or fix on an existing product | playbook `feature` |
    | To know if customers want it, or will pay | playbook `customer-test` |
    | Money: margins, pricing, runway, "can this make money?" | playbook `finance-check` |

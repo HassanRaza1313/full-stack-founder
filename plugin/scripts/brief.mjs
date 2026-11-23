@@ -78,25 +78,26 @@ function unfinished(text, target) {
 const summaryOf = (text) => ((text.match(/^summary:\s*(.+)$/m) ?? [])[1] ?? '').slice(0, 200);
 const stale = (text) => (text.match(/\*\*\(stale\)\*\*/g) ?? []).length;
 const dated = (n) => /^\d{4}-\d{2}-\d{2}.*\.md$/.test(n);
-const FOLDERS = { listen: 'product/listen', finance: 'product/finance', pipeline: 'product/sales/pipeline' };
+const FOLDERS = { listen: 'listen', finance: 'finance', pipeline: 'sales/pipeline' };
 
 // A product's status from GitHub: one call for the files and folder listings, one for the newest results' summaries.
 const TREE = 'fragment T on Tree { entries { name type object { ... on Tree { entries { name type } } } } }';
-async function fromGitHub(repo) {
+// `base` is the knowledge folder inside that repo: product/ in the product repo, or products/<repo>/product in the workspace.
+async function fromGitHub(repo, base = 'product') {
   const [owner, name] = repo.split('/');
   const blob = (alias, path) => `${alias}: object(expression: "HEAD:${path}") { ... on Blob { text } }`;
   const tree = (alias, path) => `${alias}: object(expression: "HEAD:${path}") { ...T }`;
   const q1 = `query($owner: String!, $name: String!) { repository(owner: $owner, name: $name) {
-    ${blob('state', 'product/STATE.md')} ${blob('runs', 'product/runs.md')} ${blob('index', 'product/INDEX.md')}
-    ${Object.entries(FOLDERS).map(([k, p]) => tree(k, p)).join(' ')} } } ${TREE}`;
+    ${blob('state', `${base}/STATE.md`)} ${blob('runs', `${base}/runs.md`)} ${blob('index', `${base}/INDEX.md`)}
+    ${Object.entries(FOLDERS).map(([k, p]) => tree(k, `${base}/${p}`)).join(' ')} } } ${TREE}`;
   const r = (await graphql(q1, { owner, name }))?.repository;
   if (!r) return null;
   // The newest dated file in each folder, one level of subfolders deep (names start with their date).
   const newestPath = (k) => {
     const files = [];
     for (const e of r[k]?.entries ?? []) {
-      if (e.type === 'blob' && dated(e.name)) files.push(`${FOLDERS[k]}/${e.name}`);
-      for (const s of e.object?.entries ?? []) if (s.type === 'blob' && dated(s.name)) files.push(`${FOLDERS[k]}/${e.name}/${s.name}`);
+      if (e.type === 'blob' && dated(e.name)) files.push(`${base}/${FOLDERS[k]}/${e.name}`);
+      for (const s of e.object?.entries ?? []) if (s.type === 'blob' && dated(s.name)) files.push(`${base}/${FOLDERS[k]}/${e.name}/${s.name}`);
     }
     return files.sort((a, b) => (a.split('/').pop() < b.split('/').pop() ? 1 : -1))[0] ?? null;
   };
@@ -113,8 +114,7 @@ async function fromGitHub(repo) {
 }
 
 // The same, from the copy on this computer: used only when GitHub can't be reached.
-function fromLocal(local) {
-  const p = join(local, 'product');
+function fromLocal(p) {
   const newest = (folder) => {
     if (!existsSync(folder)) return null;
     const files = [];
@@ -153,16 +153,20 @@ const entries = (issues ?? []).map((i) => ({ issue: i, meta: meta(i.body), statu
 const products = await Promise.all(entries.filter((e) => e.meta.repo && !ended.has(e.status)).map(async ({ issue, meta: m, status: st }) => {
   const repoName = m.repo.split('/').pop();
   const local = config.productsDir && existsSync(join(config.productsDir, repoName, '.git')) ? join(config.productsDir, repoName) : null;
+  // Knowledge in the workspace (public repos, or repos kept clean): read it from the workspace repo instead.
+  const inWorkspace = m.knowledge === 'workspace';
+  const [kRepo, kBase] = inWorkspace ? [config.studioRepo, `products/${repoName}/product`] : [m.repo, 'product'];
+  const kLocal = inWorkspace ? join(dir, 'products', repoName, 'product') : local && join(local, 'product');
   const [remote, localSync, blockers] = await Promise.all([
-    fromGitHub(m.repo),
+    fromGitHub(kRepo, kBase),
     local ? sync(local) : null,
     gh(['issue', 'list', '-R', m.repo, '--state', 'open', '--label', 'launch-blocker', '--limit', '20', '--json', 'number,title']),
   ]);
-  const src = remote ?? (local ? fromLocal(local) : null);
+  const src = remote ?? (kLocal && existsSync(kLocal) ? fromLocal(kLocal) : null);
   const media = m.drive && config.driveRoot ? join(config.driveRoot, m.drive) : null;
   return {
     name: issue.title, slug: m.slug ?? repoName, issue: issue.number, catalogStatus: st, repo: m.repo,
-    source: remote ? 'github' : local ? 'this computer (GitHub unreachable)' : 'unavailable',
+    source: remote ? 'github' : src ? 'this computer (GitHub unreachable)' : 'unavailable', knowledge: inWorkspace ? 'workspace' : 'repo',
     ...(src?.stateText ? state(src.stateText) : { stateMissing: true }),
     listen: src?.listen ?? null, finance: src?.finance ?? null, pipeline: src?.pipeline ?? null,
     staleResults: src?.staleResults ?? null,

@@ -5,6 +5,7 @@
 //        Clones the repo if it already exists on GitHub (a new machine); otherwise creates it from the template.
 //   node workspace.mjs set <key> <value> [--local]  saves a setting (dot keys allowed); --local for this machine only
 import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { homedir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { fail, getPath, loadConfig, parseArgs, readState, run, setUserEnv, stateDir, step, workspaceDir, writeState } from './lib.mjs';
@@ -75,11 +76,15 @@ if (command === 'show') {
   writeState('state.json', { ...readState('state.json'), workspace: dir });
   console.log(setUserEnv('STUDIO_DIR', dir));
   // Quick reads made before setup (trial mode) move into the workspace's ideas/.
-  const trial = join(stateDir, 'trial');
-  const moved = existsSync(trial) ? readdirSync(trial).filter((n) => !existsSync(join(dir, 'ideas', n))) : [];
-  for (const n of moved) {
-    cpSync(join(trial, n), join(dir, 'ideas', n), { recursive: true });
-    rmSync(join(trial, n), { recursive: true, force: true });
+  // Claude Code blocks writes inside ~/.claude, so trial reads live in ~/founder-trial (older ones may be in ~/.claude/founder/trial).
+  const moved = [];
+  for (const trial of [join(homedir(), 'founder-trial'), join(stateDir, 'trial')]) {
+    const names = existsSync(trial) ? readdirSync(trial).filter((n) => !existsSync(join(dir, 'ideas', n))) : [];
+    for (const n of names) {
+      cpSync(join(trial, n), join(dir, 'ideas', n), { recursive: true });
+      rmSync(join(trial, n), { recursive: true, force: true });
+      moved.push(n);
+    }
   }
   if (moved.length) console.log(`Moved your first quick read(s) into ideas/: ${moved.join(', ')}. Track them with /founder:idea add.`);
   console.log(`\nWorkspace ready: ${dir}${getPath(loadConfig(dir), 'studioRepo') ? ` (${args.repo})` : ''}`);

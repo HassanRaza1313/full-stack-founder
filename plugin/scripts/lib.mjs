@@ -27,6 +27,16 @@ export function workspaceDir({ required = true } = {}) {
   return '';
 }
 
+// A product's knowledge folder: <repo>/product/, or <workspace>/products/<repo name>/product/ for products whose knowledge
+// lives in the workspace (`knowledge: workspace`, chosen by /founder:adopt for public repos or repos you keep clean).
+export function productDir(repoDir) {
+  const inRepo = join(repoDir, 'product');
+  if (existsSync(inRepo)) return inRepo;
+  const ws = workspaceDir({ required: false });
+  const alt = ws ? join(ws, 'products', repoDir.split(/[\\/]/).filter(Boolean).pop(), 'product') : '';
+  return alt && existsSync(alt) ? alt : inRepo;
+}
+
 // studio.config.json (shared) overlaid by studio.config.local.json (this machine's paths).
 export function loadConfig(dir = workspaceDir({ required: false })) {
   if (!dir) return {};

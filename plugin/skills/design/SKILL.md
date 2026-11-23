@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 # /founder:design
 
-Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md` and the "Design" section of the repo's `docs/engineering.md`. Gate: `build`.
+Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md` and the "Design" section of the engineering rules (the repo's `docs/engineering.md`, or `engineering.md` in the knowledge folder). Gate: `build`.
 
 - **Product UI:** run the `impeccable` skill with the user's arguments. With no arguments, use `shape` if there's no real `DESIGN.md` yet; otherwise show Impeccable's menu.
 - **Landing, marketing or portfolio pages:** use MengTo's `build-awwwards-quality-sites`.

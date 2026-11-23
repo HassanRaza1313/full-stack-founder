@@ -2,7 +2,7 @@
 
 From install to your first launch, step by step.
 
-**Contents:** [1. Install](#1-install) · [2. Try it](#2-try-it-no-setup) · [3. Set up](#3-set-up) · [4. Idea to launch](#4-from-idea-to-launch) · [5. More ideas and features](#5-more-ideas-and-features) · [6. Run your portfolio](#6-run-your-portfolio) · [7. If something breaks](#7-if-something-breaks)
+**Contents:** [1. Install](#1-install) · [2. Try it](#2-try-it-no-setup) · [3. Set up](#3-set-up) · [4. Idea to launch](#4-from-idea-to-launch) · [5. More ideas and features](#5-more-ideas-and-features) · [6. Run your portfolio](#6-run-your-portfolio) · [7. Save tokens](#7-save-tokens) · [8. If something breaks](#8-if-something-breaks)
 
 ---
 
@@ -42,7 +42,7 @@ Then type `/exit` and start `claude` again.
 ```
 
 - Nothing gets installed or created.
-- About 10 minutes and 80k tokens.
+- About 5–10 minutes and 700k tokens (most of them cached re-reads, which count far less toward your limit).
 - **You get:**
   - a score out of 40
   - the strongest case against the idea
@@ -227,6 +227,25 @@ This starts with the interview (step 2), then runs on its own:
 | Save an idea for later | `/founder:idea add <idea>` |
 | A feature for a product | `/founder:ceo add dark mode to <product>` |
 | Answers from past research | `/founder:ask what did we find about pricing?` |
+| Bring in a repo you already have | `/founder:adopt you/my-app` |
+
+### Bring in an existing repo
+
+```
+/founder:adopt you/my-app
+```
+
+- **It adds** the repo to your catalog, with a knowledge folder for its research, state and plans.
+- **It reads** the README, issues, commits and config, then writes the product's state, roadmap and engineering notes.
+- **It never changes your code.** The only change it offers to the repo is the lean-code rules in `CLAUDE.md`, and that needs your yes.
+- **Where the knowledge lives:**
+
+| Repo | Default | Why |
+|---|---|---|
+| Private | In the repo (`product/`) | Everything about the product in one place |
+| Public | In your workspace (`products/<repo>/product/`) | Research, pricing and plans stay private |
+
+- Then use it like any other product: "add <feature> to <name>", a showcase, or a customer test.
 
 **Features follow the same steps:** review, spec, build, release and announce, with a stop for each of your decisions.
 
@@ -248,7 +267,16 @@ This starts with the interview (step 2), then runs on its own:
 
 ---
 
-## 7. If something breaks
+## 7. Save tokens
+
+- **See the cost first.** Every journey shows its token estimate and where you can stop.
+- **Switch off connectors you don't need** (mail, calendar, docs) for founder sessions. Every helper agent loads them before it starts.
+- **Research runs lean by default.** A cheaper model gathers the evidence once, and the judging model reads only the notes.
+- **Stop at the first stop** when you only need a quick answer: the quick read alone is enough to drop a weak idea.
+
+**Better sources:** connect Claude in Chrome. Research then reads sites that block automated reading (Reddit, G2, Indie Hackers) through your own browser, read-only, instead of relying on search snippets.
+
+## 8. If something breaks
 
 | Problem | Fix |
 |---|---|

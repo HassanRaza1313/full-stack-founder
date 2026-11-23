@@ -7,12 +7,12 @@ import { spawn, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, openSync, readFileSync, writeFileSync } from 'node:fs';
 import { freemem } from 'node:os';
 import { join, resolve } from 'node:path';
-import { fail, isWin, ok, parseArgs, platform, run } from './lib.mjs';
+import { fail, isWin, ok, parseArgs, platform, productDir, run } from './lib.mjs';
 
 const args = parseArgs();
 const [command, ...ids] = args._;
 const dir = resolve(args.dir ?? '.');
-const file = join(dir, 'product', 'services.json');
+const file = join(productDir(dir), 'services.json');
 const listed = existsSync(file) ? JSON.parse(readFileSync(file, 'utf8')).services ?? [] : [];
 const stateDir = join(dir, '.studio');
 const pidFile = join(stateDir, 'pids.json');

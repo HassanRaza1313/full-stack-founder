@@ -11,6 +11,8 @@
 - One batched question, with the recommended answer first and a one-line reason.
 - Anything outward (push, publish, post, send, create a repo, spend) gets a one-line preview and an explicit yes. The user sends and posts.
 
+**The knowledge folder.** A product's saved results, state and plans live in its knowledge folder: `<repo>/product/`, or `<workspace>/products/<repo>/product/` when its catalog entry says `knowledge: workspace` (public repos, or repos kept clean). Wherever these instructions say `product/`, use that folder, and commit changes to it in the repo that holds it. Its engineering rules are the repo's `docs/engineering.md`, or `engineering.md` in the knowledge folder.
+
 **Start from the brief.** For an idea or product, `00-intake/brief.md` (from `/founder:discover --frame`) is the founder's own picture. Every step reads it first, works from it rather than the one-line idea, and asks nothing it already answers.
 
 **Delegate the work.** When a step needs a job done, the skill named in `skills.md` (same folder) does it. To run one, `node "<plugin>/scripts/skill.mjs" <name>` prints its file: read it and follow it. That's the pinned copy this release was tested with, so don't use the Skill tool for these. Inside it, `${CLAUDE_SKILL_DIR}` means that file's folder, and any other skill it names is loaded the same way. If skill.mjs can't find one, say which and stop that step: never work from a web copy or from memory. Studio supplies the target, the context (saved results, notes, the brief) and the saving; it never re-implements what that skill does.
@@ -22,7 +24,7 @@
 **Context economy:**
 - Read the target's `INDEX.md` and files' headers before opening files.
 - Read only the sections a step needs.
-- Send bulk reading, research and generation to subagents (`scout` for lookups, `builder` for routine work, `architect` for judgment). They write full results to files and reply with at most 10 lines.
+- Send bulk reading, research and generation to subagents: `scout` for lookups, `researcher` for web evidence, `analyst` for judging saved evidence, `builder` for routine work, `architect` for code and high-stakes design. Only researchers search the web: gather once into a notes file, then judge from the file. Every agent costs about 35k tokens just to start, so use the fewest that do the job. They write full results to files and reply with at most 10 lines.
 - Don't paste file contents, logs or long lists into chat. Link the file.
 
 **Safety:**

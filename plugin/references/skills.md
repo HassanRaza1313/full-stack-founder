@@ -17,6 +17,7 @@ Studio skills target, add context, save and track. The work itself is done by th
 | Framing the idea | `grilling` (Matt Pocock) | discover --frame |
 | Spec and tickets | `grill-with-docs`, `to-spec`, `to-tickets` (Matt Pocock) | spec |
 | Build | `implement-spec`, `tdd`, `code-review` (Matt Pocock) | build |
+| Adopting an existing repo | `product-marketing` (Corey Haines), for positioning from the README | adopt |
 | Repo setup | `setup-matt-pocock-skills` (Matt Pocock) | setup-product |
 | Product UI, design system, reviews | `impeccable` (Paul Bakaus), with `no-ai-design-slop` (Meng To) as a quality gate | design |
 | Marketing, landing and portfolio sites | `build-awwwards-quality-sites` (Meng To), `gsap-*` (GreenSock) | design, showcase |
