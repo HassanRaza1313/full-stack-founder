@@ -11,6 +11,7 @@ Every agent costs about 35k tokens just to start (Claude Code's own instructions
 | `/founder:research <one topic>` | 100k+ | agent-reported 82k and 101k (2026-11-22), which leaves out cached re-reads: expect several times that |
 | `/founder:board` | 180k+ | agent-reported 165k for the three lens members (2026-11-22), plus the chair; leaves out cached re-reads |
 | `/founder:hunt` | 1.2M | measured: 1.18M, 8 min (real-time fraud, 2026-11-24; two researchers, one analyst). Was about 4M before 0.3 |
+| `/founder:adopt` | 0.55M | measured: 539k, 2 min (sindresorhus/slugify, 2026-11-24; the scout read the repo for 35k) |
 | `/founder:discover` (full, with the loop) | 500k–1M | estimate: depends on the rounds |
 | `/founder:finance <one mode>` | 40k | estimate |
 | `/founder:sales icp` · `prospects` · `outreach` | 40k · 100k · 60k | estimate |
