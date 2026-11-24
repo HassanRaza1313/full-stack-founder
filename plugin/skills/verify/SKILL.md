@@ -7,10 +7,12 @@ disable-model-invocation: true
 
 # /founder:verify
 
-Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Gate: `build --product .`. Run in the product repo, with the services it needs (`session.mjs up`).
+Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Find the knowledge folder and `services.json` with `node "${CLAUDE_PLUGIN_ROOT}/scripts/where.mjs"`. Gate: `build --product .`. Run in the product repo, with the services it needs (`session.mjs up`).
 
 1. **Baseline:** the product's own `commands` from `services.json` (`check`, `typecheck`, `test`, `build`), plus its end-to-end tests if it has them, and `gitleaks` across the full history. Skip a command the product doesn't have, and name it in the report.
-2. **Exploratory QA** (`builder` with Playwright CLI, against `commands.url` with `commands.dev` running): every user story at 1440×900 and 390×844, on seed data, including empty, slow, offline, bad input and the back button. Save `audits/qa-<date>.md`, with screenshots.
+2. **Exploratory QA** (one `builder` with Playwright CLI, against `commands.url` with `commands.dev` running): the user stories at 1440×900 and 390×844, on seed data, including empty, slow, offline, bad input and the back button. Save `audits/qa-<date>.md`, with screenshots.
+   - **Keep it lean:** screenshots and short element lookups, never whole-page snapshots or DOM dumps in the conversation (save them to files if needed). A budget of about 60 browser actions; past it, write up what's covered and list the rest as not tested.
+   - The main session waits for the QA report before moving on.
 3. **Lighthouse** (web apps only) on a local production build, against the spec budgets: `audits/lighthouse-<date>/`.
 4. **Security:** Cloudflare's `security-audit` (quick), plus `/security-review` on the changes since the last release. `architect` confirms the findings. Link the report from `STATE.md`.
 5. **Design:** Impeccable's `audit` on the changed screens.

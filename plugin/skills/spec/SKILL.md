@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 # /founder:spec
 
-Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md` and the engineering rules (the repo's `docs/engineering.md`, or `engineering.md` in the knowledge folder). Gate: `build`. Run in the product repo, in a fresh session.
+Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md` and the engineering rules (the repo's `docs/engineering.md`, or `engineering.md` in the knowledge folder). Gate: `build`. Run in the product repo, in a fresh session. Find the knowledge folder with `node "${CLAUDE_PLUGIN_ROOT}/scripts/where.mjs"`.
 
 Load each of Pocock's skills by reading it: `node "${CLAUDE_PLUGIN_ROOT}/scripts/skill.mjs" <name>` prints its path. Then follow that file.
 

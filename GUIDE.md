@@ -227,23 +227,30 @@ This starts with the interview (step 2), then runs on its own:
 | Save an idea for later | `/founder:idea add <idea>` |
 | A feature for a product | `/founder:ceo add dark mode to <product>` |
 | Answers from past research | `/founder:ask what did we find about pricing?` |
-| Bring in a repo you already have | `/founder:adopt you/my-app` |
+| Bring in code you already have | `/founder:adopt you/my-app`, or a folder |
 
-### Bring in an existing repo
+### Bring in code you already have
 
 ```
 /founder:adopt you/my-app
+/founder:adopt "C:\Users\you\Desktop\My App"
 ```
 
-- **It adds** the repo to your catalog, with a knowledge folder for its research, state and plans.
-- **It reads** the README, issues, commits and config, then writes the product's state, roadmap and engineering notes.
-- **It never changes your code.** The only change it offers to the repo is the lean-code rules in `CLAUDE.md`, and that needs your yes.
-- **Where the knowledge lives:**
+Or just tell `/founder:ceo` "I built an app, it's in this folder".
 
-| Repo | Default | Why |
+- **It asks for your ideas first.** Tell it, or drop notes, Word docs or old plans into the folder it gives you. Your ideas go through the same review as any other: nothing skips it.
+- **One home for your code.** It moves the code into your products folder. Other copies on your computer are merged in (their own files kept) and put aside, never deleted.
+- **No GitHub copy yet?** It offers to save your code privately on GitHub, with passwords and keys kept out.
+- **It gets everything working:** installs what the code needs, repairs a moved setup, and runs the tests once.
+- **You finish with a checklist:** your ideas, what it is, the plan, ideas reviewed, set up, tests pass. Then it says what to say next.
+
+- **It never changes your code** without a yes. The only change it offers is the lean-code rules in `CLAUDE.md`.
+- **Where its plans and research live:**
+
+| Your code | Default | Why |
 |---|---|---|
-| Private | In the repo (`product/`) | Everything about the product in one place |
-| Public | In your workspace (`products/<repo>/product/`) | Research, pricing and plans stay private |
+| A private GitHub repo | In the repo (`product/`) | Everything about the product in one place |
+| A public GitHub repo, or a folder | In your workspace (`products/<name>/product/`) | Research, pricing and plans stay private |
 
 - Then use it like any other product: "add <feature> to <name>", a showcase, or a customer test.
 

@@ -137,8 +137,10 @@ if (cmd === 'detect') {
   const line = commands.test;
   if (!line) { console.log(JSON.stringify({ ok: null, note: 'No test command found. Say so in the ready checklist.' })); process.exit(0); }
   const r = sh(line);
-  const passed = [...r.tail.matchAll(/(\d+) passed/g)].reduce((n, m) => n + Number(m[1]), 0);
-  const failed = [...r.tail.matchAll(/(\d+) failed/g)].reduce((n, m) => n + Number(m[1]), 0);
+  // pytest, vitest and jest say "3 passed"; node --test says "# pass 3" or "ℹ pass 3", depending on its reporter.
+  const count = (re) => [...r.tail.matchAll(re)].reduce((n, m) => n + Number(m[1]), 0);
+  const passed = count(/(\d+) passed/g) + count(/^(?:#|ℹ) pass (\d+)/gm);
+  const failed = count(/(\d+) failed/g) + count(/^(?:#|ℹ) fail (\d+)/gm);
   console.log(JSON.stringify({ ok: r.code === 0, line, passed, failed, tail: r.tail }, null, 1));
   process.exit(r.code === 0 ? 0 : 1);
 }

@@ -47,6 +47,26 @@ test('env check: a Python environment moved from another folder is caught, with 
   assert.match(moved.fix, /--reinstall/);
 });
 
+test('env test: runs the tests once and counts them (node --test output)', () => {
+  const s = sandbox();
+  const code = join(s.root, 'nodeapp');
+  write(code, { 'package.json': JSON.stringify({ type: 'module', scripts: { test: 'node --test' } }), 'test/a.test.js': "import { test } from 'node:test';\ntest('a', () => {});\ntest('b', () => {});\n" });
+  const r = json(s.run('env.mjs', ['test', '--dir', code]));
+  assert.equal(r.ok, true, r.tail);
+  assert.equal(r.passed, 2);
+});
+
+test('where: a product repo finds its knowledge folder in the workspace', () => {
+  const s = sandbox();
+  const repo = join(s.products, 'pubapp'); mkdirSync(repo, { recursive: true });
+  write(join(s.ws, 'products', 'pubapp', 'product'), { 'services.json': '{"services":[]}' });
+  const r = json(s.run('where.mjs', ['--dir', repo]));
+  assert.equal(r.knowledge, join(s.ws, 'products', 'pubapp', 'product'));
+  assert.equal(r.knowledgeRepo, s.ws);
+  const none = json(s.run('where.mjs', ['--dir', join(s.root)]));
+  assert.equal(none.knowledge, null);
+});
+
 test('intake: copies plans and documents (Word too), gathers TODOs, never moves the originals', () => {
   const s = sandbox();
   const code = join(s.root, 'proj'); const out = join(s.root, 'k');

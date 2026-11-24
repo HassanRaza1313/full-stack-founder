@@ -7,23 +7,28 @@ Every agent costs about 35k tokens just to start (Claude Code's own instructions
 | Command | About | Basis |
 |---|---|---|
 | `/founder:discover --quick` | 0.7M | measured: 668k, 5.5 min (FraudLab, 2026-11-24; one researcher, two analysts). Was about 4.5M before 0.3 |
-| `/founder:discover --frame` | 150k | estimate: a three-round interview in the main session |
-| `/founder:research <one topic>` | 100k+ | agent-reported 82k and 101k (2026-11-22), which leaves out cached re-reads: expect several times that |
-| `/founder:board` | 180k+ | agent-reported 165k for the three lens members (2026-11-22), plus the chair; leaves out cached re-reads |
+| `/founder:discover --frame` | 0.4M | measured: 371k, 1.5 min (smoke run, answers given up front; a live interview adds a turn per round) |
+| `/founder:research <one topic>` | 0.8M | measured: 766k, 5 min (competitors, 53 sources; two researchers, one analyst) |
+| `/founder:board` | 1.2M | measured: 1.19M, 2.5 min (three lens members, plus the CFO and customer seats) |
 | `/founder:hunt` | 1.2M | measured: 1.18M, 8 min (real-time fraud, 2026-11-24; two researchers, one analyst). Was about 4M before 0.3 |
-| `/founder:adopt` | 0.55M | measured: 539k, 2 min (sindresorhus/slugify, 2026-11-24; the scout read the repo for 35k) |
-| `/founder:discover` (full, with the loop) | 500k–1M | estimate: depends on the rounds |
-| `/founder:finance <one mode>` | 40k | estimate |
-| `/founder:sales icp` · `prospects` · `outreach` | 40k · 100k · 60k | estimate |
-| `/founder:spec` | 100k | estimate |
-| `/founder:design` | 150k | estimate |
-| `/founder:build` | 0.5–3M | estimate: depends on the spec's size |
-| `/founder:verify` | 150k | estimate |
-| `/founder:market`, `/founder:showcase` (per piece) | 60k | estimate |
-| `/founder:listen` | 60k | estimate |
-| Any other command | 20–50k | estimate |
+| `/founder:adopt` | 1.3M | measured: 1.27M and 1.42M, 4 min (a small vibe-coded app, full onboarding: intake, brief, plan, idea review, install and tests). Registering only: 539k (slugify) |
+| `/founder:discover` (full, with the loop) | 2–4M | estimate: depends on the rounds |
+| `/founder:finance <one mode>` | 0.6M | measured: 559k, 3.5 min (costs, with live price pages) |
+| `/founder:sales icp` · `prospects` · `outreach` | 250k · 0.5M · 300k | measured icp: 251k, 1.5 min; the others are estimates |
+| `/founder:spec` | 0.7M | measured: 710k, 3 min (MVP, to the approval stop) |
+| `/founder:design` | 0.8M | measured: 782k, 2.5 min (shape, to the first direction) |
+| `/founder:build` | 1–5M | estimate: depends on the spec's size; not measured yet |
+| `/founder:verify` | 2–5M | measured: 2.29M, 5 min on a tiny app; 22M, 33 min on a real one (archie-rag) before 0.4 capped the browser QA, which alone took 14M re-reading page snapshots. Re-measure on the next real run |
+| `/founder:market` (per piece) | 0.9M | measured: 941k, 3.5 min (a post in four versions, plus the marketing brief it had to write first) |
+| `/founder:showcase` | 0.3M to the readiness stop | measured: 297k; a full showcase is several pieces at the market rate |
+| `/founder:legal trademark` | 0.6M | measured: 569k, 2 min |
+| `/founder:listen` · `/founder:support` | 400k · 400k | measured: 380k, 406k (no live sources connected) |
+| `/founder:ceo` brief · `/founder:portfolio` | 85k · 230k | measured: 84k, 30 s; 228k, 50 s |
+| `/founder:idea` · `ask` · `next` · `pause` · `resume` · `run list` | 150–370k | measured: 223k, 178k, 227k, 367k, 216k, 136k |
+| `/founder:setup check` | 85k | measured: 84k, 30 s |
+| Any other command | 100–300k | measured range of the small commands |
 
-Rows marked **estimate** or **agent-reported** were counted before cached re-reads were included, so they are probably low by 3–5 times. Replace each with a measurement from `runs.md` as runs happen.
+Measured on 2026-11-24 in a sandbox smoke run of every flow (`tests/smoke.mjs`), counting cached re-reads, which make up most of each figure and count far less toward usage limits. Rows still marked **estimate** get replaced with a measurement from `runs.md` as runs happen.
 
 **Before a playbook runs** (`/founder:run`, `/founder:ceo`): add up the steps that won't be skipped, and say it in one line, with the cheapest useful stopping point:
 `About 700k tokens and 1–3 hours (300k measured, the rest estimated). Stopping after step 1 costs about 80k.`

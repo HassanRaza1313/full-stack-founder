@@ -19,7 +19,7 @@
 - One batched question, with the recommended answer first and a one-line reason.
 - Anything outward (push, publish, post, send, create a repo, spend) gets a one-line preview and an explicit yes. The user sends and posts.
 
-**The knowledge folder.** A product's saved results, state and plans live in its knowledge folder: `<repo>/product/`, or `<workspace>/products/<repo>/product/` when its catalog entry says `knowledge: workspace` (public repos, or repos kept clean). Wherever these instructions say `product/`, use that folder, and commit changes to it in the repo that holds it. Its engineering rules are the repo's `docs/engineering.md`, or `engineering.md` in the knowledge folder. How to install, run, test, check, build and audit it is `commands` in its `services.json`, and where its design tokens, legal pages, help and changelog live is `paths`: use those, never assume the template's stack (pnpm, `apps/web`, Supabase). A command or path that isn't there means the product doesn't have it: skip that part and say so. Knowledge files are read on other computers too: never write a path from this one into them (use repo paths, or "the products folder").
+**The knowledge folder.** A product's saved results, state and plans live in its knowledge folder: `<repo>/product/`, or `<workspace>/products/<repo>/product/` when its catalog entry says `knowledge: workspace` (public repos, or repos kept clean). Wherever these instructions say `product/`, use that folder, and commit changes to it in the repo that holds it. Inside a product repo, `node "<plugin>/scripts/where.mjs"` prints where it is. Its engineering rules are the repo's `docs/engineering.md`, or `engineering.md` in the knowledge folder. How to install, run, test, check, build and audit it is `commands` in its `services.json`, and where its design tokens, legal pages, help and changelog live is `paths`: use those, never assume the template's stack (pnpm, `apps/web`, Supabase). A command or path that isn't there means the product doesn't have it: skip that part and say so. Knowledge files are read on other computers too: never write a path from this one into them (use repo paths, or "the products folder").
 
 **Start from the brief.** For an idea or product, `00-intake/brief.md` (from `/founder:discover --frame`) is the founder's own picture. Every step reads it first, works from it rather than the one-line idea, and asks nothing it already answers.
 
@@ -32,11 +32,12 @@
 **Context economy:**
 - Read the target's `INDEX.md` and files' headers before opening files.
 - Read only the sections a step needs.
-- Send bulk reading, research and generation to subagents: `scout` for lookups, `researcher` for web evidence, `analyst` for judging saved evidence, `builder` for routine work, `architect` for code and high-stakes design. Only researchers search the web: gather once into a notes file, then judge from the file. Every agent costs about 35k tokens just to start, so use the fewest that do the job. They write full results to files and reply with at most 10 lines.
+- Send bulk reading, research and generation to subagents: `scout` for lookups, `researcher` for web evidence, `analyst` for judging saved evidence, `builder` for routine work, `architect` for code and high-stakes design. Only researchers search the web: gather once into a notes file, then judge from the file. Every agent costs about 35k tokens just to start, so use the fewest that do the job. They write full results to files and reply with at most 10 lines. Run them in the foreground and wait for every one before closing: a flow never ends while a subagent is still working. Large tool output (page snapshots, logs, test runs) goes to a file and is read in parts, never pasted whole into the conversation, because every turn re-reads it.
 - Don't paste file contents, logs or long lists into chat. Link the file.
 
 **Safety:**
 - Note or make a commit before changing files.
+- Commit only the files this step wrote (`git add <those paths>`), never everything: other work may be in progress in the same repo, the workspace especially.
 - Never handle secrets in chat.
 - On failure: what failed, what was kept, and the one way forward. Never delete half-made work without asking.
 

@@ -23,9 +23,9 @@ test('a folder with no GitHub repo: moves home, knowledge in the workspace, cata
   const r = s.run('adopt.mjs', ['--path', folder, '--no-labels']);
   assert.equal(r.status, 0, r.stderr);
   const out = json(r);
-  const home = join(s.products, 'My App');
+  const home = join(s.products, 'my-app');
   assert.ok(existsSync(join(home, 'plan.md')) && !existsSync(folder), 'moved into the products folder');
-  const k = join(s.ws, 'products', 'My App', 'product');
+  const k = join(s.ws, 'products', 'my-app', 'product');
   const state = readFileSync(join(k, 'STATE.md'), 'utf8');
   assert.match(state, /^stage: onboarding$/m);
   assert.match(state, /^ready: your ideas — · brief — · build plan — · ideas reviewed — · setup — · tests —$/m);
@@ -37,7 +37,8 @@ test('a folder with no GitHub repo: moves home, knowledge in the workspace, cata
 
   const issue = s.gh().issues[0];
   assert.equal(out.catalogIssue, 1);
-  assert.match(issue.body, /^local: My App$/m);
+  assert.match(issue.body, /^local: my-app$/m);
+  assert.equal(issue.title, 'My App');
   assert.doesNotMatch(issue.body, /^repo:/m);
   assert.doesNotMatch(issue.body, /[A-Za-z]:\\|\/tmp\/|founder-test-/, 'no path from this computer in the catalog');
 });

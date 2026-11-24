@@ -1,5 +1,27 @@
 # Changelog
 
+## 0.4.0 · 2026-11-24
+
+- **Bring in code you already have, and get it ready to build** ([#1](https://github.com/HassanRaza1313/full-stack-founder/issues/1)). `/founder:adopt` takes a GitHub repo or a folder on your computer, vibe-coded or not, or just "I built an app" to `/founder:ceo`.
+  - **Your ideas first:** before reading the code, it asks what you have in mind. It copies your plans, notes and Word or PDF documents into one folder (the originals stay put). Your ideas are inputs to the review, never straight to the backlog.
+  - **Understands it with you:** a brief from the code and your answers, the framing interview to confirm it, and an optional honest score.
+  - **A plan, and your ideas reviewed:** finish, fix or cut, in order. Each idea gets a recommendation, with the review scaled to its size: small fixes go to the backlog, direction changes go to customers and the board. Your strong preferences have to be argued against explicitly, and you can overrule.
+  - **Set up and tested:** installs what the code needs (Node, Python, Go or Rust), repairs a setup that was moved from another folder, runs the tests once and checks the app loads.
+  - **One home for every copy:** other copies on your computer are found; their own files (data, settings, specs) join the main copy, and the copies are put aside, never deleted.
+  - **No GitHub copy yet?** It offers to save the code privately, keeping `.env` files out and stopping if it finds anything that looks like a key.
+  - **A ready checklist** in the product's state, ticked only when each part is really done.
+- **Works on any stack.** Verify, design, legal, market, release, support and showcase now use each product's own commands and paths (`services.json`) instead of assuming the template's pnpm, Supabase and Vercel.
+- **Simple for anyone.** A "Speak plainly" rule for every flow: defaults over questions, one question at a time, plain words, progress as a checklist, and next steps as words you can say back.
+- **Measured costs for almost every flow,** from a sandbox run of all of them, replacing the old estimates (`references/costs.md`).
+- **Fixes:**
+  - resume and the setup check now find products whose plans live in your workspace;
+  - release, verify, spec and showcase find the plans folder from inside a product repo (`where.mjs`);
+  - `next` maps a product's stage to the right setup stage;
+  - a parked idea's reason now shows in the portfolio;
+  - flows commit only the files they wrote;
+  - no path from your computer is written into shared files.
+- **Tests:** 22 automated tests run every script end to end against a stand-in GitHub, plus checks of every flow's references and plain-language rules, on Windows, macOS and Linux on every change. A smoke runner (`plugin/tests/smoke.mjs`) drives all 26 flows headless in a sandbox before each release. Plus a new eval for plain-language onboarding.
+
 ## 0.3.0 · 2026-11-24
 
 - **Lean research, measured.** Two new agents. A `researcher` (Sonnet, only search, fetch and file tools, a fixed budget, few turns) gathers evidence once into a notes file. An `analyst` (Opus, no web) judges from those notes. On the same ideas:

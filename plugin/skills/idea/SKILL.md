@@ -68,7 +68,7 @@ Comment `Note (you): <text>`. Flows act on notes newer than their own last run. 
 ## move `<idea>` `<stage>` `[reason]`
 
 - Swap the `status:*` label and set `updated:`.
-- Off-ramps need a reason, as a comment `<Stage>: <reason>`.
+- Off-ramps need a reason, as a comment `<Stage>: <reason>`, and as `reason:` in the metadata, so the portfolio can show it.
 - `rejected` and `sunset` close the issue; moving out of them reopens it.
 - Confirm first for flow-owned stages: `showcased`, `graduated`, `live`, `specced`, `shipped`.
 

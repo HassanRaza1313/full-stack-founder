@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 # /founder:release
 
-Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Gate: `build --product .`, or `graduate` once deployed. Run on an up-to-date `main`.
+Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Find the knowledge folder (`STATE.md`, `services.json`, the newest verify) with `node "${CLAUDE_PLUGIN_ROOT}/scripts/where.mjs"`. Gate: `build --product .`, or `graduate` once deployed. Run on an up-to-date `main`.
 
 1. **Ready?**
    - The newest `/founder:verify` is newer than the last merge and has no open P1. Otherwise run `/founder:verify`.

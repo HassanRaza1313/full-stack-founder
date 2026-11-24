@@ -7,7 +7,7 @@ disable-model-invocation: true
 
 # /founder:showcase
 
-Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Gate: `showcase`. The case study is published through the portfolio site, at the folder in `site.repo`. If it's missing, run `/founder:setup showcase`.
+Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Gate: `showcase`. Find the knowledge folder with `node "${CLAUDE_PLUGIN_ROOT}/scripts/where.mjs"`. The case study is published through the portfolio site, at the folder in `site.repo`. If it's missing, run `/founder:setup showcase`.
 
 ## Showcase
 

@@ -39,9 +39,13 @@ if (given && !existsSync(given)) fail(`There's no folder at ${given}.`);
 if (given && !repo) repo = ghRepoOf(git(given, 'remote', 'get-url', 'origin'));
 if (repo && !/^[\w.-]+\/[\w.-]+$/.test(repo)) fail(usage);
 const info = repo ? JSON.parse(run('gh', ['repo', 'view', repo, '--json', 'name,description,visibility,defaultBranchRef,primaryLanguage,homepageUrl,isArchived'], { capture: true }).out) : null;
-const folderName = info?.name ?? basename(given);
-const slug = args.slug ?? folderName.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
-const name = args.name ?? folderName.split(/[-_\s]+/).filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(' ');
+// The code's folder in the products folder is named like its repo, so every computer finds it from the catalog. A folder
+// with no repo gets the slug ("Party Planner" -> party-planner), which is also its repo name if one is created.
+const toSlug = (s) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const slug = args.slug ?? toSlug(info?.name ?? basename(given));
+const folderName = info?.name ?? slug;
+const label = info?.name ?? basename(given);
+const name = args.name ?? (/[A-Z ]/.test(label) ? label : label.split(/[-_\s]+/).filter(Boolean).map((w) => w[0].toUpperCase() + w.slice(1)).join(' '));
 const isPublic = info?.visibility === 'PUBLIC';
 const localOnly = !repo;
 const knowledge = args.knowledge ?? (isPublic || localOnly ? 'workspace' : 'repo');

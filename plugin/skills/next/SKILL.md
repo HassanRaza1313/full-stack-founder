@@ -15,7 +15,7 @@ Read the issue (stage and metadata), `STATE.md` (`gate`, `next`, "Where I left o
 
 1. A gate waits on the user (a `gate:` line, an unapproved spec, a PR awaiting review) → ask for that decision.
 2. A playbook stopped partway → `/founder:run <playbook> <target>`.
-3. The machine isn't ready for the stage → `/founder:setup <stage>`.
+3. The machine isn't ready for the stage → `/founder:setup <stage>`. The setup stage for an item's stage: `ideas` for idea stages (new to researching), `build` for building and specced, `showcase` for showcased, `graduate` for graduated and live.
 4. Stale results the next step depends on → refresh them first.
 5. **Product idea:**
    - `new` → `/founder:discover --quick`

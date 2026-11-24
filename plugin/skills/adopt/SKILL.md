@@ -11,7 +11,7 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md` (especially **Speak plainly
 
 The person may not be technical: a marketer with a vibe-coded app, a `plan.md`, some notes. Do the technical work to a professional standard, and keep what they see to plain words, one question at a time, each with a suggested answer. Decide everything a sensible default can decide, and say what you decided in one line.
 
-Show this checklist at the start, and tick it as you go. It's also the `ready:` line in `STATE.md`:
+Show this checklist at the start, and tick it as you go. It's also the `ready:` line in `STATE.md`. Tick a box only when it's really done: the brief once they've confirmed it, the plan once they've approved it. A draft shows as `draft`, not ticked:
 
 ```
 Getting <Name> ready to build
@@ -35,7 +35,7 @@ Run `node "${CLAUDE_PLUGIN_ROOT}/scripts/intake.mjs" --dir <codeDir> --out <know
 
 > Before I look at the code: what do you already have in mind? Ideas, problems you know about, plans, who it's for, what you'd change. Tell me here, or drop files into `<existing-ideas folder>` (notes, screenshots, documents) and say "done". I found <n> documents in the project and copied them there already. "Nothing" is fine too.
 
-Save what they say to `00-intake/existing-ideas/<date>-from-you.md`, in their words. These are **inputs, not decisions**: nothing goes straight to the backlog.
+Don't ask where their files are: intake finds the ones in the project, and they can drop others in. Save what they say to `00-intake/existing-ideas/<date>-from-you.md`, in their words. These are **inputs, not decisions**: nothing goes straight to the backlog.
 
 ## 3 · Read the code, once
 

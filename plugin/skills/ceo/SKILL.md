@@ -39,6 +39,8 @@ If they already have code (a project they built, a folder, a GitHub link), say: 
 
 "What would you do?", "what would it cost?", "don't run it yet": pick the flow as below and give the cost line and the **Stop:** points, then wait for a go. Loading this skill never starts work by itself.
 
+End with **exactly one question**, the go-ahead, with your recommended answer. Say everything else as statements, not questions: what you'll find yourself ("I'll look for the Word doc in the folder; if it's somewhere else, you can drop it in at step 2"), what setup will ask for when it gets there (a GitHub account, a sign-in), and the choices you'll put to them later, at the step that needs them.
+
 ## A direction: run it
 
 1. **Pick the flow**, using the first match:
@@ -61,7 +63,7 @@ If they already have code (a project they built, a folder, a GitHub link), say: 
    | Something already decided or researched | `/founder:ask` |
    | Anything else | `/founder:next` on the product in question |
 
-   If two fit, or the target is unclear, ask one question with options. Otherwise just say "Running <flow> on <target>: about <tokens> and <time>, stopping for you at <the Stop points>.", using `${CLAUDE_PLUGIN_ROOT}/references/costs.md` (over 1M tokens, ask once first).
+   If two fit, or the target is unclear, ask one question with options. Otherwise just say "Running <flow> on <target>: about <tokens> and <time>, stopping for you at <the Stop points>.", using `${CLAUDE_PLUGIN_ROOT}/references/costs.md`. Over 1M tokens, the go-ahead is your one question ("Run it all, or stop after step 1?"): don't add others, decide them or ask them later, at the step that needs them.
 2. **Run it** by following `${CLAUDE_PLUGIN_ROOT}/skills/run/SKILL.md`, with the playbook, in **autopilot**:
    - Do every step without asking, except the playbook's **Stop:** points and outward actions (push, publish, post, send, spend).
    - Batch the decisions that are due together into one question.

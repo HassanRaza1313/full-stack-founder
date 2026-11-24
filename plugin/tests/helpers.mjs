@@ -20,7 +20,8 @@ export function sandbox(ghState = {}) {
   writeFileSync(join(bin, 'gh.cmd'), `@node "${fake}" %*\r\n`);
   writeFileSync(join(bin, 'gh'), `#!/bin/sh\nexec node "${fake}" "$@"\n`, { mode: 0o755 });
   // gitleaks off the PATH unless the machine has it; HOME points into the sandbox so the copy search stays inside it.
-  const env = { ...process.env, STUDIO_DIR: ws, FAKEGH_STATE: state, PATH: `${bin}${process.platform === 'win32' ? ';' : ':'}${process.env.PATH}`, HOME: root, USERPROFILE: root };
+  const { NODE_TEST_CONTEXT: _nested, ...outer } = process.env; // a nested `node --test` would report to this runner instead
+  const env = { ...outer, STUDIO_DIR: ws, FAKEGH_STATE: state, PATH: `${bin}${process.platform === 'win32' ? ';' : ':'}${process.env.PATH}`, HOME: root, USERPROFILE: root };
   const runScript = (name, args, opts = {}) => spawnSync('node', [script(name), ...args], { env, encoding: 'utf8', cwd: opts.cwd ?? root });
   const gh = () => JSON.parse(readFileSync(state, 'utf8'));
   return { root, ws, products, env, run: runScript, gh };

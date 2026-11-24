@@ -27,7 +27,7 @@ You can build it. Full Stack Founder runs the other half of a startup: research,
 | "Build it" | Repo, spec, design, build and tests |
 | "Launch it" | Case study, demo, posts and outreach, as drafts you send |
 | "Add dark mode to Fraud Guard" | Review, spec, build and release |
-| `/founder:adopt you/my-app` | Brings a repo you already have into the catalog, without touching its code |
+| `/founder:adopt you/my-app` or a folder | Brings in code you already have (a GitHub repo, or a vibe-coded folder) and gets it ready to build on |
 
 4. **Run your portfolio:** `/founder:ceo` on its own gives one brief across every product.
 5. **Stop when you stop:** `/founder:pause` shuts everything down. `/founder:resume` brings back only what's needed.
@@ -145,7 +145,7 @@ Start with these. Everything else runs behind them.
 | `/founder:run <playbook>` | A whole journey: validate, idea-to-launch, feature, customer-test, finance-check, first-customers, showcase, health, weekly, monthly-review, raise, graduate |
 | `/founder:idea` · `/founder:portfolio` · `/founder:next` | Capture ideas and enhancements; the detailed portfolio view; "what should I do now?" on one product |
 | `/founder:research` · `/founder:finance` · `/founder:discover` · `/founder:market` · `/founder:sales` · `/founder:listen` · `/founder:support` · `/founder:legal` | The departments, each runnable on its own |
-| `/founder:adopt` | Bring in a repo you already have: catalog entry, knowledge folder, state and roadmap from the repo |
+| `/founder:adopt` | Bring in code you already have, from GitHub or a folder: your ideas first, a brief, a plan, your ideas reviewed, installed and tested, one home for every copy |
 | `/founder:setup-product` · `/founder:spec` · `/founder:design` · `/founder:build` · `/founder:verify` · `/founder:release` · `/founder:showcase` | Engineering, built on Matt Pocock's skills and Impeccable, and the showcase |
 
 </details>
@@ -157,7 +157,7 @@ Run `/founder:portfolio help` for one line per command, or ask `/founder:ceo` in
 - **Act in public for you.** You send every post and message. Nothing is published, deployed or paid for without your yes.
 - **Replace a lawyer, an accountant or real customers.** Legal output is "not legal advice". Simulated customers never count as evidence.
 - **Scrape or sign in anywhere.** Blocked sites are read through your own browser, read-only.
-- **Make big jobs free.** A full validation is several hundred thousand tokens. You see the estimate first.
+- **Make big jobs free.** Most single steps take 0.2–2M tokens (mostly cached re-reads), and a full validation a few million. You see the estimate first, measured per flow in [costs.md](plugin/references/costs.md).
 - **Run on a server.** It runs in your Claude Code, with your files and your GitHub.
 - **Speak for the skills' authors.** It ships their open-source skills with credit and licences. They haven't endorsed it.
 - **Run paid production yet.** Hosting, billing and monitoring for paying customers come in a later release.
@@ -166,7 +166,9 @@ Run `/founder:portfolio help` for one line per command, or ask `/founder:ceo` in
 
 - **Tested end to end on Windows.**
 - **Built for macOS and Linux too.** Automated install checks pass on both on every change. Full end-to-end testing there is still to come.
-- A test suite checks the first run, routing, honest verdicts and pinned skills ([`plugin/evals/`](plugin/evals/)).
+- **Automated tests** run every script end to end against a stand-in GitHub, and check every flow's references and plain-language rules, on Windows, macOS and Linux on every change ([`plugin/tests/`](plugin/tests/)).
+- **Evals** check the first run, routing, honest verdicts, pinned skills and plain-language onboarding ([`plugin/evals/`](plugin/evals/)).
+- **Smoke runs** drive every flow headless in a sandbox before each release (`plugin/tests/smoke.mjs`).
 
 ## Credits
 
