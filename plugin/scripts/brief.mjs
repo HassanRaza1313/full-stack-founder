@@ -146,11 +146,11 @@ const issues = config.studioRepo
   ? await gh(['issue', 'list', '-R', config.studioRepo, '--label', 'type:idea', '--state', 'all', '--limit', '200', '--json', 'number,title,labels,updatedAt,state,body'])
   : null;
 const status = (i) => (i.labels.find((l) => l.name.startsWith('status:'))?.name ?? 'status:new').slice(7);
-const ended = new Set(['rejected', 'sunset', 'shelved']);
+const ended = new Set(['rejected', 'sunset', 'shelved']); // A closed catalog issue also retires a product.
 const entries = (issues ?? []).map((i) => ({ issue: i, meta: meta(i.body), status: status(i) }));
 
 // 2. Products: status from GitHub; the local copy only for sync, or as the fallback when offline.
-const products = await Promise.all(entries.filter((e) => e.meta.repo && !ended.has(e.status)).map(async ({ issue, meta: m, status: st }) => {
+const products = await Promise.all(entries.filter((e) => e.meta.repo && !ended.has(e.status) && e.issue.state === 'OPEN').map(async ({ issue, meta: m, status: st }) => {
   const repoName = m.repo.split('/').pop();
   const local = config.productsDir && existsSync(join(config.productsDir, repoName, '.git')) ? join(config.productsDir, repoName) : null;
   // Knowledge in the workspace (public repos, or repos kept clean): read it from the workspace repo instead.
@@ -178,7 +178,7 @@ const products = await Promise.all(entries.filter((e) => e.meta.repo && !ended.h
 }));
 
 // 3. Ideas that aren't products yet: open ones by default. --all adds closed ideas and retired products.
-const ideas = entries.filter((e) => (all ? !e.meta.repo || ended.has(e.status) : !e.meta.repo && e.issue.state === 'OPEN')).map(({ issue, meta: m, status: st }) => ({
+const ideas = entries.filter((e) => (all ? !e.meta.repo || ended.has(e.status) || e.issue.state !== 'OPEN' : !e.meta.repo && e.issue.state === 'OPEN')).map(({ issue, meta: m, status: st }) => ({
   number: issue.number, title: issue.title, slug: m.slug ?? null, status: st, score: m.score ?? null, next: m.next ?? null,
   updated: issue.updatedAt?.slice(0, 10),
   ...(all ? { state: issue.state, labels: issue.labels.map((l) => l.name), body: (issue.body ?? '').slice(0, 800) } : {}),
