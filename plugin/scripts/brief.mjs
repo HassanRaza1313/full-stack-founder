@@ -58,10 +58,12 @@ function state(text) {
   for (const line of text.split(/\r?\n/)) {
     if (line.startsWith('#')) break;
     const kv = line.match(/^([\w-]+):\s*(.*)$/);
-    if (kv && ['stage', 'gate', 'next', 'interest', 'health', 'costs'].includes(kv[1])) s[kv[1]] = kv[2];
+    if (kv && ['stage', 'gate', 'next', 'interest', 'health', 'costs', 'ready'].includes(kv[1])) s[kv[1]] = kv[2];
   }
   const left = text.match(/\*\*Next step:\*\*\s*(.+)/);
   if (left) s.leftOff = left[1].trim();
+  const last = text.match(/\*\*Last session:\*\*\s*(\d{4}-\d{2}-\d{2})/);
+  if (last) s.lastSession = last[1];
   return s;
 }
 
@@ -150,22 +152,25 @@ const ended = new Set(['rejected', 'sunset', 'shelved']); // A closed catalog is
 const entries = (issues ?? []).map((i) => ({ issue: i, meta: meta(i.body), status: status(i) }));
 
 // 2. Products: status from GitHub; the local copy only for sync, or as the fallback when offline.
-const products = await Promise.all(entries.filter((e) => e.meta.repo && !ended.has(e.status) && e.issue.state === 'OPEN').map(async ({ issue, meta: m, status: st }) => {
-  const repoName = m.repo.split('/').pop();
+// A product is an idea with a GitHub repo (`repo:`), or adopted from a folder with no repo yet (`local:`, its name in the
+// products folder; its knowledge always lives in the workspace).
+const isProduct = (m) => Boolean(m.repo || m.local);
+const products = await Promise.all(entries.filter((e) => isProduct(e.meta) && !ended.has(e.status) && e.issue.state === 'OPEN').map(async ({ issue, meta: m, status: st }) => {
+  const repoName = m.repo ? m.repo.split('/').pop() : m.local;
   const local = config.productsDir && existsSync(join(config.productsDir, repoName, '.git')) ? join(config.productsDir, repoName) : null;
   // Knowledge in the workspace (public repos, or repos kept clean): read it from the workspace repo instead.
-  const inWorkspace = m.knowledge === 'workspace';
+  const inWorkspace = m.knowledge === 'workspace' || !m.repo;
   const [kRepo, kBase] = inWorkspace ? [config.studioRepo, `products/${repoName}/product`] : [m.repo, 'product'];
   const kLocal = inWorkspace ? join(dir, 'products', repoName, 'product') : local && join(local, 'product');
   const [remote, localSync, blockers] = await Promise.all([
     fromGitHub(kRepo, kBase),
     local ? sync(local) : null,
-    gh(['issue', 'list', '-R', m.repo, '--state', 'open', '--label', 'launch-blocker', '--limit', '20', '--json', 'number,title']),
+    m.repo ? gh(['issue', 'list', '-R', m.repo, '--state', 'open', '--label', 'launch-blocker', '--limit', '20', '--json', 'number,title']) : [],
   ]);
   const src = remote ?? (kLocal && existsSync(kLocal) ? fromLocal(kLocal) : null);
   const media = m.drive && config.driveRoot ? join(config.driveRoot, m.drive) : null;
   return {
-    name: issue.title, slug: m.slug ?? repoName, issue: issue.number, catalogStatus: st, repo: m.repo,
+    name: issue.title, slug: m.slug ?? repoName, issue: issue.number, catalogStatus: st, repo: m.repo ?? null, localOnly: !m.repo,
     source: remote ? 'github' : src ? 'this computer (GitHub unreachable)' : 'unavailable', knowledge: inWorkspace ? 'workspace' : 'repo',
     ...(src?.stateText ? state(src.stateText) : { stateMissing: true }),
     listen: src?.listen ?? null, finance: src?.finance ?? null, pipeline: src?.pipeline ?? null,
@@ -178,7 +183,7 @@ const products = await Promise.all(entries.filter((e) => e.meta.repo && !ended.h
 }));
 
 // 3. Ideas that aren't products yet: open ones by default. --all adds closed ideas and retired products.
-const ideas = entries.filter((e) => (all ? !e.meta.repo || ended.has(e.status) || e.issue.state !== 'OPEN' : !e.meta.repo && e.issue.state === 'OPEN')).map(({ issue, meta: m, status: st }) => ({
+const ideas = entries.filter((e) => (all ? !isProduct(e.meta) || ended.has(e.status) || e.issue.state !== 'OPEN' : !isProduct(e.meta) && e.issue.state === 'OPEN')).map(({ issue, meta: m, status: st }) => ({
   number: issue.number, title: issue.title, slug: m.slug ?? null, status: st, score: m.score ?? null, next: m.next ?? null,
   updated: issue.updatedAt?.slice(0, 10),
   ...(all ? { state: issue.state, labels: issue.labels.map((l) => l.name), body: (issue.body ?? '').slice(0, 800) } : {}),

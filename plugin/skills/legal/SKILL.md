@@ -11,8 +11,8 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`, `knowledge.md`. Gate: `sho
 
 | Item | Done by | Output |
 |---|---|---|
-| `check` | Anthropic legal's `compliance-check` skill, given the product's facts: the data it collects (`packages/shared/src/env.ts`, the adapters, Supabase tables, forms), its regions, its emails, analytics and cookies, any AI features and app-store builds | `audits/legal-<date>.md`; each gap becomes an issue (`launch-blocker` if it must be fixed before going public) |
-| `docs` | Rewrite `app/(legal)/privacy` and `terms` from those same facts: what's collected, why, processors (Supabase, Vercel, Resend, PostHog, Stripe), retention, user rights, contact | A PR for the user to review |
+| `check` | Anthropic legal's `compliance-check` skill, given the product's facts: the data it collects (its settings at `paths.env` or `.env.example`, the outside services it calls, its database tables, forms), its regions, its emails, analytics and cookies, any AI features and app-store builds | `audits/legal-<date>.md`; each gap becomes an issue (`launch-blocker` if it must be fixed before going public) |
+| `docs` | Rewrite the privacy and terms pages (at `paths.legal`, or wherever the app keeps its pages) from those same facts: what's collected, why, the processors it actually uses (for example Supabase, Vercel, Resend, PostHog, Stripe), retention, user rights, contact | A PR for the user to review |
 | `contract <file>` | Anthropic legal's `review-contract`, or `triage-nda` for NDAs | A plain-English summary, red flags, and suggested redlines in `decisions/` (no personal details) |
 | `trademark <name>` | USPTO, EUIPO and WIPO search links, `.com`/`.dev` availability (RDAP), similar marks in the product's class | `research/market/<date>-trademark-<name>.md` |
 

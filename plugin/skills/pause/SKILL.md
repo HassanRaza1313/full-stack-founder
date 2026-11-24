@@ -16,13 +16,13 @@ Quick, with no questions unless something's wrong.
    - **Never commit to `main`.** If on `main`, branch to `wip/<date>-<topic>` first.
    - Leave out anything that looks like a secret or personal data (`.env*`, keys, lead lists), and say so.
    - Commit `WIP: <what changed>`, then `git push -u origin <branch>`. If there's no remote or the push fails, keep the commit local and say so.
-3. **Note where things stand.** Update "Where I left off" in `product/STATE.md`, so a fresh session can pick up from it alone:
+3. **Note where things stand.** Update "Where I left off" in the knowledge folder's `STATE.md` (journey.md), so a fresh session on any computer can pick up from it alone. Name branches, tickets and files by their repo path, never by a path on this computer:
    - the date
    - what's done
    - what's in progress (branch, ticket)
    - the one next step
    - open questions
 
-   Commit and push it.
+   Commit and push it in the repo that holds it (the workspace, for products whose knowledge lives there).
 4. **Stop everything:** `node "${CLAUDE_PLUGIN_ROOT}/scripts/session.mjs" down --dir <repo>`. It stops the services, leftover dev processes, Docker and WSL, for every project.
 5. **Close:** `Paused · <branch> @ <sha> (pushed|local) · stopped <services> · <n> GB free · resume: /founder:resume <product> → <next step>`.

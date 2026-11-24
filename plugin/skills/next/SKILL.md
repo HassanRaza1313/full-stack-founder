@@ -37,4 +37,4 @@ Read the issue (stage and metadata), `STATE.md` (`gate`, `next`, "Where I left o
 
 Run a command by reading `${CLAUDE_PLUGIN_ROOT}/skills/<name>/SKILL.md` and following it (our commands are user-only).
 
-Say "Next for <target>: <command>, because <reason>", naming the runner-up if it was close. Then run it. If nothing's pending, offer the best optional move: the top backlog idea, a stale refresh, or content.
+Say "Next for <target>: <what it does, in plain words>, because <reason>" (with the command in brackets), naming the runner-up if it was close. Then run it. If nothing's pending, offer the best optional move: the top backlog idea, a stale refresh, or content.

@@ -9,7 +9,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, statfsSync, writeFile
 import { homedir, totalmem } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { addUserPath, getPath, isWin, loadConfig, ok, parseArgs, platform, readRegEnv, readState, readUserEnv, run, setUserEnv, workspaceDir, writeState } from './lib.mjs';
+import { addUserPath, getPath, isWin, loadConfig, ok, parseArgs, platform, productDir, readRegEnv, readState, readUserEnv, run, setUserEnv, workspaceDir, writeState } from './lib.mjs';
 
 const pluginRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const reqs = JSON.parse(readFileSync(join(pluginRoot, 'requirements.json'), 'utf8'));
@@ -45,7 +45,8 @@ function render(text) {
 }
 const renderObj = (o) => JSON.parse(JSON.stringify(o), (_, v) => (typeof v === 'string' ? (render(v) ?? '') : v));
 
-// Products (and so services) this machine has: <productsDir>/*/product/services.json.
+// Products (and so services) this machine has: each <productsDir>/* repo's services.json, from its knowledge folder
+// (in the repo, or in the workspace for products adopted with `knowledge: workspace`).
 function productServices() {
   const dirs = args.product ? [resolve(args.product)] : [];
   if (!args.product && config.productsDir && existsSync(config.productsDir)) {
@@ -53,7 +54,7 @@ function productServices() {
   }
   const byService = {};
   for (const dir of dirs) {
-    const file = join(dir, 'product', 'services.json');
+    const file = join(productDir(dir), 'services.json');
     if (!existsSync(file)) continue;
     for (const s of JSON.parse(readFileSync(file, 'utf8')).services ?? []) {
       for (const id of [s.id, s.use, ...(s.use === 'supabase' ? ['docker'] : [])].filter(Boolean)) (byService[id] ??= []).push(dir.split(/[\\/]/).pop());

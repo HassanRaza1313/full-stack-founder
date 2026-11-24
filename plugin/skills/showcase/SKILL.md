@@ -33,7 +33,7 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Gate: `showcase`. The case
 
 ## `demo on | off`
 
-**on:**
+**on:** for products on the template's stack (a `supabase` service). For others, host the demo where the engineering rules say; if no free host fits (a GPU, a big Docker stack), say so plainly and offer a recorded demo instead.
 1. Check that live demos are below `demos.maxLive`. Otherwise, ask which one comes down.
 2. **(the user)** creates the Vercel Hobby project. Point to the exact screen.
 3. **The database:** its own Supabase project if a slot is free, otherwise a schema in `studio`.

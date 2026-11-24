@@ -1,6 +1,25 @@
 {
-  "$comment": "What this product needs running while you work on it. /founder:resume starts only what the next task needs; /founder:pause stops everything. 'use' is a built-in (docker, supabase); anything else gives 'run' (a long-running command) or 'start' and 'stop'. Remove supabase if the product has no database.",
+  "$comment": "How to work on this product. 'services' is what needs running while you work: /founder:resume starts only what the next task needs, /founder:pause stops everything; 'use' is a built-in (docker, supabase), anything else gives 'run' (a long-running command) or 'start' and 'stop'. Remove supabase if the product has no database. 'commands' and 'paths' tell verify, design, release, legal, market and support how this product works, so they fit any stack: leave out what the product doesn't have.",
   "services": [
     { "id": "supabase", "use": "supabase", "why": "Local database, auth and storage" }
-  ]
+  ],
+  "commands": {
+    "install": "pnpm install",
+    "dev": "pnpm dev",
+    "url": "http://localhost:3000",
+    "check": "pnpm check",
+    "typecheck": "pnpm typecheck",
+    "test": "pnpm test",
+    "build": "pnpm build",
+    "audit": "pnpm audit --audit-level high",
+    "seed": "pnpm db:reset"
+  },
+  "paths": {
+    "tokens": "packages/shared/src/tokens.ts",
+    "public": "apps/web/public",
+    "env": "packages/shared/src/env.ts",
+    "legal": "apps/web/app/(legal)",
+    "help": "apps/web/app/help",
+    "changelog": "apps/web/app/changelog"
+  }
 }

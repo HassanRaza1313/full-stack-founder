@@ -39,7 +39,7 @@ No idea yet? `/founder:hunt` finds them from real complaints and competitor gaps
 1. **Level.**
    - Recommend **enhancement** if Claude is running in a product repo, or the text names or changes a known product.
    - Otherwise recommend **new product**.
-   - Ask, unless it's unambiguous.
+   - Decide, and say which in one line ("Saving this as a new feature for Fraud Guard"). Ask only when it could really be either.
 2. **Duplicates.** Run `gh issue list --label type:idea --state all --search "<3–5 keywords>" --json number,title,state,labels --limit 10`. For an enhancement, also check the roadmap and open specs. On a match, offer to add a note to it instead.
 3. **Draft:**
    - **Product idea:** Problem, Hypothesis ("We believe X will cause Y for Z"), Evidence, Source, Success metric, Size S/M/L, and a slug of 5 words or fewer.

@@ -13,7 +13,7 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`, `knowledge.md`. Gate: `gra
 |---|---|---|
 | `triage` | Anthropic customer-support's `ticket-triage`, on the Gmail label `support/<name>` (or pasted messages) | Each message is sorted into answer, bug or idea. Bugs become `type:bug` issues; requests become evidence comments on ideas (or new `type:idea` drafts) |
 | `reply` | `draft-response`, in the product's voice from `.agents/product-marketing.md` | Gmail drafts or text; the user sends them |
-| `help-docs` | `kb-article`, from questions asked 3 or more times | Pages in `app/help`, as a PR |
+| `help-docs` | `kb-article`, from questions asked 3 or more times | Pages at `paths.help` (or a `docs/help/` folder), as a PR |
 | `retention` | Corey Haines's `churn-prevention`, `onboarding` and `emails`, using activation and churn data from `/founder:listen` | `marketing/retention/<date>.md` and email drafts |
 
 Close with counts (answered, bugs, ideas), anything urgent, and the next step: usually `/founder:listen`, so the evidence reaches the backlog.

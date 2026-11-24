@@ -13,12 +13,12 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Gate: `build --product .`,
    - The newest `/founder:verify` is newer than the last merge and has no open P1. Otherwise run `/founder:verify`.
    - The version comes from the PRs since the last tag: `feat` → minor, `fix` → patch, breaking → major. The user can override.
 2. **Local, always:**
-   1. Update `CHANGELOG.md` (Added / Changed / Fixed, in user language) and `app/changelog`.
+   1. Update `CHANGELOG.md` (Added / Changed / Fixed, in user language), and the in-app changelog at `paths.changelog` if there is one.
    2. Commit `release: vX.Y.Z` and tag it.
    3. Preview, then push `main` and the tag.
    4. `gh release create` with notes from the merged PRs.
    5. Ideas whose spec shipped get `status:shipped` and `next: /founder:listen`.
-3. **Production** (only after `/founder:deploy`). Stop at the first failure:
+3. **Production** (only after `/founder:deploy`; for products not on the template's Supabase and Vercel stack, follow the deploy notes in the engineering rules instead). Stop at the first failure:
    1. Back up the database.
    2. `supabase db push` (expand only).
    3. Promote the Vercel deployment.

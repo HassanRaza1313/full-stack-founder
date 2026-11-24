@@ -20,7 +20,7 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`, `knowledge.md`. Gate: `sho
 | `copy <page>` | Landing, pricing or onboarding copy, 2 headline options, a CRO pass | `copywriting`, `cro` |
 | `post <topic>` | LinkedIn, X and Instagram versions, plus target-community versions where their rules allow | `social` |
 | `carousel <topic>` | An 8–10 slide PDF at 1080×1350 | HTML slides in the product's tokens → Playwright CLI PDF |
-| `video demo\|vertical\|brag` | 60–90 s at 1920×1080, 30 s at 1080×1920, or a launch reel, recorded with `scripts/demo-walkthrough.mjs` | `hyperframes`, `brag`. Credit brag's CC BY music in every post that uses it |
+| `video demo\|vertical\|brag` | 60–90 s at 1920×1080, 30 s at 1080×1920, or a launch reel, recorded with `node "${CLAUDE_PLUGIN_ROOT}/scripts/demo-walkthrough.mjs" --steps <knowledge folder>/demo-steps.json` while the app runs (`commands.dev`, seeded with `commands.seed`) | `hyperframes`, `brag`. Credit brag's CC BY music in every post that uses it |
 | `email <purpose>` | Waitlist, launch, onboarding or win-back emails | `emails` |
 | `case-study` | Problem, research highlights, personas, USP, design, architecture, demo, what's next | `copywriting` |
 | `announce <feature\|vX.Y.Z>` | A post, an email update and a changelog line, from the release notes | `social`, `emails` |

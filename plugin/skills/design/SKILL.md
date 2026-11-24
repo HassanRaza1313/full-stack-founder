@@ -14,9 +14,9 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md` and the "Design" section of
 - **Every UI change:** `no-ai-design-slop` is the quality gate.
 
 Then apply the studio rules:
-- tokens live in `packages/shared/src/tokens.ts`
+- tokens live at `paths.tokens` in `services.json`; with none, keep them in `DESIGN.md` and the app's own theme file
 - GSAP skills handle motion, each with a reduced-motion fallback
 - WCAG 2.2 AA
-- brand assets go to `apps/web/public/` and the media folder's `Brand/`
+- brand assets go to `paths.public` (the app's public or static folder) and the media folder's `Brand/`
 
 Close with screenshots (Playwright CLI, 1440×900 and 390×844). Next: `/founder:build`.

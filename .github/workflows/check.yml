@@ -20,9 +20,15 @@ jobs:
           node-version: 22
       - name: Scripts parse
         shell: bash
-        run: for f in plugin/scripts/*.mjs plugin/templates/product/scripts/*.mjs; do node --check "$f"; done
+        run: for f in plugin/scripts/*.mjs plugin/tests/*.mjs plugin/tests/fixtures/*.mjs; do node --check "$f"; done
       - name: Pinned skills match their lock and licences
         run: node plugin/scripts/vendor.mjs verify
+      - name: Tests (scripts end to end against a fake GitHub, references, plain-language rules)
+        shell: bash
+        run: |
+          git config --global user.email ci@example.com
+          git config --global user.name CI
+          node --test plugin/tests/*.test.mjs
       - name: Setup doctor runs on a fresh machine
         shell: bash
         # Exit 2 means "items missing", which is expected on a bare runner; anything else is a crash.

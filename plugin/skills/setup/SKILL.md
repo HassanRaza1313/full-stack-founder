@@ -11,7 +11,7 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Stages are cumulative; the
 
 0. **Bootstrap.** The doctor needs Node 22+. If `node --version` fails or is older, install it first: on Windows `winget install --id OpenJS.NodeJS.LTS -e --accept-source-agreements --accept-package-agreements`; on a Mac, Homebrew (brew.sh) and then `brew install node`; on Linux, nvm. Then continue in a new terminal if PATH needs it.
 1. **Status.** Run `doctor.mjs --stage <s> --json`. It lists only what's missing, plus counts. Show one line, `<ok> ready · <a> automatic · <m> need you`, then the missing titles. `check` stops here.
-2. **Workspace** (when `workspace` is missing). Ask in one batch, with detected defaults:
+2. **Workspace** (when `workspace` is missing). Decide these from what's detected, then show them in one plain line ("I'll make a private workspace on GitHub called `studio-workspace` and keep your products in `D:\Code`. OK, or change something?"):
    - **Repo:** `<gh login>/studio-workspace`. An existing one is cloned.
    - **Products folder:** a non-system drive with more space on Windows (for example `D:\Code`); otherwise `~/Code`.
    - **Media folder:** a detected Google Drive `…/My Drive/Products`, or "later".
