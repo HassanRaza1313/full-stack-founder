@@ -60,3 +60,14 @@ test('no flow hard-codes the template stack without a fallback', () => {
   }
   assert.deepEqual(offenders, []);
 });
+
+test('every agent lists its own tools, so no helper inherits the user\'s connectors', () => {
+  const missing = [];
+  for (const f of readdirSync(join(plugin, 'agents'))) {
+    const fm = readFileSync(join(plugin, 'agents', f), 'utf8').split('---')[1] ?? '';
+    const tools = fm.match(/^tools:\s*(.+)$/m)?.[1];
+    if (!tools) { missing.push(`${f}: no tools line`); continue; }
+    for (const t of tools.split(',').map((x) => x.trim())) if (t.startsWith('mcp__') && !t.startsWith('mcp__context7__')) missing.push(`${f}: ${t}`);
+  }
+  assert.deepEqual(missing, []);
+});

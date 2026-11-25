@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.4.2 · 2026-11-26
+
+- **Lighter helpers, your connectors untouched.** The builder and architect agents now list only the tools they use, so they no longer load your mail, Drive, Sheets and other connectors on every start. A builder starts at about 12k tokens instead of 36k; nothing changes in your other sessions.
+- **Connector steps run in the main session:** listen's gathering, and finance's Stripe and Sheets work.
+- A test checks every agent keeps its own tool list.
+
+## 0.4.1 · 2026-11-25
+
+- **Saving a folder to GitHub works without a git name set up.** `/founder:adopt` now falls back to your GitHub login for the first commit, as it already did for the email.
+
 ## 0.4.0 · 2026-11-24
 
 - **Bring in code you already have, and get it ready to build** ([#1](https://github.com/HassanRaza1313/full-stack-founder/issues/1)). `/founder:adopt` takes a GitHub repo or a folder on your computer, vibe-coded or not, or just "I built an app" to `/founder:ceo`.

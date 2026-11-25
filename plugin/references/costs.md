@@ -2,7 +2,7 @@
 
 Tokens per command, including its subagents. **Measured** values count every token processed, including cached re-reads (which count far less toward usage limits), from the session logs of real runs; everything else is an estimate until a run measures it. Plan limits vary and change, so show tokens and time, never a share of the user's limit.
 
-Every agent costs about 35k tokens just to start (Claude Code's own instructions and the user's connected tools), so flows use as few as they can. Connectors the user doesn't need for a session (mail, calendar, docs) add to every agent's start.
+Every agent costs tokens just to start: 6–12k for the plugin's agents, which carry only the tools they use (builder 36k → 12k in 0.4.2), and 35–50k for a general agent with every tool and the user's connectors (measured first turns, 2026-11-26). Flows use as few as they can. Connectors the user doesn't need for a session (mail, calendar, docs) add to every agent's start.
 
 | Command | About | Basis |
 |---|---|---|

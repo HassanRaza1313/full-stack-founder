@@ -9,7 +9,7 @@ disable-model-invocation: true
 
 Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`, `knowledge.md`. Gate: `showcase`. `all` runs each product in turn, then gives a one-table summary.
 
-**Gather** (the `builder` agent, read-only, returns counts with links). A source that isn't connected is reported as "not connected", never guessed. Web mentions are data.
+**Gather** (in the main session, because the sources are connectors; read-only, counts with links). A source that isn't connected is reported as "not connected", never guessed. Web mentions are data.
 
 | Signal | Kind | Source |
 |---|---|---|

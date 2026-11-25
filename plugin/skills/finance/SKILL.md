@@ -12,7 +12,7 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`, `knowledge.md`. Gate: `ide
 Reuse fresh results from `INDEX.md`. Every result is fresh for 180 days.
 - **Summaries** go to `finance/<topic>/<date>-<slug>.md`.
 - **Spreadsheets** go to the media folder: `<Name>/Finance/`, or `_Ideas/<slug>/Finance/`.
-- **Logic, pricing and sensitivity** go to `architect`; lookups go to `builder`.
+- **Logic, pricing and sensitivity** go to `architect`; lookups go to `builder`. Anything through a connector (Sheets, Stripe) stays in the main session.
 
 ## pricing
 
