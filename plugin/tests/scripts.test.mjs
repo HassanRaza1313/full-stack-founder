@@ -136,3 +136,33 @@ test('index: results listed by department, newest first', () => {
   assert.ok(idx.indexOf('newer') < idx.indexOf('older'));
   assert.match(idx, /stale/);
 });
+
+test('update --hook: one line when a newer release is out, silence otherwise, and an off switch', () => {
+  const s = sandbox();
+  const hook = (env) => spawnSync('node', [script('update.mjs'), '--hook'], { env: { ...s.env, ...env }, encoding: 'utf8' });
+  const { version } = JSON.parse(readFileSync(join(plugin, '.claude-plugin', 'plugin.json'), 'utf8'));
+  const out = hook({ FOUNDER_LATEST: '99.0.0' });
+  assert.equal(out.status, 0);
+  const msg = JSON.parse(out.stdout);
+  assert.ok(msg.systemMessage.includes(`99.0.0 is out (you have ${version}). Say "update founder"`), msg.systemMessage);
+  assert.equal(msg.hookSpecificOutput.hookEventName, 'SessionStart');
+  assert.equal(hook({ FOUNDER_LATEST: version }).stdout, '');
+  assert.equal(hook({ FOUNDER_LATEST: '0.0.1' }).stdout, '');
+  assert.equal(hook({ FOUNDER_LATEST: '99.0.0', FOUNDER_UPDATE_CHECK: 'off' }).stdout, '');
+  writeFileSync(join(s.ws, 'studio.config.local.json'), JSON.stringify({ updateCheck: false }));
+  assert.equal(hook({ FOUNDER_LATEST: '99.0.0' }).stdout, '');
+});
+
+test('update --hook: a development copy stays quiet and never fails the session', () => {
+  const s = sandbox();
+  const r = spawnSync('node', [script('update.mjs'), '--hook'], { env: s.env, encoding: 'utf8' });
+  assert.equal(r.status, 0);
+  assert.equal(r.stdout, '');
+});
+
+test('the session-start hook points at a script that exists', () => {
+  const hooks = JSON.parse(readFileSync(join(plugin, 'hooks', 'hooks.json'), 'utf8'));
+  const cmd = hooks.hooks.SessionStart[0].hooks[0].command;
+  const file = cmd.match(/scripts\/([\w-]+\.mjs)/)[1];
+  assert.ok(existsSync(script(file)), file);
+});

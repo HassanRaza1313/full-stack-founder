@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.4.3 · 2026-11-26
+
+- **Know when there's an update, and get it in one step.** When a session starts, a new release is announced in one line (checked at most once a day, about 3 seconds, no tokens). Say "update founder" (`/founder:update`): it installs the latest version and lists what's new. Turn the notice off with `"updateCheck": false` in `studio.config.json`.
+
 ## 0.4.2 · 2026-11-26
 
 - **Lighter helpers, your connectors untouched.** The builder and architect agents now list only the tools they use, so they no longer load your mail, Drive, Sheets and other connectors on every start. A builder starts at about 12k tokens instead of 36k; nothing changes in your other sessions.

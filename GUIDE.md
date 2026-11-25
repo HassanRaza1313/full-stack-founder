@@ -195,6 +195,7 @@ This starts with the interview (step 2), then runs on its own:
 
 - Stop for the day: `/founder:pause`. It saves your work and frees memory.
 - Come back: `/founder:resume`. It recaps where you left off.
+- New version out? A session tells you in one line. Say "update founder", then restart Claude Code. To stop the notice, add `"updateCheck": false` to `studio.config.json`.
 
 ### Step 5: Launch
 

@@ -136,6 +136,7 @@ Start with these. Everything else runs behind them.
 | `/founder:ask` | Answers from everything already researched and decided |
 | `/founder:setup` | Get this machine ready for the next stage |
 | `/founder:pause` · `/founder:resume` | Stop everything; start only what's needed |
+| `/founder:update` | Get the latest version. New releases are announced in one line when a session starts |
 
 <details>
 <summary>Every command, for direct control</summary>
