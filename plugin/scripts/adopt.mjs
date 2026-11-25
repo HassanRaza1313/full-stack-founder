@@ -149,7 +149,7 @@ if (localOnly && args['create-repo']) {
   const leaks = spawnSync('gitleaks', ['detect', '--no-git', '--source', codeDir, '--no-banner', '--exit-code', '3'], { encoding: 'utf8', shell: process.platform === 'win32' });
   if (leaks.status === 3) fail('gitleaks found what look like secrets in the code. Nothing was pushed. Move them to .env (ignored), then run adopt again.');
   run('git', ['-C', codeDir, 'add', '-A']);
-  if (git(codeDir, 'status', '--porcelain')) run('git', ['-C', codeDir, '-c', 'user.email=' + (git(codeDir, 'config', 'user.email') || `${owner}@users.noreply.github.com`), 'commit', '-m', 'Initial commit']);
+  if (git(codeDir, 'status', '--porcelain')) run('git', ['-C', codeDir, '-c', 'user.email=' + (git(codeDir, 'config', 'user.email') || `${owner}@users.noreply.github.com`), '-c', 'user.name=' + (git(codeDir, 'config', 'user.name') || owner), 'commit', '-m', 'Initial commit']);
   run('gh', ['repo', 'create', `${owner}/${slug}`, '--private', '--source', codeDir, '--remote', 'origin', '--push']);
   repo = `${owner}/${slug}`;
 }
