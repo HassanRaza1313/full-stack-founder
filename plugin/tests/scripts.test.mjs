@@ -241,3 +241,13 @@ test('stage --record: one call labels, updates metadata and card, logs, commits 
   assert.match(start, /- \*\*\[Where it stands\]\(verdict\.md\)\*\*: the verdict, in one screen/);
   assert.doesNotMatch(start, /case-for/, 'only files that exist are listed');
 });
+
+test('workspace init in an isolated run leaves this computer\'s settings alone', () => {
+  const s = sandbox();
+  const state = join(s.root, 'state');
+  const dir = join(s.root, 'fresh-ws');
+  const r = spawnSync('node', [script('workspace.mjs'), 'init', '--repo', 'tester/fresh-ws', '--dir', dir, '--products', join(s.root, 'products')],
+    { env: { ...s.env, STUDIO_DIR: '', FOUNDER_STATE_DIR: state, FOUNDER_TRIAL_DIR: join(s.root, 'trial') }, encoding: 'utf8' });
+  assert.match(r.stdout, /STUDIO_DIR left unchanged \(isolated run\)/, r.stdout + r.stderr);
+  assert.equal(JSON.parse(readFileSync(join(state, 'state.json'), 'utf8')).workspace, dir);
+});

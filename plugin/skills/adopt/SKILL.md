@@ -33,6 +33,8 @@ One yes covers it. Then run the same command without `--dry-run`, plus `--consol
 
 ## 2 · Your idea, as it stands (with the code)
 
+If Capture sent you here (steps 1 and 3 only), go back to it after step 3. Otherwise:
+
 Follow `${CLAUDE_PLUGIN_ROOT}/skills/capture/SKILL.md` at **3 · Work done**, with the code folder: it copies their plans and documents, reads the code once, writes `00-intake/plan-vs-code.md`, shows what they already have, asks only about the gaps and the places plan and code disagree, and writes the brief for them to confirm.
 
 Then fill, never inventing (write `—`):

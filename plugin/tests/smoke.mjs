@@ -19,8 +19,45 @@ const desktop = join(out, 'Desktop', 'Party Planner');
 const g = (cwd, ...a) => spawnSync('git', ['-C', cwd, ...a], { encoding: 'utf8' });
 const write = (root, files) => { for (const [f, b] of Object.entries(files)) { mkdirSync(join(root, f, '..'), { recursive: true }); writeFileSync(join(root, f), b); } };
 
+// --fresh: a brand-new computer. No workspace, the scripts' state isolated from this machine's, and a fake GitHub that
+// holds one project to link to. Its cases (fresh-*) start from the front door with an idea, notes, a folder or a link.
+const fresh = Boolean(args.fresh);
+const notes = join(out, 'Desktop', 'Gift Swap notes');
+const home = join(out, 'Code');
+if (fresh && !existsSync(join(out, 'gh.json'))) {
+  for (const d of [remotes, bin, join(out, 'results'), home]) mkdirSync(d, { recursive: true });
+  const fake = join(plugin, 'tests', 'fixtures', 'fakegh.mjs');
+  writeFileSync(join(bin, 'gh.cmd'), `@node "${fake}" %*\r\n`);
+  writeFileSync(join(bin, 'gh'), `#!/bin/sh\nexec node "${fake}" "$@"\n`, { mode: 0o755 });
+  write(notes, {
+    'plan.md': '# Gift Swap\n\nA secret-santa organiser for offices: everyone adds a wishlist, it draws names, and nobody sees who drew them.\n\n## Goals\n- 20 offices using it by Christmas\n- free for small teams, paid for companies over 50 people?\n\n## Open\n- not sure if HR teams or the employees themselves are the buyers\n',
+    'competitor notes.txt': 'Elfster seems big. DrawNames too. Both feel cluttered.\n',
+  });
+  // A vibe-coded folder with no git, for the folder case.
+  write(join(out, 'Desktop', 'Recipe Box'), {
+    'README.md': '# Recipe Box\n\nSave recipes from any website and plan the week. Planned: shopping list, sharing with family.\n',
+    'package.json': JSON.stringify({ name: 'recipe-box', version: '0.1.0', type: 'module', scripts: { start: 'node server.js', test: 'node --test' } }, null, 2),
+    'server.js': "import { createServer } from 'node:http';\nconst recipes = [{ name: 'Dal' }];\ncreateServer((q, r) => { r.setHeader('content-type', 'text/html'); r.end(`<h1>Recipe Box</h1><ul>${recipes.map((x) => `<li>${x.name}</li>`).join('')}</ul>`); }).listen(4323);\n",
+    'test/basic.test.js': "import { test } from 'node:test';\nimport assert from 'node:assert';\ntest('works', () => assert.ok(true));\n",
+    'ideas.md': '# Ideas\n\n- import from Instagram\n- a paid plan for meal-prep coaches\n',
+  });
+  // A small project already on (fake) GitHub, for the link case.
+  const gb = join(out, 'seed', 'guest-book');
+  write(gb, {
+    'README.md': '# Guest Book\n\nVisitors leave a message on a wedding website. Planned: photo uploads, moderation, a printable book.\n',
+    'package.json': JSON.stringify({ name: 'guest-book', version: '0.1.0', type: 'module', scripts: { start: 'node server.js', test: 'node --test' } }, null, 2),
+    'server.js': "import { createServer } from 'node:http';\nconst notes = [];\ncreateServer((q, r) => { r.setHeader('content-type', 'text/html'); r.end(`<h1>Guest Book</h1><p>${notes.length} messages</p>`); }).listen(4322);\n",
+    'test/basic.test.js': "import { test } from 'node:test';\nimport assert from 'node:assert';\ntest('works', () => assert.ok(true));\n",
+  });
+  spawnSync('git', ['init', '-q', '--bare', '-b', 'main', join(remotes, 'tester__guest-book.git')]);
+  g(out, 'init', '-q', '-b', 'main', gb);
+  g(gb, 'add', '-A'); g(gb, '-c', 'user.email=t@t', '-c', 'user.name=t', 'commit', '-q', '-m', 'guest book');
+  g(gb, 'push', '-q', join(remotes, 'tester__guest-book.git'), 'main');
+  writeFileSync(join(out, 'gh.json'), JSON.stringify({ login: 'tester', repos: { 'tester/guest-book': { visibility: 'PRIVATE' } }, labels: {}, issues: [] }, null, 2));
+}
+
 // --- The sandbox -----------------------------------------------------------------------------------------------
-if (!existsSync(join(ws, 'studio.config.json'))) {
+if (!fresh && !existsSync(join(ws, 'studio.config.json'))) {
   for (const d of [ws, products, remotes, bin, join(out, 'results')]) mkdirSync(d, { recursive: true });
   cpSync(join(plugin, 'templates', 'workspace'), ws, { recursive: true });
   writeFileSync(join(ws, 'studio.config.json'), JSON.stringify({ studioRepo: 'tester/ws', demos: { maxLive: 2 } }, null, 2));
@@ -47,6 +84,8 @@ if (!existsSync(join(ws, 'studio.config.json'))) {
   });
 }
 const env = { ...process.env, STUDIO_DIR: ws, FAKEGH_STATE: join(out, 'gh.json'), FAKEGH_REMOTES: remotes, PATH: `${bin}${process.platform === 'win32' ? ';' : ':'}${process.env.PATH}` };
+if (fresh) { delete env.STUDIO_DIR; env.FOUNDER_STATE_DIR = join(out, 'state'); env.FOUNDER_TRIAL_DIR = join(out, 'trial'); }
+const freshRules = `This computer has never used Full Stack Founder. If a step sets up a workspace, use ${join(home, 'studio-workspace')} for it and ${home} as the products folder. Don't install or change anything outside this sandbox: no doctor --fix, no global git or Claude settings; list anything that would need installing and carry on without it.`;
 
 // --- The cases ---------------------------------------------------------------------------------------------------
 const rules = 'This is an automated test in a sandbox: `gh` is a stand-in for GitHub and the remotes are local folders, so nothing is real or public. Don\'t ask me anything: take your recommended answer at every decision, unless this message gives one. Never post, publish, send or spend. Finish with what you did, what you found and what you would have asked me, in at most 12 lines.';
@@ -82,7 +121,12 @@ const cases = [
   // phase 3: needs phase 2's state
   { name: 'pause', phase: 3, cwd: pp, prompt: '/founder:pause' },
   { name: 'resume', phase: 4, cwd: ws, prompt: '/founder:resume\n\nRecap only: don\'t start the next step.' },
-].filter((c) => !only || only.has(c.name));
+  // --fresh only: the front door on a brand-new computer, with each kind of starting point.
+  { name: 'fresh-idea', phase: 1, fresh: true, cwd: out, prompt: '/founder:ceo\n\nI have an idea: a tool that turns a nurse\'s shift rota into a weekly meal-prep plan. Just an idea for now. Stop at the verdict.' },
+  { name: 'fresh-notes', phase: 1, fresh: true, cwd: out, prompt: `/founder:ceo\n\nI've been working on an idea, my notes are in "${notes}". Stop at the verdict.` },
+  { name: 'fresh-folder', phase: 1, fresh: true, cwd: out, prompt: `/founder:ceo\n\nI built an app with an AI tool, it's in "${join(out, 'Desktop', 'Recipe Box')}". Bring it in; skip the Check and stop after the plan forward.` },
+  { name: 'fresh-link', phase: 1, fresh: true, cwd: out, prompt: '/founder:ceo\n\nhttps://github.com/tester/guest-book is mine. Bring it in; skip the Check and stop after setup and the tests.' },
+].filter((c) => Boolean(c.fresh) === fresh).filter((c) => !only || only.has(c.name)).map((c) => (fresh ? { ...c, prompt: `${c.prompt}\n\n${freshRules}` } : c));
 
 // --- Running and measuring -------------------------------------------------------------------------------------------
 function tokens(session) {

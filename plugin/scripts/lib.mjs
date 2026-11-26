@@ -8,7 +8,10 @@ export const platform = { win32: 'win', darwin: 'mac' }[process.platform] ?? 'li
 export const isWin = platform === 'win';
 
 // Small machine-level state (the workspace pointer, the doctor's cache) lives here, never in a repo.
-export const stateDir = join(homedir(), '.claude', 'founder');
+// FOUNDER_STATE_DIR and FOUNDER_TRIAL_DIR let a test run as a brand-new computer without touching the real ones.
+export const stateDir = process.env.FOUNDER_STATE_DIR || join(homedir(), '.claude', 'founder');
+// Ideas checked before setup live here (Claude Code blocks writes inside ~/.claude); setup moves them into the workspace.
+export const trialDir = process.env.FOUNDER_TRIAL_DIR || join(homedir(), 'founder-trial');
 export function readState(file, fallback = {}) {
   try { return JSON.parse(readFileSync(join(stateDir, file), 'utf8')); } catch { return fallback; }
 }
@@ -20,7 +23,8 @@ export function writeState(file, data) {
 // The workspace is the user's private repo (ideas, portfolio, settings). Found from STUDIO_DIR, then the pointer
 // /founder:setup writes, then (Windows) the user environment, so it works without restarting terminals.
 export function workspaceDir({ required = true } = {}) {
-  const candidates = [process.env.STUDIO_DIR, readState('state.json').workspace, isWin ? readUserEnv('STUDIO_DIR') : ''];
+  const isolated = Boolean(process.env.FOUNDER_STATE_DIR);
+  const candidates = [process.env.STUDIO_DIR, readState('state.json').workspace, isWin && !isolated ? readUserEnv('STUDIO_DIR') : ''];
   const dir = candidates.find((d) => d && existsSync(join(d, 'studio.config.json')));
   if (dir) return dir;
   if (required) fail('No workspace found. Run /founder:setup in Claude Code first.');

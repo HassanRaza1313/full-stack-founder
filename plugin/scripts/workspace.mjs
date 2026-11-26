@@ -8,7 +8,7 @@ import { cpSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, write
 import { homedir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { fail, getPath, loadConfig, parseArgs, readState, run, setUserEnv, stateDir, step, workspaceDir, writeState } from './lib.mjs';
+import { fail, getPath, loadConfig, parseArgs, readState, run, setUserEnv, stateDir, step, trialDir, workspaceDir, writeState } from './lib.mjs';
 
 const pluginRoot = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = parseArgs();
@@ -24,8 +24,9 @@ function setPath(obj, key, value) {
 }
 
 if (command === 'show') {
-  const dir = workspaceDir();
-  console.log(JSON.stringify({ workspace: dir, ...loadConfig(dir) }, null, 2));
+  // No workspace yet is a normal first run, not an error: say so, with where a trial idea is kept.
+  const dir = workspaceDir({ required: false });
+  console.log(JSON.stringify(dir ? { workspace: dir, trialDir, ...loadConfig(dir) } : { workspace: null, trialDir, next: 'Check an idea now, with nothing to set up; setup comes when you keep it.' }, null, 2));
 } else if (command === 'set') {
   const [key, value] = rest;
   if (!key || value === undefined) fail('Usage: workspace.mjs set <key> <value> [--local]');
@@ -58,7 +59,10 @@ if (command === 'show') {
     });
     run('git', ['init', '-q', '-b', 'main'], { cwd: dir });
     run('git', ['add', '-A'], { cwd: dir });
-    run('git', ['commit', '-q', '-m', 'Create studio workspace'], { cwd: dir });
+    // A brand-new computer may have no git name yet (setup asks for it later): sign this first commit as the GitHub login.
+    const has = (k) => run('git', ['config', k], { cwd: dir, capture: true, allowFail: true }).out;
+    const who = [...(has('user.name') ? [] : ['-c', `user.name=${owner}`]), ...(has('user.email') ? [] : ['-c', `user.email=${owner}@users.noreply.github.com`])];
+    run('git', [...who, 'commit', '-q', '-m', 'Create studio workspace'], { cwd: dir });
     run('gh', ['repo', 'create', args.repo, '--private', '--source', '.', '--remote', 'origin', '--push'], { cwd: dir });
   }
 
@@ -74,11 +78,13 @@ if (command === 'show') {
   step('Pointing Full Stack Founder at the workspace');
   // The pointer file works everywhere without a terminal restart; STUDIO_DIR is kept for scripts and other tools.
   writeState('state.json', { ...readState('state.json'), workspace: dir });
-  console.log(setUserEnv('STUDIO_DIR', dir));
+  // An isolated run (FOUNDER_STATE_DIR, as in tests) never touches this computer's own settings.
+  if (process.env.FOUNDER_STATE_DIR) console.log('STUDIO_DIR left unchanged (isolated run).');
+  else console.log(setUserEnv('STUDIO_DIR', dir));
   // Quick reads made before setup (trial mode) move into the workspace's ideas/.
   // Claude Code blocks writes inside ~/.claude, so trial reads live in ~/founder-trial (older ones may be in ~/.claude/founder/trial).
   const moved = [];
-  for (const trial of [join(homedir(), 'founder-trial'), join(stateDir, 'trial')]) {
+  for (const trial of [trialDir, join(stateDir, 'trial')]) {
     const names = existsSync(trial) ? readdirSync(trial).filter((n) => !existsSync(join(dir, 'ideas', n))) : [];
     for (const n of names) {
       cpSync(join(trial, n), join(dir, 'ideas', n), { recursive: true });

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.7.0 · 2026-11-27
+
+- **One front door for everything.** Say what you're bringing to `/founder:ceo` (an idea, an idea with goals, notes or documents, a folder of code or a GitHub link) and the flow adapts. There's no longer a choice between "a new idea" and "adopting": Capture notices code and brings it in on the way (one home, a private backup, setup and tests), then Check, then the plan forward. `/founder:adopt` still works as a shortcut.
+- **Setup just in time.** Nothing needs setting up before your first idea: the Check runs right away and saves to your home folder. Each step sets up only what it needs when it needs it ("To save this privately, I need you signed in to GitHub. About a minute."), then carries on where you were. "Keep it" makes your private workspace and moves the idea in.
+- **Setup, simpler:** it opens with what this unlocks and how long it takes, names each item by what it does for you, decides the defaults and shows them in one line, takes sign-ins one at a time with "done", "skip" or "later", and goes straight back to what you were doing. Saving ideas no longer installs pnpm or Python: they're part of the build stage now.
+- **Fixes found by the fresh-computer runs:** creating the workspace failed on a computer with no git name yet (it now signs the first commit with your GitHub login), and a test run could change this computer's `STUDIO_DIR` setting (isolated runs now leave it alone).
+- **Measured on a brand-new computer** (sandbox, 2026-11-27): an idea, 1.15M tokens and 5 minutes to the verdict; notes, 1.19M and 5 minutes; a code folder, 1.13M and 3 minutes to the plan forward; a GitHub link, 0.85M and 2 minutes to setup and passing tests.
+- For testing: `FOUNDER_STATE_DIR` and `FOUNDER_TRIAL_DIR` run the scripts as a brand-new computer; `workspace.mjs show` reports a missing workspace as a normal first run, with where trial ideas are kept.
+
 ## 0.6.0 · 2026-11-27
 
 - **Your idea first, then the judgment: Capture → Check → Prove → Build,** for a new idea and for code you already have.

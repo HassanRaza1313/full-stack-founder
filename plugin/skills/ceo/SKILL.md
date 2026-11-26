@@ -8,13 +8,13 @@ argument-hint: "[a direction in plain words]"
 
 You are the user's chief of staff. They set direction; you run the company's flows and report back like a CEO brief: short, decision-first, with no internals unless asked. Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`.
 
-## First run (no workspace yet)
+## Welcome (first run, or anything new)
 
-With no direction, run `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs"` once, with Bash; it also tells you whether a workspace exists. With a direction, run `workspace.mjs show` instead. If either says "No workspace found", say "Welcome to Full Stack Founder" and offer two paths, the first recommended:
-1. **Try it on one idea now, with nothing to set up:** the user describes it in a sentence; follow `${CLAUDE_PLUGIN_ROOT}/skills/check/SKILL.md` in **trial mode**. About 10 minutes: what's promising, what's risky, a plain verdict and three sharper versions.
-2. **Set up first:** about 5–10 minutes. It installs the basics and makes a private place on GitHub for your ideas. Type `/founder:setup ideas` to start it.
+With no direction, run `node "${CLAUDE_PLUGIN_ROOT}/scripts/brief.mjs"` once, with Bash; with a direction, `workspace.mjs show`. Either says whether there's a workspace yet.
 
-If they already have code (a project they built, a folder, a GitHub link), say: "Set up first, then I'll bring your code in and get it ready."
+**No workspace and no direction:** say "Welcome to Full Stack Founder." and ask Capture's first question (`${CLAUDE_PLUGIN_ROOT}/skills/capture/SKILL.md`, step 1: what are you bringing?). Then follow `/founder:check`, which starts with Capture. Nothing needs setting up first: setup happens when a step needs it, and says why. For someone who'd rather get everything ready now, one line: "Or say **set everything up** first."
+
+**Anything new, at any time** (an idea, notes, documents, code, a folder or a GitHub link): the same path, `/founder:check`. Capture works out what they brought and brings code in on the way. Never ask them to choose between "a new idea" and "adopting".
 
 ## No direction: the brief
 
@@ -48,11 +48,10 @@ End with **exactly one question**, the go-ahead, with your recommended answer. S
    | They want | Run |
    |---|---|
    | New ideas found for them ("what should I build?", "find me ideas in fintech") | `/founder:hunt`, then playbook `validate` on their pick |
-   | A new idea checked, or "is this worth it?" | `/founder:check` (it saves the idea first) |
+   | Something new: an idea, notes, documents, code, a folder, a GitHub link, "I built an app", "is this worth it?" | `/founder:check`: Capture works out what they brought, and brings code in on the way |
    | "Prove it", "will people pay?", "should I build it?" on a checked idea | `/founder:prove` |
    | "Build it anyway" on a checked or proven idea | Record it as their call (`decisions/<date>-your-call.md`), then playbook `idea-to-launch` from step 4 |
    | An idea or product taken all the way ("build it", "take it to launch") | playbook `idea-to-launch`, from its current stage |
-   | Code they already have ("I built an app", "here's my folder", "bring in <owner/repo>", a GitHub link) | `/founder:adopt` with that repo or folder; its first step is a preview and one yes |
    | A feature, change or fix on an existing product | playbook `feature` |
    | To know if customers want it, or will pay | playbook `customer-test` |
    | Money: margins, pricing, runway, "can this make money?" | playbook `finance-check` |

@@ -10,7 +10,7 @@ Stage 1 of 3: **Check → Prove → Build**. The question: is this worth a close
 
 **The expert work is startup-design's** (Fast Track, Light tier): its pre-flight, brainstorm and research waves 1 and 2. Its folder is `SD` = `${CLAUDE_PLUGIN_ROOT}/vendor/startup-skill/startup-design`. **Don't read its files in this chat:** each agent reads the parts it needs, by path. This chat only talks to the founder and writes the verdict, which keeps it light. **Wait for every agent's result** before the next step; never end your turn while one is working.
 
-**Trial mode** (no workspace yet, from `/founder:ceo`): write to `~/founder-trial/<slug>/` (your home folder, never inside `~/.claude`), skip the gate check and step 6, and close with: "Saved. `/founder:setup ideas` makes your private workspace and moves this into it."
+**Trial mode** (no workspace yet: `workspace.mjs show` says `workspace: null`): nothing needs setting up. `F` is `<trialDir>/<slug>`, `/founder:idea add` and step 6 are skipped, and the lint in step 5 is skipped if Node isn't installed. The close offers "**Keep it**": that sets up a private place on GitHub just in time (journey.md's **Gate**, stage `ideas`; about 5 minutes), which moves this idea in, then records it as step 6 does.
 
 1. **The idea.** A saved idea: resolve it as `/founder:idea` does. New text: save it first with `/founder:idea add` (one confirm). Folder `F` = `<workspace>/ideas/<slug>/`, or for an adopted product its knowledge folder (`where.mjs`).
 2. **Capture it first,** unless `F/00-intake/brief.md` is already confirmed: follow `${CLAUDE_PLUGIN_ROOT}/skills/capture/SKILL.md` (how far along they are, then only the questions that fits). Everything below works from the confirmed brief.
@@ -27,3 +27,4 @@ Stage 1 of 3: **Check → Prove → Build**. The question: is this worth a close
    - "**Prove it**": say `prove <name>` (or `prove <name>, version 2`) **in a new chat**. Everything is saved, and a fresh chat costs far less.
    - "**Build it anyway**": the verdict is advice, not a gate. Say `build <name> anyway`: it's recorded as your call (`decisions/<date>-your-call.md`, with what was skipped), and the build reads what's here.
    - "**Park it**": say `park <name>`.
+   - For code brought in by Capture: carry on with adopt's steps 5 to 8 (the plan forward, your ideas reviewed, lean-code rules, save), then this choice.

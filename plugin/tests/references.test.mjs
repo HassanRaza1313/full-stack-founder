@@ -89,10 +89,10 @@ test('no flow points at a mode that no longer exists', () => {
   assert.deepEqual(offenders, []);
 });
 
-test('capture: how far along first, intent not facts, "not sure" welcome, short, then check and adopt build on it', () => {
+test('capture: what are you bringing first, intent not facts, "not sure" welcome, short, then check and adopt build on it', () => {
   const read = (p) => readFileSync(join(plugin, p), 'utf8');
   const c = read('skills/capture/SKILL.md');
-  for (const s of ['How far along are you?', 'Just an idea', 'I know what I want from it', "I've done work on it", '**What we ask about: intent, never facts.**', '"Not sure" is always a good answer', 'up to 3 questions', '6 at most', 'at most 2 rounds and 8 questions', 'grilling', 'plan-vs-code.md', '"that\'s enough"', 'Is this right?']) assert.ok(c.includes(s), `capture: ${s}`);
+  for (const s of ['What are you bringing?', '**An idea.**', '**An idea with goals.**', '**Notes or documents:**', '**Code:**', 'skills/adopt/SKILL.md', 'trialDir', 'Gate', '**What we ask about: intent, never facts.**', '"Not sure" is always a good answer', 'up to 3 questions', '6 at most', 'at most 2 rounds and 8 questions', 'grilling', 'plan-vs-code.md', '"that\'s enough"', 'Is this right?']) assert.ok(c.includes(s), `capture: ${s}`);
   assert.ok(read('skills/check/SKILL.md').includes('skills/capture/SKILL.md'), 'check runs capture');
   const adopt = read('skills/adopt/SKILL.md');
   for (const s of ['skills/capture/SKILL.md', '/founder:check', 'your-call']) assert.ok(adopt.includes(s), `adopt: ${s}`);
@@ -105,4 +105,18 @@ test('skill headers parse: a description with ": " in it is quoted', () => {
     return m && !/^["'>|]/.test(m[1]) && /: /.test(m[1]);
   });
   assert.deepEqual(bad, []);
+});
+
+test('one front door: welcome asks what you bring, setup happens just in time and only for the next step', () => {
+  const read = (p) => readFileSync(join(plugin, p), 'utf8');
+  const ceo = read('skills/ceo/SKILL.md');
+  assert.ok(ceo.includes('## Welcome (first run, or anything new)'));
+  assert.ok(ceo.includes('Never ask them to choose between "a new idea" and "adopting"'));
+  assert.doesNotMatch(ceo, /\| Code they already have[^\n]*\/founder:adopt/, 'code goes through check, not a separate journey');
+  assert.ok(read('references/journey.md').includes('**Gate: setup just in time.**'));
+  const setup = read('skills/setup/SKILL.md');
+  for (const s of ['**Which stage.**', 'Never set up a later stage', 'go straight back to what they were doing', 'Never ask for passwords']) assert.ok(setup.includes(s), s);
+  const req = JSON.parse(read('requirements.json'));
+  const ideas = req.items.filter((i) => i.stage === 'ideas').map((i) => i.id);
+  for (const id of ['pnpm', 'python']) assert.ok(!ideas.includes(id), `${id} isn't needed to save an idea`);
 });

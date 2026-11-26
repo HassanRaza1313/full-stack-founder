@@ -35,21 +35,16 @@ Then type `/exit` and start `claude` again.
 
 ---
 
-## 2. Try it (no setup)
+## 2. Start: say what you're bringing
 
 ```
-/founder:ceo is my meal-planner idea worth building?
+/founder:ceo
 ```
 
-- Nothing gets installed or created.
-- About 5–10 minutes and 700k tokens (most of them cached re-reads, which count far less toward your limit).
-- **You get:**
-  - a score out of 40
-  - the strongest case against the idea
-  - its top objections
-  - three sharper versions, and a pick
-
-Like it? Set up once (step 3).
+- **It asks one thing first:** an idea, an idea with goals, notes or documents, or code (a folder or a GitHub link). Or just tell it.
+- **Nothing to set up for an idea or documents.** You get the verdict in about 10 minutes: what's promising, what's risky, and better versions.
+- **Want to keep it?** Say "keep it". It sets up a private place on GitHub then (about 5 minutes) and moves the idea in.
+- **Code?** It brings it in properly on the way: one home, a private backup, and a check that it runs.
 
 ---
 
@@ -59,7 +54,7 @@ Like it? Set up once (step 3).
 /founder:setup
 ```
 
-- Type it yourself. Claude can't start setup on its own, because setup installs things.
+- **You rarely need to run it.** Each step sets up what it needs, when it needs it, says why and how long, then carries on. Run it yourself to get everything ready up front ("set everything up").
 - Setup checks your machine first and shows: `ready · automatic · need you`.
 - **Automatic** items are installed in one batch. You approve the batch once.
 - **Need you** items come one at a time, each with steps and a link. Say `done` or `skip`.
@@ -74,8 +69,8 @@ Each stage includes the ones before it. Start with **ideas** and add the rest wh
 
 | Stage | Run | For |
 |---|---|---|
-| Ideas | `/founder:setup ideas` | Capture, research and validate ideas |
-| Build | `/founder:setup build` | Build products on your machine. This is the default |
+| Ideas | `/founder:setup ideas` | Save and research ideas privately (Git, GitHub, your workspace) |
+| Build | `/founder:setup build` | Build products on your machine (adds Node packages, Python, Docker, testing tools) |
 | Showcase | `/founder:setup showcase` | Case studies, demos, videos and posts |
 | Graduate | coming later | Running a product with paying customers |
 
@@ -231,7 +226,7 @@ Everything here feeds the build: the spec, design and marketing read it instead 
 /founder:adopt "C:\Users\you\Desktop\My App"
 ```
 
-Or just tell `/founder:ceo` "I built an app, it's in this folder".
+Or just tell `/founder:ceo` "I built an app, it's in this folder", or paste the GitHub link. It's the same front door as an idea: it notices the code and brings it in.
 
 - **It's the same journey as a new idea, with code attached:** your idea as it stands, then Check, then the plan.
 - **It asks for your ideas first.** Tell it, or drop notes, Word docs or old plans into the folder it gives you. Your ideas go through the same review as any other: nothing skips it.

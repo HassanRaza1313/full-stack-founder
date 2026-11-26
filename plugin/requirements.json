@@ -138,7 +138,7 @@
     },
     {
       "id": "pnpm",
-      "stage": "ideas",
+      "stage": "build",
       "title": "pnpm",
       "needs": [
         "node"
@@ -277,7 +277,7 @@
     },
     {
       "id": "python",
-      "stage": "ideas",
+      "stage": "build",
       "title": "Python 3",
       "why": "Runs founder-cfo's unit-economics calculator, so the numbers are computed, not estimated.",
       "check": {

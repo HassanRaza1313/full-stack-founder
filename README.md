@@ -16,19 +16,18 @@ You can build it. Full Stack Founder runs the other half of a startup: research,
 
 ## Your journey
 
-1. **Try it:** ask `/founder:ceo` about one idea. No setup needed.
-2. **Set up once:** `/founder:setup` installs only what your next stage needs.
-3. **Say where an idea should go.** It runs the journey and stops for your decisions.
+1. **Say what you're bringing** to `/founder:ceo`: an idea, notes, documents, a folder of code or a GitHub link. One door for all of them.
+2. **Nothing to set up first.** Each step sets up only what it needs, when it needs it, and says why.
+3. **It runs the journey** and stops for your decisions. The verdict is advice: you can always build it anyway.
 
 | You say | It runs |
 |---|---|
 | "Find me ideas in fintech" | A hunt through real complaints, reviews and competitor gaps |
-| "Check my idea" | How far along you are, a few questions about what you want, research, and a one-screen verdict: what's promising, what's risky, better versions |
+| "Check my idea", or a folder or a GitHub link | What you're bringing, a few questions about what you want (code is brought in and set up on the way), research, and a one-screen verdict: what's promising, what's risky, better versions |
 | "Prove it" | Customers, real conversations, pricing and the numbers, then one board vote: build it? |
 | "Build it" | Repo, spec, design, build and tests |
 | "Launch it" | Case study, demo, posts and outreach, as drafts you send |
 | "Add dark mode to Fraud Guard" | Review, spec, build and release |
-| `/founder:adopt you/my-app` or a folder | Brings in code you already have (a GitHub repo, or a vibe-coded folder) and gets it ready to build on |
 
 4. **Run your portfolio:** `/founder:ceo` on its own gives one brief across every product.
 5. **Stop when you stop:** `/founder:pause` shuts everything down. `/founder:resume` brings back only what's needed.

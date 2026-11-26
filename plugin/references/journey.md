@@ -31,7 +31,7 @@
 
 **Running another studio command** (from a playbook, `/founder:ceo` or `/founder:next`): our commands are user-only, so read `<plugin>/skills/<name>/SKILL.md` and follow it.
 
-**Gate:** run `node "<plugin>/scripts/doctor.mjs" --stage <stage> --quiet`. If it isn't ready, offer `/founder:setup <stage>`, then continue.
+**Gate: setup just in time.** Run `node "<plugin>/scripts/doctor.mjs" --stage <stage> --quiet`. If something's missing, don't send them away: say in one line why it's needed now and how long it takes ("To save this privately, I need you signed in to GitHub. About a minute."), follow `skills/setup/SKILL.md` for just that stage's missing items, then carry on where you were. Never set up more than the next step needs.
 
 **Context economy:**
 - Read the target's `INDEX.md` and files' headers before opening files.
