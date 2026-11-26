@@ -10,7 +10,7 @@
 - **An idea card** at the top of each catalog issue: the stage (Idea → Checked → Proven → Built → Live), the verdict and the next words to say.
 - **Fewer stops before code:** two board votes became one, and the separate framing interview became three questions.
 - **A fresh chat per stage:** each stage ends with what to say in a new chat, because a long chat re-reads its whole history (a quick read cost 2.85M tokens late in a long chat, against 0.7M fresh).
-- **Lighter to run:** the chat no longer reads the expert skills itself (its agents read the parts they need), and one script finishes a stage (labels, card, log, index, commit). Measured in a sandbox: Check 1.16M tokens in 7 minutes (2.76M before these changes); Prove 4.4M up to the money, plus about 1M for the board and verdict.
+- **Lighter to run:** the chat no longer reads the expert skills itself (its agents read the parts they need), and one script finishes a stage (labels, card, log, index, commit). Measured in a sandbox: Check 1.16M tokens in 7 minutes (2.76M before these changes); Prove 3.82M in 16 minutes, start to verdict.
 - Board members run as lighter agents. `/founder:discover` is now the feature review only.
 
 ## 0.4.3 · 2026-11-26

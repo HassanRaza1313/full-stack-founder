@@ -11,7 +11,7 @@ Every agent costs tokens just to start: 6–12k for the plugin's agents, which c
 | `/founder:board` | 1.2M | measured: 1.19M, 2.5 min (three lens members, plus the CFO and customer seats) |
 | `/founder:hunt` | 1.2M | measured: 1.18M, 8 min (real-time fraud, 2026-11-24; two researchers, one analyst). Was about 4M before 0.3 |
 | `/founder:adopt` | 1.3M | measured: 1.27M and 1.42M, 4 min (a small vibe-coded app, full onboarding: intake, brief, plan, idea review, install and tests). Registering only: 539k (slugify) |
-| `/founder:prove` | 5M | measured: 4.4M, 16 min, $4.82 up to the money (sandbox, 2026-11-26), with one agent doing strategy, the first version and the money alone (2.06M); 0.5 splits that into three. The board and the verdict add about 1M. Your own conversations sit in the middle, and a refine round adds about 1M |
+| `/founder:prove` | 3.8M | measured: 3.82M, 16 min, $5.60, start to verdict (sandbox, 2026-11-27; 11 agents, the board's three members about 40k each; the chat itself 1.45M over 22 turns). Your own conversations sit in the middle; a refine round adds about 1M |
 | `/founder:discover <product>#<n>` | 0.5M | estimate: a feature review |
 | `/founder:finance <one mode>` | 0.6M | measured: 559k, 3.5 min (costs, with live price pages) |
 | `/founder:sales icp` · `prospects` · `outreach` | 250k · 0.5M · 300k | measured icp: 251k, 1.5 min; the others are estimates |
