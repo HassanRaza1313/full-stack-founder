@@ -103,7 +103,7 @@ claude plugin list
 /plugin install founder@full-stack-founder
 ```
 
-Then **start a new Claude Code session**, and type `/founder` to see the commands. Install stuck? See [If something breaks](GUIDE.md#8-if-something-breaks).
+Then **start a new Claude Code session** and type `/founder:ceo`. New to this? Follow [How to use it](HOW-TO.md). Install stuck? See [If something breaks](GUIDE.md#8-if-something-breaks).
 
 ## Set up
 
@@ -121,6 +121,8 @@ Try `/founder:ceo` on one idea first. It needs no setup. When you're ready:
   - a free `.vercel.app` site, or your own domain (about $10 a year)
   - a local media folder, or Google Drive
 - **Set up in stages:** ideas, then build, then showcase, each only when you need it.
+
+**New here? [How to use it](HOW-TO.md)**: short, simple steps for every flow, from your first idea to customers.
 
 **[The guide](GUIDE.md)** walks through every step, from setup to your first launch.
 
