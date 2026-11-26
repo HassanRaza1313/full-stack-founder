@@ -7,7 +7,7 @@ Full Stack Founder runs these open-source projects. Thank you to every author.
 | Project | Author | License |
 |---|---|---|
 | [startup-skill](https://github.com/ferdinandobons/startup-skill) (`startup-design`, `startup-positioning`) | ferdinandobons | MIT |
-| [claude-skills-founder](https://github.com/emotixco/claude-skills-founder) | emotixco | MIT. Not installed; the `/founder:discover` scorecard is adapted from its `validate-idea` rubric |
+| [claude-skills-founder](https://github.com/emotixco/claude-skills-founder) | emotixco | MIT. Not installed; the scorecard of `/founder:discover` before 0.5 was adapted from its `validate-idea` rubric |
 | [skills](https://github.com/mattpocock/skills) | Matt Pocock | MIT |
 | [marketingskills](https://github.com/coreyhaines31/marketingskills) | Corey Haines | MIT |
 | [gsap-skills](https://github.com/greensock/gsap-skills) | GreenSock | MIT |

@@ -198,8 +198,12 @@ const ideaFolders = !all ? undefined : ideaNames.map((n) => {
   const vs = existsSync(it) ? readdirSync(it).filter((v) => /^v\d+$/.test(v)).sort((x, y) => Number(y.slice(1)) - Number(x.slice(1))) : [];
   const card = vs.map((v) => read(join(it, v, 'scorecard.md'))).find(Boolean) ?? '';
   const score = (card.match(/(\d+)\s*\/\s*40/) ?? [])[1];
+  // Check and Prove write verdict.md: the light, the one-line call and (after Prove) a score out of 10.
+  const v = read(join(ideasDir, n, 'verdict.md')).split(/^---$/m)[1] ?? '';
+  const vf = (k) => v.match(new RegExp(`^${k}:\\s*(.+?)\\s*(#.*)?$`, 'm'))?.[1] ?? null;
+  const verdict = v ? { stage: vf('stage'), light: vf('light'), call: vf('call'), score: vf('score') } : null;
   const phase = (read(join(ideasDir, n, 'PROGRESS.md')).split(/\r?\n/).find((l) => l.trim() && !l.startsWith('#') && !l.startsWith('---')) ?? '').slice(0, 160);
-  return { slug: n, version: vs[0] ?? null, score: score ? Number(score) : null, phase: phase || null, brief: existsSync(join(ideasDir, n, '00-intake', 'brief.md')), moved: existsSync(join(ideasDir, n, 'MOVED.md')) };
+  return { slug: n, verdict, version: vs[0] ?? null, score: score ? Number(score) : null, phase: phase || null, brief: existsSync(join(ideasDir, n, '00-intake', 'brief.md')), moved: existsSync(join(ideasDir, n, 'MOVED.md')) };
 });
 const learnings = !all ? undefined : read(join(dir, 'LEARNINGS.md')).split(/\r?\n/).filter((l) => l.startsWith('- ')).slice(-5);
 

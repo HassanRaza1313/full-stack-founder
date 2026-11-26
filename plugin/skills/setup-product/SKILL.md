@@ -7,9 +7,9 @@ disable-model-invocation: true
 
 # /founder:setup-product
 
-Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Gate: `build`. Usually offered by `/founder:discover` at "Ready".
+Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Gate: `build`. Usually offered by `/founder:prove` when the founder says "build it".
 
-1. **Confirm:** the name (suggest the pick from `naming.md`). Preview what happens: a private repo `<owner>/<name>` is created, the research moves in, and the media folder is renamed.
+1. **Confirm:** the name. If there's no `03-brand/naming.md` yet, write it first with startup-design's brand phase, naming part only (5 names, each with `.com`/`.app` availability by RDAP, handles and a trademark search link, then a pick). Suggest the pick. Preview what happens: a private repo `<owner>/<name>` is created, the research moves in, and the media folder is renamed.
 2. **Script** (several minutes; run it in the background):
    ```
    node "${CLAUDE_PLUGIN_ROOT}/scripts/setup-product.mjs" --slug <slug> --name "<Product Name>"

@@ -71,3 +71,14 @@ test('every agent lists its own tools, so no helper inherits the user\'s connect
   }
   assert.deepEqual(missing, []);
 });
+
+test('check and prove: the plain verdict, both sides, the expert skills, and a fresh chat per stage', () => {
+  const read = (p) => readFileSync(join(plugin, p), 'utf8');
+  const verdict = read('references/verdict.md');
+  for (const rule of ['**About 250 words, never over 300,**', '**No codes or shorthand:**', '**Both sides, weighed.**', '🟢', '🟡', '🔴']) assert.ok(verdict.includes(rule), rule);
+  const check = read('skills/check/SKILL.md');
+  for (const s of ['startup-design', 'case-for.md', 'case-against.md', 'verdict.md', 'stage.mjs', 'in a new chat']) assert.ok(check.includes(s), `check: ${s}`);
+  const prove = read('skills/prove/SKILL.md');
+  for (const s of ['startup-design', 'skills/board/SKILL.md', 'simulated', 'verdict.md', 'stage.mjs', 'in a new chat']) assert.ok(prove.includes(s), `prove: ${s}`);
+  assert.doesNotMatch(read('playbooks/validate.md') + read('playbooks/idea-to-launch.md'), /--quick|--frame/);
+});

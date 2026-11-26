@@ -6,13 +6,13 @@ Every agent costs tokens just to start: 6–12k for the plugin's agents, which c
 
 | Command | About | Basis |
 |---|---|---|
-| `/founder:discover --quick` | 0.7M | measured: 668k, 5.5 min (FraudLab, 2026-11-24; one researcher, two analysts). Was about 4.5M before 0.3 |
-| `/founder:discover --frame` | 0.4M | measured: 371k, 1.5 min (smoke run, answers given up front; a live interview adds a turn per round) |
+| `/founder:check` | 1.2M | measured: 1.16M, 7 min, $1.98 (sandbox, fresh chat, 2026-11-26; 4 researchers, 3 analysts; the chat itself 669k over 12 turns). Late in a long chat it costs more: 2.85M for Pitch Market's quick read |
 | `/founder:research <one topic>` | 0.8M | measured: 766k, 5 min (competitors, 53 sources; two researchers, one analyst) |
 | `/founder:board` | 1.2M | measured: 1.19M, 2.5 min (three lens members, plus the CFO and customer seats) |
 | `/founder:hunt` | 1.2M | measured: 1.18M, 8 min (real-time fraud, 2026-11-24; two researchers, one analyst). Was about 4M before 0.3 |
 | `/founder:adopt` | 1.3M | measured: 1.27M and 1.42M, 4 min (a small vibe-coded app, full onboarding: intake, brief, plan, idea review, install and tests). Registering only: 539k (slugify) |
-| `/founder:discover` (full, with the loop) | 2–4M | estimate: depends on the rounds |
+| `/founder:prove` | 5M | measured: 4.4M, 16 min, $4.82 up to the money (sandbox, 2026-11-26), with one agent doing strategy, the first version and the money alone (2.06M); 0.5 splits that into three. The board and the verdict add about 1M. Your own conversations sit in the middle, and a refine round adds about 1M |
+| `/founder:discover <product>#<n>` | 0.5M | estimate: a feature review |
 | `/founder:finance <one mode>` | 0.6M | measured: 559k, 3.5 min (costs, with live price pages) |
 | `/founder:sales icp` · `prospects` · `outreach` | 250k · 0.5M · 300k | measured icp: 251k, 1.5 min; the others are estimates |
 | `/founder:spec` | 0.7M | measured: 710k, 3 min (MVP, to the approval stop) |

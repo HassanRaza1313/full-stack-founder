@@ -142,44 +142,36 @@ Each stage includes the ones before it. Start with **ideas** and add the rest wh
 
 Say it in plain words to `/founder:ceo`, or run each step yourself. Before each journey runs, you see what it will cost and where you can stop.
 
-### Step 1: Quick read
+An idea goes **Idea → Checked → Proven → Built → Live**. Its card in your catalog on GitHub shows where it stands, the verdict, and what to say next.
+
+### Step 1: Check it (about 10 minutes)
 
 ```
-/founder:ceo is <your idea> worth building?
+check my idea: <your idea, in a sentence or two>
 ```
 
-- **You get:** a score out of 40, the case against the idea, its objections, and three sharper versions.
-- **You decide:** continue, refine, park or drop.
+- **It asks** three questions: who it's for, what it does for them, how it makes money. Say "skip" to any.
+- **It researches** the market, the rules and the competitors.
+- **You get** one screen: 🟢 worth building, 🟡 worth a closer look with changes, or 🔴 not as it stands. Then what's promising, what's risky, what would change the verdict, and up to three better versions.
+- **You decide:** prove it, prove a better version, or park it.
 
-### Step 2: Frame the idea
+### Step 2: Prove it (a few hours, plus your conversations)
 
-The idea starts as a guess in your head. A short interview turns it into a clear picture first.
-
-- **It asks** in rounds, each question with a suggested answer. Say "yes" to accept one.
-- **It covers:** who it's for, the problem, what they do today, what you picture, why now, money, what success looks like, and your limits.
-- **You get:** `brief.md`, your idea in your own words, with open questions for research.
-- **You decide:** confirm the brief, or change it.
-- Every later step works from the brief, and doesn't ask you the same things again.
-
-### Step 3: Validate
+Start it in a new chat; everything is saved.
 
 ```
-/founder:ceo validate <idea>
+prove <idea>
 ```
 
-This starts with the interview (step 2), then runs on its own:
-- **Customers:** who has the problem, and in their own words.
-- **Competitors:** who already solves it, and where they fall short.
-- **Pricing and numbers:** what to charge, the cost to serve, and unit economics.
-- **People to talk to:** 10 to 15 real prospects. You reach out yourself.
-- **Full review:** suggestions you accept or reject, round after round, until the idea stops improving.
+- **Customers and demand:** who has the problem, in their own words, and how to reach them.
+- **Real conversations:** 10 to 15 people who have the problem, a 20-minute script and two short messages. You talk to 3 to 5 and tell it what you heard.
+- **The shape and the money:** who exactly it's for, the first version (what's in and out), pricing, costs and break-even.
+- **One board vote:** "build it?", with any conditions in plain words. It can fix the conditions and vote again.
+- **You decide:** build it, change it, park it or drop it.
 
-**You decide:** build, park, drop, or overrule it.
+Everything here feeds the build: the spec, design and marketing read it instead of asking you again.
 
-- Want a second opinion on a big call? `/founder:board should I build <idea>?`
-- Every result is saved as a dated file with its sources.
-
-### Step 4: Build
+### Step 3: Build
 
 ```
 /founder:ceo build <idea>
@@ -197,7 +189,7 @@ This starts with the interview (step 2), then runs on its own:
 - Come back: `/founder:resume`. It recaps where you left off.
 - New version out? A session tells you in one line. Say "update founder", then restart Claude Code. To stop the notice, add `"updateCheck": false` to `studio.config.json`.
 
-### Step 5: Launch
+### Step 4: Launch
 
 ```
 /founder:ceo launch <product>
@@ -213,7 +205,7 @@ This starts with the interview (step 2), then runs on its own:
 - **You decide:** approve each public piece.
 - **You send:** every post and message. Nothing goes out without you.
 
-### Step 6: Listen
+### Step 5: Listen
 
 - `/founder:listen` weekly: signups, what customers said, and how close the product is to real demand.
 - When customers start paying, the product moves to paid infrastructure.
@@ -280,7 +272,7 @@ Or just tell `/founder:ceo` "I built an app, it's in this folder".
 - **See the cost first.** Every journey shows its token estimate and where you can stop.
 - **Switch off connectors you don't need** (mail, calendar, docs) for founder sessions. Every helper agent loads them before it starts.
 - **Research runs lean by default.** A cheaper model gathers the evidence once, and the judging model reads only the notes.
-- **Stop at the first stop** when you only need a quick answer: the quick read alone is enough to drop a weak idea.
+- **Stop after Check** when you only need a quick answer: it's enough to drop a weak idea.
 
 **Better sources:** connect Claude in Chrome. Research then reads sites that block automated reading (Reddit, G2, Indie Hackers) through your own browser, read-only, instead of relying on search snippets.
 

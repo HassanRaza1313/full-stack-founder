@@ -9,6 +9,10 @@
 - **Show progress** as a short checklist toward the goal, not as tool calls.
 - **Next step as words they can say back:** "Say **build it** to start", with the command after it for people who like typing them.
 - **Costs** lead with time ("about 10 minutes"); the token estimate follows in brackets.
+- **Stages, in their words:** an idea goes **Idea → Checked → Proven → Built → Live** (labels `new`, `exploring`, `researching` then proven, `building`, `showcased` and later). Say the stage, not the label.
+- **Files they read are plain too:** `verdict.md`, the brief and the cases for and against follow `verdict.md`'s rules (references). Research files behind them can be technical.
+- **Results stay in the chat and the files.** Show a verdict or summary in the chat; never publish it as a web page or artifact unless the founder asks.
+- **A fresh chat per stage.** Check, Prove and Build each end by saying the next words to use in a new chat: everything is saved, and a long chat re-reads its whole history on every turn.
 
 **Open** with up to four lines: what it will do for them, in plain words, the steps and time, and what it needs from them. Infer a missing target from the current folder or the newest active idea, and say which one.
 
@@ -21,7 +25,7 @@
 
 **The knowledge folder.** A product's saved results, state and plans live in its knowledge folder: `<repo>/product/`, or `<workspace>/products/<repo>/product/` when its catalog entry says `knowledge: workspace` (public repos, or repos kept clean). Wherever these instructions say `product/`, use that folder, and commit changes to it in the repo that holds it. Inside a product repo, `node "<plugin>/scripts/where.mjs"` prints where it is. Its engineering rules are the repo's `docs/engineering.md`, or `engineering.md` in the knowledge folder. How to install, run, test, check, build and audit it is `commands` in its `services.json`, and where its design tokens, legal pages, help and changelog live is `paths`: use those, never assume the template's stack (pnpm, `apps/web`, Supabase). A command or path that isn't there means the product doesn't have it: skip that part and say so. Knowledge files are read on other computers too: never write a path from this one into them (use repo paths, or "the products folder").
 
-**Start from the brief.** For an idea or product, `00-intake/brief.md` (from `/founder:discover --frame`) is the founder's own picture. Every step reads it first, works from it rather than the one-line idea, and asks nothing it already answers.
+**Start from the brief.** For an idea or product, `00-intake/brief.md` (from `/founder:check`, or `/founder:adopt` for existing code) is the founder's own picture, and `verdict.md` is where it stands. Every step reads it first, works from it rather than the one-line idea, and asks nothing it already answers.
 
 **Delegate the work.** When a step needs a job done, the skill named in `skills.md` (same folder) does it. To run one, `node "<plugin>/scripts/skill.mjs" <name>` prints its file: read it and follow it. That's the pinned copy this release was tested with, so don't use the Skill tool for these. Inside it, `${CLAUDE_SKILL_DIR}` means that file's folder, and any other skill it names is loaded the same way. If skill.mjs can't find one, say which and stop that step: never work from a web copy or from memory. Studio supplies the target, the context (saved results, notes, the brief) and the saving; it never re-implements what that skill does.
 

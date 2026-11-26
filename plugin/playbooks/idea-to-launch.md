@@ -4,12 +4,13 @@ target: a product idea (starts from its current stage) or plain text for a new o
 time: days to weeks; mostly unattended between your decisions
 ---
 1. `/founder:idea add` (skip if the idea exists).
-2. Playbook `validate`. **Stop:** Ready to build, park, or kill.
-3. `/founder:setup-product <slug> "<name>"`. **Stop:** confirm the name and the private repo.
-4. `/founder:spec mvp`. **Stop:** approve the spec.
-5. `/founder:design` (shape, then variants). **Stop:** pick a direction.
-6. `/founder:build`. **Stop:** review and merge the PR.
-7. `/founder:verify`. Fix P1s with `/founder:build`, then continue.
-8. `/founder:legal check`, fixing launch-blockers.
-9. Playbook `showcase`. **Stop:** approve public pieces; you post.
-10. Playbook `customer-test` on the live case study, then `/founder:listen` weekly until the graduation gate.
+2. `/founder:check`. **Stop:** prove it, a better version, or park.
+3. `/founder:prove`. **Stop:** your conversations. **Stop:** build it, change it, park it, or drop it.
+4. `/founder:setup-product <slug> "<name>"`: the name (from startup-design's brand phase, run here) and the private repo; the research moves in. **Stop:** confirm the name and the repo.
+5. `/founder:spec mvp`, from Prove's first version. **Stop:** approve the spec.
+6. `/founder:design` (shape, then variants). **Stop:** pick a direction.
+7. `/founder:build`. **Stop:** review and merge the PR.
+8. `/founder:verify`. Fix P1s with `/founder:build`, then continue.
+9. `/founder:legal check`, fixing launch-blockers.
+10. Playbook `showcase`. **Stop:** approve public pieces; you post.
+11. Playbook `customer-test` on the live case study, then `/founder:listen` weekly until the graduation gate.

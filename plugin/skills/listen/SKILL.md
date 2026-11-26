@@ -40,6 +40,6 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`, `knowledge.md`. Gate: `sho
 
 **Close** with the 3 numbers that matter, the distance to graduation, and anything paused or broken. Then:
 - **If the thresholds are met:** the graduation gate.
-- **Otherwise:** the top idea → `/founder:discover` or `/founder:spec`.
+- **Otherwise:** the top idea → `/founder:discover` (a feature), `/founder:check` (a new product) or `/founder:spec`.
 
 Offer a weekly schedule with the `schedule` skill.

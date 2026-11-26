@@ -1,6 +1,6 @@
 // The other scripts: environment setup, intake, the brief, knowledge folders, pinned skills, the demo recorder, the index.
 import assert from 'node:assert/strict';
-import { spawnSync } from 'node:child_process';
+import { execFileSync, spawnSync } from 'node:child_process';
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { test } from 'node:test';
@@ -165,4 +165,74 @@ test('the session-start hook points at a script that exists', () => {
   const cmd = hooks.hooks.SessionStart[0].hooks[0].command;
   const file = cmd.match(/scripts\/([\w-]+\.mjs)/)[1];
   assert.ok(existsSync(script(file)), file);
+});
+
+const verdictFile = (stage, light, extra = '') => `---\ntopic: verdict\nstage: ${stage}\nlight: ${light}          # green | yellow | red\n${extra}call: Worth proving as a profile builder.\ndate: 2026-11-26\n---\n\n# X\n`;
+
+test('card: the idea card shows the stage and the verdict at the top of the issue, and rebuilds in place', () => {
+  const meta = 'x\n\n<!-- studio\nslug: pm\nnext: say "prove pm" in a new chat\n-->';
+  const s = sandbox({ issues: [{ repo: 'tester/ws', number: 7, title: 'PM', body: meta, labels: [{ name: 'type:idea' }, { name: 'status:exploring' }], state: 'OPEN' }] });
+  write(join(s.ws, 'ideas', 'pm'), { 'verdict.md': verdictFile('checked', 'yellow') });
+  assert.equal(s.run('card.mjs', ['pm']).status, 0);
+  let body = s.gh().issues[0].body;
+  assert.match(body, /^<!-- card -->\n\*\*Where it stands:\*\* ✅ Idea → ✅ Checked → ⬜ Proven → ⬜ Built → ⬜ Live/);
+  assert.match(body, /\*\*Verdict:\*\* 🟡 Worth proving as a profile builder\. · \[read it\]\(https:\/\/github\.com\/tester\/ws\/blob\/main\/ideas\/pm\/verdict\.md\)/);
+  assert.match(body, /\*\*Next:\*\* say "prove pm" in a new chat/);
+  // Prove: proven, with a score, rebuilt in place (one card, the rest of the body kept).
+  write(join(s.ws, 'ideas', 'pm'), { 'verdict.md': verdictFile('proven', 'green', 'score: 7/10\n') });
+  const st = s.gh(); st.issues[0].labels = [{ name: 'type:idea' }, { name: 'status:researching' }]; writeFileSync(s.env.FAKEGH_STATE, JSON.stringify(st));
+  s.run('card.mjs', ['pm']);
+  body = s.gh().issues[0].body;
+  assert.equal(body.match(/<!-- card -->/g).length, 1);
+  assert.match(body, /✅ Proven → ⬜ Built/);
+  assert.match(body, /🟢 Worth proving as a profile builder\. · 7\/10/);
+  assert.match(body, /<!-- studio\nslug: pm/);
+});
+
+test('card: a parked idea says so, with its reason', () => {
+  const s = sandbox({ issues: [{ repo: 'tester/ws', number: 1, title: 'Old', body: 'x\n\n<!-- studio\nslug: old\nreason: too crowded\n-->', labels: [{ name: 'type:idea' }, { name: 'status:parked' }], state: 'OPEN' }] });
+  const r = s.run('card.mjs', ['old', '--dry-run']);
+  assert.match(r.stdout, /\*\*Parked\*\* \(too crowded\) · ✅ Idea → ⬜ Checked/);
+  assert.match(r.stdout, /not checked yet/);
+});
+
+test('brief --all: an idea folder reports its verdict', () => {
+  const s = sandbox();
+  write(join(s.ws, 'ideas', 'pm'), { 'verdict.md': verdictFile('proven', 'green', 'score: 7/10\n') });
+  const idea = json(s.run('brief.mjs', ['--all'])).ideaFolders.find((i) => i.slug === 'pm');
+  assert.deepEqual(idea.verdict, { stage: 'proven', light: 'green', call: 'Worth proving as a profile builder.', score: '7/10' });
+});
+
+const goodVerdict = `---\ntopic: verdict\nstage: checked\nlight: yellow\ncall: Worth proving as a pack plan.\n---\n\n# X · 🟡\n\n**The call:** Real problem; prove the pack plan first.\n\n**What's promising**\n- Common problem ([case for](01-discovery/case-for.md)).\n\n**What's risky**\n- Two apps already exist ([case against](01-discovery/case-against.md)).\n\n**Next:** Say: **prove x**.\n\n<details>${'word '.repeat(400)}</details>\n`;
+
+test('stage --lint: a plain verdict passes; shorthand, missing parts and length are named', () => {
+  const s = sandbox();
+  const f = join(s.root, 'v.md');
+  writeFileSync(f, goodVerdict);
+  assert.equal(s.run('stage.mjs', ['--lint', f]).status, 0, 'details are not counted');
+  writeFileSync(f, goodVerdict.replace('**What\'s risky**', 'Risks: WTP is unproven (E§4), see [assumption].').replace('light: yellow', 'light: amber') + 'word '.repeat(0));
+  const r = s.run('stage.mjs', ['--lint', f]);
+  assert.equal(r.status, 1);
+  const p = JSON.parse(r.stdout).problems.join(' | ');
+  for (const bit of ["missing **What's risky**", 'light: must be', 'WTP', 'E§4', '[assumption]']) assert.ok(p.includes(bit), bit);
+  writeFileSync(f, goodVerdict.replace('**The call:** ', `**The call:** ${'long '.repeat(300)}`));
+  assert.match(JSON.parse(s.run('stage.mjs', ['--lint', f]).stdout).problems[0], /words above the details/);
+});
+
+test('stage --record: one call labels, updates metadata and card, logs, commits only the idea folder', () => {
+  const s = sandbox({ issues: [{ repo: 'tester/ws', number: 3, title: 'X', body: 'x\n\n<!-- studio\nslug: x\nnext: old\n-->', labels: [{ name: 'type:idea' }, { name: 'status:new' }], state: 'OPEN' }] });
+  execFileSync('git', ['init', '-q', s.ws]);
+  write(join(s.ws, 'ideas', 'x'), { 'verdict.md': goodVerdict });
+  writeFileSync(join(s.ws, 'other.md'), 'someone else\'s work in progress');
+  const r = s.run('stage.mjs', ['--record', 'x', '--stage', 'check', '--light', 'yellow', '--next', 'say: prove x', '--tokens', '600k']);
+  assert.equal(r.status, 0, r.stderr);
+  const i = s.gh().issues[0];
+  assert.deepEqual(i.labels.map((l) => l.name).sort(), ['status:exploring', 'type:idea']);
+  assert.match(i.body, /^light: yellow$/m);
+  assert.match(i.body, /^next: say: prove x$/m);
+  assert.match(i.body, /^<!-- card -->/);
+  assert.match(readFileSync(join(s.ws, 'ideas', 'x', 'runs.md'), 'utf8'), /· check · done · yellow · 600k tokens/);
+  const committed = execFileSync('git', ['-C', s.ws, 'show', '--name-only', '--format=%s', 'HEAD'], { encoding: 'utf8' });
+  assert.match(committed, /^check\(x\): yellow/);
+  assert.doesNotMatch(committed, /other\.md/);
 });

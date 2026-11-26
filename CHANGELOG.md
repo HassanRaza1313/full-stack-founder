@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.5.0 · 2026-11-26
+
+- **From idea to build in three plain stages: Check → Prove → Build.** Say "check my idea", then "prove it", then "build it".
+  - **Check** (about 10 minutes): three questions about your idea first, then research, then **what's promising and what's risky, written separately**, and one verdict: 🟢 worth building, 🟡 worth a closer look with changes, or 🔴 not as it stands, with up to three better versions.
+  - **Prove** (a few hours, plus your conversations): customers, how to reach them, the first version, pricing and the numbers, your conversations with 3 to 5 real people, then **one board vote**: build it? Everything feeds the spec, design and marketing.
+  - **The expert work** is startup-design (research waves, interviews, strategy, money, validation) and founder-board, the same skills as before, now run by stage instead of by command.
+- **One verdict file per idea, in plain words:** under 250 words, no shorthand or source codes, technical terms explained once.
+- **An idea card** at the top of each catalog issue: the stage (Idea → Checked → Proven → Built → Live), the verdict and the next words to say.
+- **Fewer stops before code:** two board votes became one, and the separate framing interview became three questions.
+- **A fresh chat per stage:** each stage ends with what to say in a new chat, because a long chat re-reads its whole history (a quick read cost 2.85M tokens late in a long chat, against 0.7M fresh).
+- **Lighter to run:** the chat no longer reads the expert skills itself (its agents read the parts they need), and one script finishes a stage (labels, card, log, index, commit). Measured in a sandbox: Check 1.16M tokens in 7 minutes (2.76M before these changes); Prove 4.4M up to the money, plus about 1M for the board and verdict.
+- Board members run as lighter agents. `/founder:discover` is now the feature review only.
+
 ## 0.4.3 · 2026-11-26
 
 - **Know when there's an update, and get it in one step.** When a session starts, a new release is announced in one line (checked at most once a day, about 3 seconds, no tokens). Say "update founder" (`/founder:update`): it installs the latest version and lists what's new. Turn the notice off with `"updateCheck": false` in `studio.config.json`.

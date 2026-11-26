@@ -1,11 +1,7 @@
 ---
-title: Validate an idea
+title: Check and prove an idea
 target: product idea
-time: 1-3 hours, mostly unattended
+time: about 10 minutes, then a few hours plus your conversations
 ---
-1. `/founder:discover <idea> --quick`: the quick read. **Stop:** continue, park or reject.
-2. `/founder:discover <idea> --frame`: a short interview that turns the idea into your full picture, saved as the brief (skip if `00-intake/brief.md` exists and you don't want to change it). **Stop:** confirm the brief.
-3. `/founder:research customers` and `/founder:research competitors` (skip what the quick read already covers well).
-4. Playbook `finance-check` (costs, pricing and offer, unit economics, board).
-5. `/founder:sales prospects --signal`: find 10-15 people who have the problem, for 3-5 real conversations. **Stop:** you reach out yourself; log what you hear with `/founder:idea note`.
-6. `/founder:discover <idea>`: the full run with the refinement loop, using all of the above. **Stop:** Ready to build, plateau, kill, or override.
+1. `/founder:check <idea>`: three questions, research, what's promising and what's risky, the verdict. **Stop:** prove it, prove a better version, or park.
+2. `/founder:prove <idea>`: customers, the money and the first version, then your conversations and one board vote. **Stop:** talk to 3 to 5 people. **Stop:** build it, change it, park it, or drop it.

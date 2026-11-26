@@ -11,7 +11,7 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`, `knowledge.md`. Gate: `ide
 
 1. **Frame it.** One sentence for the decision, plus the options. Infer the target, as `/founder:idea` does.
 2. **Brief the board.** founder-board reads `founder/idea.md` in the target folder (the product repo or `ideas/<slug>/`). Write it or refresh it from saved results, not from memory: the brief or discovery, the newest `finance/`, `research/` and `listen/` summaries, and the decision itself. Include the key numbers.
-3. **Convene.** Run the `founder-board` skill on the decision. Its three lens members score, name the risks that would kill it, and vote fund, fund with conditions, or pass.
+3. **Convene.** Run the `founder-board` skill on the decision, with its three members as `analyst` agents in one message (not general-purpose: they start lighter and read only what they're given). Its three lens members score, name the risks that would kill it, and vote fund, fund with conditions, or pass.
 4. **Two more seats**, short, from saved results only:
    - **CFO:** margin, break-even and runway impact (`finance/`; run `/founder:finance unit-economics` first if there are no numbers).
    - **Customer:** what real customers said (`research/voice/`, `listen/`). Simulated reactions don't count as evidence here.

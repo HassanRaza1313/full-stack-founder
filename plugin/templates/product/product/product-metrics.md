@@ -1,6 +1,6 @@
 # Product metrics
 
-Set during `/founder:discover`. Every gate checks against these numbers.
+Set during `/founder:prove`. Every gate checks against these numbers.
 
 | Metric | Definition | Target |
 |---|---|---|

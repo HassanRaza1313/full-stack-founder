@@ -23,7 +23,8 @@ You can build it. Full Stack Founder runs the other half of a startup: research,
 | You say | It runs |
 |---|---|
 | "Find me ideas in fintech" | A hunt through real complaints, reviews and competitor gaps |
-| "Is this worth building?" | A short interview to pin down your idea, then research, pricing, the numbers and a board vote |
+| "Check my idea" | Three questions, research, and a one-screen verdict: what's promising, what's risky, better versions |
+| "Prove it" | Customers, real conversations, pricing and the numbers, then one board vote: build it? |
 | "Build it" | Repo, spec, design, build and tests |
 | "Launch it" | Case study, demo, posts and outreach, as drafts you send |
 | "Add dark mode to Fraud Guard" | Review, spec, build and release |
@@ -70,7 +71,7 @@ You can build it. Full Stack Founder runs the other half of a startup: research,
 
 **"AI tells me every idea is brilliant."**
 - Every verdict opens with the case against the idea, with sources.
-- A deliberately weak idea scored 11/40, then got three sharper versions.
+- A deliberately weak idea scored 11/40, then got three sharper versions (before 0.5; Check now gives a plain verdict).
 
 **"I researched this once. Where did it go?"**
 - Every result is a dated file, with sources.
@@ -132,6 +133,7 @@ Start with these. Everything else runs behind them.
 |---|---|
 | `/founder:ceo` | The front door. A portfolio brief, or any request in plain words |
 | `/founder:hunt` | Find product ideas from real complaints, reviews and competitor gaps |
+| `/founder:check` · `/founder:prove` | Is it worth a closer look? Will people want it and pay? |
 | `/founder:board` | Your board of directors for any decision |
 | `/founder:ask` | Answers from everything already researched and decided |
 | `/founder:setup` | Get this machine ready for the next stage |

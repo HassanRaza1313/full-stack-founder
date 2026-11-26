@@ -64,7 +64,7 @@ if (x === 'issue' && y === 'create') {
 if (x === 'issue' && y === 'edit') {
   const i = st.issues.find((v) => v.number === Number(a[2]) && v.repo === opt('-R'));
   if (opt('--body-file')) i.body = readFileSync(opt('--body-file'), 'utf8'); else if (opt('--body')) i.body = opt('--body');
-  a.forEach((v, k) => { if (a[k - 1] === '--add-label') i.labels.push({ name: v }); if (a[k - 1] === '--remove-label') i.labels = i.labels.filter((l) => l.name !== v); });
+  a.forEach((v, k) => { if (a[k - 1] === '--add-label' && !i.labels.some((l) => l.name === v)) i.labels.push({ name: v }); if (a[k - 1] === '--remove-label') i.labels = i.labels.filter((l) => l.name !== v); });
   out('');
 }
 if (x === 'issue' && y === 'view') { const i = issueOf(); if (!i) die('issue not found'); out({ ...i, comments: i.comments ?? [], url: `https://github.com/${i.repo}/issues/${i.number}` }); }

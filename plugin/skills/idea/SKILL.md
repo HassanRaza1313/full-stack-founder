@@ -24,7 +24,7 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`. Settings come from `node "
 
 ```
 <!-- studio
-slug · track · score (/40) · repo · drive · site · demo · demo_url · signals   ← product ideas
+slug · track · light · score (/10; older ideas /40) · repo · drive · site · demo · demo_url · signals   ← product ideas
 impact · confidence · ease · score (/125) · review · spec · evidence                   ← enhancements
 next · updated
 -->
