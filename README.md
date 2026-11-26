@@ -23,7 +23,7 @@ You can build it. Full Stack Founder runs the other half of a startup: research,
 | You say | It runs |
 |---|---|
 | "Find me ideas in fintech" | A hunt through real complaints, reviews and competitor gaps |
-| "Check my idea" | Three questions, research, and a one-screen verdict: what's promising, what's risky, better versions |
+| "Check my idea" | How far along you are, a few questions about what you want, research, and a one-screen verdict: what's promising, what's risky, better versions |
 | "Prove it" | Customers, real conversations, pricing and the numbers, then one board vote: build it? |
 | "Build it" | Repo, spec, design, build and tests |
 | "Launch it" | Case study, demo, posts and outreach, as drafts you send |

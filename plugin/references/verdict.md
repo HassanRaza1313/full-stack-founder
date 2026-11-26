@@ -25,6 +25,8 @@ fresh_until: 2027-02-24
 
 **What would change this:** one or two facts that would flip the light.
 
+**What we filled in** (only if the brief left points open): one line each, "You weren't sure who it's for: the research points to …".
+
 **Better versions** (Check only): up to 3, one line each, then "Pick: …".
 
 **Next:** one plain sentence, then the words to say back ("say: prove pitch market").
@@ -40,4 +42,5 @@ One line per scored dimension, and links to the research.
 - **Plain words.** A technical term only when it's the right word, explained once in brackets the first time: "unit economics (what each customer earns you after costs)", "broker-dealer (a firm licensed to arrange investments)".
 - **No codes or shorthand:** no `E§4`, `CA§2`, `WTP`, `TAM`, `v0`, `[assumption]` tags, dimension numbers or severity labels. Link the file instead. A guess is said as a guess: "we're guessing here".
 - **Both sides, weighed.** Promising and risky come from the case for and the case against, written separately. The call weighs them; it isn't an average.
+- **Advice, not a gate.** Next always offers "build it anyway" unless the light is green: it's the founder's call.
 - **Same file, both stages.** Prove rewrites it, keeps the Check light in one line ("Check: 🟡 · Prove: 🟢 7/10"), and drops "Better versions".

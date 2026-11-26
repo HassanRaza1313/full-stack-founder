@@ -1,6 +1,6 @@
 ---
 name: board
-description: Your board of directors for any decision: build or kill, pivot, price change, graduation, quarterly strategy. Runs founder-board's three lenses (Offers, Monopoly, Product) with your saved research and numbers, plus CFO and customer seats; scores, dissent, a verdict saved as a decision.
+description: "Your board of directors for any decision: build or kill, pivot, price change, graduation, quarterly strategy. Runs founder-board's three lenses (Offers, Monopoly, Product) with your saved research and numbers, plus CFO and customer seats; scores, dissent, a verdict saved as a decision."
 argument-hint: "<the decision> [target]"
 disable-model-invocation: true
 ---

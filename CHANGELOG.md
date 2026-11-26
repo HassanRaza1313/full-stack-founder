@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.0 · 2026-11-27
+
+- **Your idea first, then the judgment: Capture → Check → Prove → Build,** for a new idea and for code you already have.
+  - **How far along are you?** Just an idea, goals in mind, or work done. The questions follow from it: up to 3, up to 6, or only the gaps in what you brought.
+  - **Intent, never facts.** It asks what you want to build, for whom, why, and your limits. The market, competitors, prices and rules are research's job.
+  - **"Not sure" is a good answer.** It becomes a question the research answers, and the verdict says what was filled in (for example, who it's for).
+  - **Work already done:** your documents are read first, you see a short "what you already have", and the interview (Pocock's `grilling`) asks only about gaps and contradictions: at most 2 rounds, 8 questions.
+- **Adopt is the same journey, with code attached:** Capture with a plan-versus-code map (built as planned, built differently, planned not built, built in no plan), then setup and tests, then Check, then the plan forward from what's really built.
+- **Build it anyway.** The verdict is advice, not a gate: every stop offers it, and it's recorded as your call.
+- **A "start here" page** in every idea folder, linking each result by what it means, not its folder name.
+- Fixes: adopt, hunt and idea pointed at the quick read and framing interview that 0.5.0 removed; a test now fails on any link to a mode that no longer exists.
+
 ## 0.5.0 · 2026-11-26
 
 - **From idea to build in three plain stages: Check → Prove → Build.** Say "check my idea", then "prove it", then "build it".

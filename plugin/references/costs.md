@@ -6,6 +6,7 @@ Every agent costs tokens just to start: 6–12k for the plugin's agents, which c
 
 | Command | About | Basis |
 |---|---|---|
+| `/founder:capture` | 0.1–0.5M | estimate: a few questions for an idea; reading documents and code, and the plan-versus-code map, for work already done |
 | `/founder:check` | 1.2M | measured: 1.16M, 7 min, $1.98 (sandbox, fresh chat, 2026-11-26; 4 researchers, 3 analysts; the chat itself 669k over 12 turns). Late in a long chat it costs more: 2.85M for Pitch Market's quick read |
 | `/founder:research <one topic>` | 0.8M | measured: 766k, 5 min (competitors, 53 sources; two researchers, one analyst) |
 | `/founder:board` | 1.2M | measured: 1.19M, 2.5 min (three lens members, plus the CFO and customer seats) |

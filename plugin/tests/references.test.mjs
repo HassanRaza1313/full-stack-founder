@@ -49,7 +49,8 @@ test('plain language: the shared rules and the onboarding flow keep it simple', 
   const journey = readFileSync(join(plugin, 'references', 'journey.md'), 'utf8');
   for (const rule of ['**Speak plainly.**', '**Defaults over questions.**', '**One question at a time,**', '**Plain words**', 'Next step as words they can say back']) assert.ok(journey.includes(rule), rule);
   const adopt = readFileSync(join(plugin, 'skills', 'adopt', 'SKILL.md'), 'utf8');
-  for (const part of ['Ask first: your ideas', 'inputs, not decisions', 'Scale the review to the idea', 'Set up on this computer', 'tests pass']) assert.ok(adopt.includes(part), part);
+  for (const part of ['Your idea, as it stands', 'Scale the review to the idea', 'Set up on this computer', 'tests pass']) assert.ok(adopt.includes(part), part);
+  assert.ok(readFileSync(join(plugin, 'skills', 'capture', 'SKILL.md'), 'utf8').includes('inputs, not decisions'));
 });
 
 test('no flow hard-codes the template stack without a fallback', () => {
@@ -81,4 +82,27 @@ test('check and prove: the plain verdict, both sides, the expert skills, and a f
   const prove = read('skills/prove/SKILL.md');
   for (const s of ['startup-design', 'skills/board/SKILL.md', 'simulated', 'verdict.md', 'stage.mjs', 'in a new chat']) assert.ok(prove.includes(s), `prove: ${s}`);
   assert.doesNotMatch(read('playbooks/validate.md') + read('playbooks/idea-to-launch.md'), /--quick|--frame/);
+});
+
+test('no flow points at a mode that no longer exists', () => {
+  const offenders = files.filter((f) => /discover[^\n]{0,40}--(quick|frame)|discover <(slug|idea)>/.test(readFileSync(f, 'utf8'))).map((f) => relative(plugin, f));
+  assert.deepEqual(offenders, []);
+});
+
+test('capture: how far along first, intent not facts, "not sure" welcome, short, then check and adopt build on it', () => {
+  const read = (p) => readFileSync(join(plugin, p), 'utf8');
+  const c = read('skills/capture/SKILL.md');
+  for (const s of ['How far along are you?', 'Just an idea', 'I know what I want from it', "I've done work on it", '**What we ask about: intent, never facts.**', '"Not sure" is always a good answer', 'up to 3 questions', '6 at most', 'at most 2 rounds and 8 questions', 'grilling', 'plan-vs-code.md', '"that\'s enough"', 'Is this right?']) assert.ok(c.includes(s), `capture: ${s}`);
+  assert.ok(read('skills/check/SKILL.md').includes('skills/capture/SKILL.md'), 'check runs capture');
+  const adopt = read('skills/adopt/SKILL.md');
+  for (const s of ['skills/capture/SKILL.md', '/founder:check', 'your-call']) assert.ok(adopt.includes(s), `adopt: ${s}`);
+  for (const f of ['skills/check/SKILL.md', 'skills/prove/SKILL.md', 'references/verdict.md']) assert.match(read(f), /[Bb]uild it anyway/, f);
+});
+
+test('skill headers parse: a description with ": " in it is quoted', () => {
+  const bad = readdirSync(join(plugin, 'skills')).filter((d) => {
+    const m = readFileSync(join(plugin, 'skills', d, 'SKILL.md'), 'utf8').match(/^description: (.*?)\r?$/m);
+    return m && !/^["'>|]/.test(m[1]) && /: /.test(m[1]);
+  });
+  assert.deepEqual(bad, []);
 });

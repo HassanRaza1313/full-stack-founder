@@ -150,10 +150,12 @@ An idea goes **Idea → Checked → Proven → Built → Live**. Its card in you
 check my idea: <your idea, in a sentence or two>
 ```
 
-- **It asks** three questions: who it's for, what it does for them, how it makes money. Say "skip" to any.
+- **First, how far along are you?** Just an idea, some goals in mind, or work already done (notes, a plan, Word docs, code: drop them in).
+- **Then a few questions about what you want,** never about the market: up to 3 for an idea, up to 6 with goals, and only the gaps if you brought files. "Not sure" is a fine answer: the research fills it in, and the verdict says what it found.
+- **You confirm "your idea, as it stands"** before anything judges it.
 - **It researches** the market, the rules and the competitors.
 - **You get** one screen: 🟢 worth building, 🟡 worth a closer look with changes, or 🔴 not as it stands. Then what's promising, what's risky, what would change the verdict, and up to three better versions.
-- **You decide:** prove it, prove a better version, or park it.
+- **You decide:** prove it, prove a better version, build it anyway, or park it. The verdict is advice: building anyway is your call, and it's recorded.
 
 ### Step 2: Prove it (a few hours, plus your conversations)
 
@@ -231,11 +233,14 @@ Everything here feeds the build: the spec, design and marketing read it instead 
 
 Or just tell `/founder:ceo` "I built an app, it's in this folder".
 
+- **It's the same journey as a new idea, with code attached:** your idea as it stands, then Check, then the plan.
 - **It asks for your ideas first.** Tell it, or drop notes, Word docs or old plans into the folder it gives you. Your ideas go through the same review as any other: nothing skips it.
+- **It compares your plan with your code:** what's built as planned, built differently, planned but not built, and built but in no plan. It asks you only about the places they disagree.
 - **One home for your code.** It moves the code into your products folder. Other copies on your computer are merged in (their own files kept) and put aside, never deleted.
 - **No GitHub copy yet?** It offers to save your code privately on GitHub, with passwords and keys kept out.
 - **It gets everything working:** installs what the code needs, repairs a moved setup, and runs the tests once.
-- **You finish with a checklist:** your ideas, what it is, the plan, ideas reviewed, set up, tests pass. Then it says what to say next.
+- **Then it checks it like any idea** (recommended if no real users have tried it yet), and makes the plan forward from what's really built.
+- **You finish with a checklist:** one home, your idea as it stands, set up, tests pass, checked, the plan, ideas reviewed. Then it says what to say next.
 
 - **It never changes your code** without a yes. The only change it offers is the lean-code rules in `CLAUDE.md`.
 - **Where its plans and research live:**

@@ -4,8 +4,8 @@ target: a product idea (starts from its current stage) or plain text for a new o
 time: days to weeks; mostly unattended between your decisions
 ---
 1. `/founder:idea add` (skip if the idea exists).
-2. `/founder:check`. **Stop:** prove it, a better version, or park.
-3. `/founder:prove`. **Stop:** your conversations. **Stop:** build it, change it, park it, or drop it.
+2. `/founder:check` (it captures the idea first). **Stop:** prove it, a better version, build it anyway, or park.
+3. `/founder:prove` (skipped if they chose "build it anyway", recorded in `decisions/`). **Stop:** your conversations. **Stop:** build it, change it, build it anyway, park it, or drop it.
 4. `/founder:setup-product <slug> "<name>"`: the name (from startup-design's brand phase, run here) and the private repo; the research moves in. **Stop:** confirm the name and the repo.
 5. `/founder:spec mvp`, from Prove's first version. **Stop:** approve the spec.
 6. `/founder:design` (shape, then variants). **Stop:** pick a direction.

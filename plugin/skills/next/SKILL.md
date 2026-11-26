@@ -18,7 +18,7 @@ Read the issue (stage and metadata), `STATE.md` (`gate`, `next`, "Where I left o
 3. The machine isn't ready for the stage → `/founder:setup <stage>`. The setup stage for an item's stage: `ideas` for idea stages (new to researching), `build` for building and specced, `showcase` for showcased, `graduate` for graduated and live.
 4. Stale results the next step depends on → refresh them first.
 5. **Product idea:**
-   - `new` → "check it" (`/founder:check`)
+   - `new` → "check it" (`/founder:check`; it captures the idea first)
    - `exploring` (checked) → "prove it" (`/founder:prove`)
    - proven, and the founder chose to build → "build it" (`/founder:setup-product`)
 6. **Product:**

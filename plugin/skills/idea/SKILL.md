@@ -44,7 +44,7 @@ No idea yet? `/founder:hunt` finds them from real complaints and competitor gaps
 3. **Draft:**
    - **Product idea:** Problem, Hypothesis ("We believe X will cause Y for Z"), Evidence, Source, Success metric, Size S/M/L, and a slug of 5 words or fewer.
    - **Enhancement:** Problem (which persona), Proposed change, Evidence, Source, Metric (from `product-metrics.md`), Size.
-4. **Confirm once,** then create it with `gh issue create --body-file`. Labels `type:idea,status:new,source:<x>`. Metadata `next:` is `/founder:discover <slug> --quick` or `/founder:discover <product>#<n>`, plus `updated`. A product idea also gets `track: portfolio` and `demo: none`.
+4. **Confirm once,** then create it with `gh issue create --body-file`. Labels `type:idea,status:new,source:<x>`. Metadata `next:` is `say: check <name>` (a product idea) or `/founder:discover <product>#<n>` (an enhancement), plus `updated`. A product idea also gets `track: portfolio` and `demo: none`.
 5. Close with the link and the `next:` command. An enhancement can also just stay in the backlog.
 
 ## list `[stage] [--product <p>]`

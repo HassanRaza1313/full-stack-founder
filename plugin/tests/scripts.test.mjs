@@ -235,4 +235,9 @@ test('stage --record: one call labels, updates metadata and card, logs, commits 
   const committed = execFileSync('git', ['-C', s.ws, 'show', '--name-only', '--format=%s', 'HEAD'], { encoding: 'utf8' });
   assert.match(committed, /^check\(x\): yellow/);
   assert.doesNotMatch(committed, /other\.md/);
+  assert.match(committed, /ideas\/x\/README\.md/);
+  const start = readFileSync(join(s.ws, 'ideas', 'x', 'README.md'), 'utf8');
+  assert.match(start, /^# X\n/);
+  assert.match(start, /- \*\*\[Where it stands\]\(verdict\.md\)\*\*: the verdict, in one screen/);
+  assert.doesNotMatch(start, /case-for/, 'only files that exist are listed');
 });

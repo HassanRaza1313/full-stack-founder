@@ -50,6 +50,7 @@ End with **exactly one question**, the go-ahead, with your recommended answer. S
    | New ideas found for them ("what should I build?", "find me ideas in fintech") | `/founder:hunt`, then playbook `validate` on their pick |
    | A new idea checked, or "is this worth it?" | `/founder:check` (it saves the idea first) |
    | "Prove it", "will people pay?", "should I build it?" on a checked idea | `/founder:prove` |
+   | "Build it anyway" on a checked or proven idea | Record it as their call (`decisions/<date>-your-call.md`), then playbook `idea-to-launch` from step 4 |
    | An idea or product taken all the way ("build it", "take it to launch") | playbook `idea-to-launch`, from its current stage |
    | Code they already have ("I built an app", "here's my folder", "bring in <owner/repo>", a GitHub link) | `/founder:adopt` with that repo or folder; its first step is a preview and one yes |
    | A feature, change or fix on an existing product | playbook `feature` |

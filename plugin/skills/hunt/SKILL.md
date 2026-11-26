@@ -33,6 +33,6 @@ Rules: `${CLAUDE_PLUGIN_ROOT}/references/journey.md`, `knowledge.md`, `skills.md
    Drop anything with fewer than 3 independent sources, crowded markets with no gap, or ideas one person can't build.
 4. **Save** `_hunts/<date>-<space>.md`: the ranked table plus one card per opportunity, with the knowledge header (`fresh_until` 60 days). Refresh the index.
 5. **Present** the ranked table (`# · Opportunity · Who · Evidence · Gap · Score`), and recommend the top 2 with a one-line reason each. **Gate:** the user picks which become ideas, and can reword them.
-6. **For each pick:** follow `${CLAUDE_PLUGIN_ROOT}/skills/idea/SKILL.md` "add", pre-filled with the evidence and the hunt link (`source:discovery`). Then offer the quick read (`/founder:discover <slug> --quick`) or the `validate` playbook for the top pick.
+6. **For each pick:** follow `${CLAUDE_PLUGIN_ROOT}/skills/idea/SKILL.md` "add", pre-filled with the evidence and the hunt link (`source:discovery`). Then offer "check it" (`/founder:check <slug>`) for the top pick.
 
 Offer a weekly hunt in a chosen space, using the `schedule` skill.

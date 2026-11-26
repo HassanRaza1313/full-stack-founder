@@ -4,7 +4,7 @@
 //   --record <slug> --stage check|prove --light green|yellow|red [--score 7/10] [--next "<words>"] [--tokens 600k]
 //                          Labels the idea, updates its metadata and card, logs runs.md, refreshes the index, commits
 //                          only the idea's folder and pushes.
-import { existsSync, readFileSync, writeFileSync, appendFileSync } from 'node:fs';
+import { appendFileSync, existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -25,6 +25,34 @@ function lint(text) {
   const shorthand = body.match(/\b[A-Z]{1,3}§\d+|\[assumption\]|\bWTP\b|\bTAM\b|\bSAM\b|\bv\d\b|\b[OE]\d\b/g);
   if (shorthand) problems.push(`shorthand to replace with plain words or a link: ${[...new Set(shorthand)].join(', ')}`);
   return { words, problems };
+}
+
+// The idea folder's front page: what to read, in plain words, only for files that exist. GitHub shows it when the
+// folder is opened, so the founder never has to know startup-design's folder names.
+function startHere(folder, slug) {
+  const name = readFileSync(join(folder, 'verdict.md'), 'utf8').match(/^# (.+?)(?: · |$)/m)?.[1] ?? slug;
+  const has = (p) => existsSync(join(folder, p));
+  const newest = (dir, re) => { try { return readdirSync(join(folder, dir)).filter((f) => re.test(f)).sort().pop(); } catch { return undefined; } };
+  const board = newest('decisions', /board/);
+  const call = newest('decisions', /your-call/);
+  const rows = [
+    ['verdict.md', '**Where it stands**: the verdict, in one screen'],
+    ['00-intake/brief.md', '**Your idea, as it stands**: in your words'],
+    ['00-intake/plan-vs-code.md', '**Your plan and your code**: what matches and what doesn\'t'],
+    ['01-discovery/case-for.md', '**What\'s promising**'],
+    ['01-discovery/case-against.md', '**What\'s risky**'],
+    ['00-intake/brainstorm.md', '**Better versions**'],
+    ['01-discovery/research-synthesis.md', '**The research**: market, rules, competitors, customers'],
+    ['02-strategy', '**Who it\'s for and how it wins**'],
+    ['04-product', '**The first version**: what\'s in and out'],
+    ['05-financial', '**The money**: pricing, costs, break-even'],
+    ['06-validation', '**Next tests**: the cheapest experiments, and the interview script'],
+    [board && `decisions/${board}`, '**The board\'s vote**'],
+    [call && `decisions/${call}`, '**Your call**: built anyway, and what was skipped'],
+  ].filter(([p]) => p && has(p));
+  // Each label is "**Title**: more"; the title becomes the link.
+  const list = rows.map(([p, label]) => { const [, title, more] = label.match(/^\*\*(.+?)\*\*(.*)$/); return `- **[${title}](${p})**${more}`; });
+  return `# ${name}\n\nStart with the first one. Everything else is the evidence behind it.\n\n${list.join('\n')}\n\nThe idea's card in your catalog on GitHub shows the same stage and the next step. Generated; don't edit.\n`;
 }
 
 if (args.lint) {
@@ -80,6 +108,7 @@ if (args.record) {
   const runs = join(folder, 'runs.md');
   appendFileSync(runs, `${existsSync(runs) && !readFileSync(runs, 'utf8').endsWith('\n') ? '\n' : ''}${today} · ${stage} · done · ${args.light}${args.score ? ` ${args.score}` : ''}${args.tokens ? ` · ${args.tokens} tokens` : ''}\n`);
   run('node', [join(here, 'index.mjs'), folder], { capture: true, allowFail: true });
+  writeFileSync(join(folder, 'README.md'), startHere(folder, slug));
   run('git', ['-C', ws, 'add', '--', join('ideas', slug)], { capture: true });
   // Commit only this idea's folder (other work may be in progress), with a fallback identity for a computer that has none.
   const cfg = (k) => run('git', ['-C', ws, 'config', k], { capture: true, allowFail: true }).out;

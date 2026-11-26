@@ -12,7 +12,7 @@ Stage 2 of 3: **Check → Prove → Build**. The question: will people want it a
 
 **Wait for every agent.** Each step needs the one before it: wait for each agent's result before the next step, and never end your turn while one is working ("I'll continue when it reports back" ends a run that has no one to wake it).
 
-**Start:** resolve the idea as `/founder:idea` does. No `verdict.md` yet: run `/founder:check` first. A version named ("version 2", or a pick from Check): update `00-intake/brief.md` to it first and say so in one line. Run `node "${CLAUDE_PLUGIN_ROOT}/scripts/stage.mjs" --start <slug> --stage prove` (it labels the idea). Say the run can be stopped and picked up again.
+**Start:** resolve the idea as `/founder:idea` does. No `verdict.md` yet: run `/founder:check` first. The brief (`00-intake/brief.md`, from Capture) is the founder's picture: every agent reads it, and its **Open, for research** points left after Check are this stage's questions. A version named ("version 2", or a pick from Check): update `00-intake/brief.md` to it first and say so in one line. Run `node "${CLAUDE_PLUGIN_ROOT}/scripts/stage.mjs" --start <slug> --stage prove` (it labels the idea). Say the run can be stopped and picked up again.
 
 1. **Research what Check didn't:** `researcher` agents in ONE message, at the tier in `research.buildDepth` (default Standard, from `SD/references/research-scaling.md`), each reading the brief, `SD/references/research-principles.md` and its wave file (`research-wave-3-customers.md`, `research-wave-4-distribution.md`), saving to `F/01-discovery/raw/`. Then one `analyst` updates `research-synthesis.md` and runs `SD/references/verification-agent.md`'s checks.
 2. **Real conversations** (startup-design phase 3.7, with `SD/references/customer-interview.md`):
@@ -31,4 +31,5 @@ Stage 2 of 3: **Check → Prove → Build**. The question: will people want it a
 8. **Stop: the founder decides.**
    - "**Build it**": say `build <name>` in a new chat. It creates the private repo and moves this research in; the spec, design and marketing read it instead of asking again.
    - "**Change it**": what to change, then one more round from step 3.
+   - "**Build it anyway**" (if the light isn't green): recorded as their call in `decisions/<date>-your-call.md`, with the board's conditions listed as risks the build should watch.
    - "**Park it**" or "**Drop it**", with the reason kept.
