@@ -41,6 +41,10 @@ if (fresh && !existsSync(join(out, 'gh.json'))) {
     'test/basic.test.js': "import { test } from 'node:test';\nimport assert from 'node:assert';\ntest('works', () => assert.ok(true));\n",
     'ideas.md': '# Ideas\n\n- import from Instagram\n- a paid plan for meal-prep coaches\n',
   });
+  // Notes kept apart from the code, for the mix case (code + notes + what's only in their head).
+  write(join(out, 'Documents', 'Recipe Box plans'), {
+    'roadmap.md': '# Recipe Box roadmap\n\n1. Shopping list from the week plan\n2. Share a recipe box with family\n3. Recipes stay private: no public profiles, ever\n\nAudience: busy parents who cook 4-5 nights a week.\n',
+  });
   // A small project already on (fake) GitHub, for the link case.
   const gb = join(out, 'seed', 'guest-book');
   write(gb, {
@@ -126,6 +130,7 @@ const cases = [
   { name: 'fresh-notes', phase: 1, fresh: true, cwd: out, prompt: `/founder:ceo\n\nI've been working on an idea, my notes are in "${notes}". Stop at the verdict.` },
   { name: 'fresh-folder', phase: 1, fresh: true, cwd: out, prompt: `/founder:ceo\n\nI built an app with an AI tool, it's in "${join(out, 'Desktop', 'Recipe Box')}". Bring it in; skip the Check and stop after the plan forward.` },
   { name: 'fresh-link', phase: 1, fresh: true, cwd: out, prompt: '/founder:ceo\n\nhttps://github.com/tester/guest-book is mine. Bring it in; skip the Check and stop after setup and the tests.' },
+  { name: 'fresh-mix', phase: 1, fresh: true, cwd: out, prompt: `/founder:ceo\n\nI've got a few things for my recipe app: the code is in "${join(out, 'Desktop', 'Recipe Box')}", my plans are in "${join(out, 'Documents', 'Recipe Box plans')}", and in my head I want it to work offline in the kitchen. Bring it all in, skip the Check and stop once the brief is written.` },
 ].filter((c) => Boolean(c.fresh) === fresh).filter((c) => !only || only.has(c.name)).map((c) => (fresh ? { ...c, prompt: `${c.prompt}\n\n${freshRules}` } : c));
 
 // --- Running and measuring -------------------------------------------------------------------------------------------

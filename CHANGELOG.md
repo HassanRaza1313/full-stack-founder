@@ -2,7 +2,7 @@
 
 ## 0.7.1 · 2026-11-27
 
-- **Bring any mix.** "What are you bringing?" is no longer a pick-one: the idea in your head, your goals, notes or documents, and code can all come together. Capture brings the code in, reads every source you name (a separate notes folder as well as the code), and always asks once for what's only in your head.
+- **Bring any mix.** "What are you bringing?" is no longer a pick-one: the idea in your head, your goals, notes or documents, and code can all come together. Capture brings the code in, reads every source you name (a separate notes folder as well as the code), and always asks once for what's only in your head. Tested on a fresh computer with code, a separate plans folder and a wish only in the founder's head: the brief and the plan-versus-code map used all three and caught two contradictions (0.75M tokens, $0.63).
 
 ## 0.7.0 · 2026-11-27
 
