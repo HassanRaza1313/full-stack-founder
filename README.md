@@ -11,172 +11,163 @@ You can build it. Full Stack Founder runs the other half of a startup: research,
 ```
 /plugin marketplace add https://github.com/HassanRaza1313/full-stack-founder.git
 /plugin install founder@full-stack-founder
-/founder:ceo is my meal-planner idea worth building?
+/founder:ceo
 ```
 
-## Your journey
+Then say what you're bringing. An idea, notes, a folder of code, a GitHub link, or all of them.
 
-1. **Say what you're bringing** to `/founder:ceo`: any mix of an idea, notes, documents, a folder of code and a GitHub link. One door for all of them.
-2. **Nothing to set up first.** Each step sets up only what it needs, when it needs it, and says why.
-3. **It runs the journey** and stops for your decisions. The verdict is advice: you can always build it anyway.
+---
 
-| You say | It runs |
-|---|---|
-| "Find me ideas in fintech" | A hunt through real complaints, reviews and competitor gaps |
-| "Check my idea", or a folder or a GitHub link | What you're bringing, a few questions about what you want (code is brought in and set up on the way), research, and a one-screen verdict: what's promising, what's risky, better versions |
-| "Prove it" | Customers, real conversations, pricing and the numbers, then one board vote: build it? |
-| "Build it" | Repo, spec, design, build and tests |
-| "Launch it" | Case study, demo, posts and outreach, as drafts you send |
-| "Add dark mode to Fraud Guard" | Review, spec, build and release |
+## What you get
 
-4. **Run your portfolio:** `/founder:ceo` on its own gives one brief across every product.
-5. **Stop when you stop:** `/founder:pause` shuts everything down. `/founder:resume` brings back only what's needed.
+- **The whole company, one command.** Research, product, design, engineering, marketing, sales, support and legal, each run by the specialist skill for that job.
+- **An honest answer before you spend a month.** What's promising and what's risky, written separately, then a plain 🟢 🟡 🔴 verdict with sources. Your call either way.
+- **Software built the way good teams build it.** A spec first, tests first, one reviewed change at a time, then a security, speed and real-browser check before anything ships.
+- **Something to show, not just code.** A case study, a live demo on free hosting, launch posts and a video, ready for customers, partners or investors.
+- **Customers, not just a product.** The people who have the problem, the messages to send them, and weekly signals on what's working.
+- **Every decision on record.** Research, prices and verdicts are saved with their sources, so you never redo work or wonder why you chose something.
 
-## Built for what actually goes wrong
+## Who it's for
 
-**"I can build it. Selling it is the problem."**
-- Every department behind one command: research, pricing, design, build, marketing, sales, support, legal.
-- A board for the big calls.
-- 12 journeys, from "is this worth it?" to your first paying customer.
+- **You have an idea, not a technical background.** Describe it in plain words. It handles the code, the tests and the security checks, and explains each decision in plain words.
+- **You can code, but selling isn't your thing.** Keep building. It writes the positioning, the pricing, the posts and the outreach, and finds the first people to talk to.
+- **You have a half-built app made with an AI tool.** Point it at the folder. It gives the code one home and a private backup, gets it running, and shows what's built, what isn't, and where it drifted from your plan.
+- **You run a one-person studio.** Many products, one brief: where each one stands, what's waiting on you, and what to do next.
+- **You need to impress someone.** Turn a product into a demo, a case study and a pitch for partners, investors or a job interview.
+- **You have notes and a plan, but no code yet.** Drop in your documents. It reads them first and asks only what's missing.
 
-**"Five half-built projects, and no idea where each stands."**
-- One brief: each product's stage, key number and next step.
-- The decisions waiting on you, each with a recommendation.
+## What you can do with it
 
-**"All-in-one tools are average at everything."**
-- Each job goes to the best-known specialist for it:
-  - **Build:** Matt Pocock
-  - **Design:** Impeccable, Meng To
-  - **Research, marketing, sales:** Corey Haines
-  - **Board and numbers:** founder-skill
-  - **Legal and support:** Anthropic
-- 52 skills, 650,000+ GitHub stars between them.
+- **Shower thought to paying customer:** check it, prove it with real people, build it, launch it, sell it.
+- **Rescue a vibe-coded project:** a clear plan from what's really there.
+- **Find your next idea:** from real complaints, reviews and gaps people pay to fix.
+- **Pitch with proof:** a live demo and a case study instead of slides.
+- **Run a portfolio:** several products, each with its stage, verdict and next step.
+- **Grow what's live:** features reviewed before they're built, releases, support replies, help articles and a monthly review.
 
-**"Skills eat my context and my usage limit."**
-- Research is gathered once by a cheaper model, then judged from the notes. Measured on the same ideas:
-  - a quick read went from about **4.5M to 0.7M** tokens;
-  - a hunt went from about **4M to 1.2M**.
-- You see the cost before every journey, and where you can stop.
-- Skills load only when a job needs them: about 700 tokens added to a session, against 3,400 for the same 52 skills installed the usual way.
+---
 
-**"Installs break, and updates break them again."**
-- Setup installs only the basics.
-- Each release ships the exact skill versions it was tested with.
-- Upstream changes reach you only after they pass our tests.
+## How it works
 
-**"It asks me everything, or does things I never approved."**
-- It works on its own between your decisions.
-- Posts, emails and outreach arrive as drafts. You send them.
+**One door for everything.** You don't choose between "a new idea" and "existing code". Say what you have, and it adapts.
 
-**"AI tells me every idea is brilliant."**
-- Every verdict opens with the case against the idea, with sources.
-- A deliberately weak idea scored 11/40, then got three sharper versions (before 0.5; Check now gives a plain verdict).
+1. **Capture: your idea, as it stands.**
+   - It asks what you're bringing: the idea in your head, your goals, notes and documents, code, or any mix.
+   - It reads what you brought first, then asks only about what you want, not about markets or numbers.
+   - "Not sure" is a fine answer. The research fills it in.
+2. **Check: is it worth a closer look?** (about 10 minutes)
+   - Market, rules and competitors researched, then one screen: what's promising, what's risky, better versions.
+   - For code, it also shows where your plan and your code disagree.
+3. **Prove: will people pay?** (a few hours, plus your conversations)
+   - Customers, how to reach them, the first version and the money.
+   - You talk to 3 to 5 real people, then a board of three advisors votes.
+4. **Build:** a name and a private home, then the spec, design options, a tested build, and a final check in a real browser.
+5. **Launch and grow:** a case study, demo, posts, outreach and weekly listening. You approve and send everything.
 
-**"I researched this once. Where did it go?"**
-- Every result is a dated file, with sources.
-- `/founder:ask` answers from them, and flags what's out of date.
+**The verdict is advice, not a gate.** You can say "build it anyway" at any point, and it's recorded as your call.
 
-**"I'm paying for servers before I have a customer."**
-- Case studies, demos and posts on free hosting.
-- Paid infrastructure only once real customers ask.
-
-**"Docker is eating my RAM again."**
-- `/founder:pause` saves your work and stops Docker, WSL and every service. In testing it freed 1.9 GB.
-- `/founder:resume` starts only what the next task needs.
-
-## Install
+## Get started
 
 You need Claude Code with a Pro or Max plan.
 
-**In a terminal** (PowerShell, Terminal or bash). This installs for your user, so every project gets it:
+**1. Install.** In a terminal (PowerShell, Terminal or bash), so every project gets it:
 
 ```
 claude plugin marketplace add https://github.com/HassanRaza1313/full-stack-founder.git
 claude plugin install founder@full-stack-founder
-claude plugin list
 ```
 
-**Or in a Claude Code chat:**
+Or in a Claude Code chat: `/plugin marketplace add …` then `/plugin install founder@full-stack-founder`.
 
-```
-/plugin marketplace add https://github.com/HassanRaza1313/full-stack-founder.git
-/plugin install founder@full-stack-founder
-```
+**2. Start.** Open a new Claude Code session and type `/founder:ceo`.
 
-Then **start a new Claude Code session** and type `/founder:ceo`. New to this? Follow [How to use it](HOW-TO.md). Install stuck? See [If something breaks](GUIDE.md#8-if-something-breaks).
+**3. That's it. Setup comes when it's needed.**
+- Your first idea needs nothing installed.
+- Say "keep it", and it makes a private place on GitHub for your ideas (about 5 minutes).
+- Building, launching and the rest each set up only what they need, say why first, then carry on.
+- Sign-ins happen one at a time, in your browser. It never asks for passwords in chat.
+- Prefer everything ready up front? Say "set everything up".
 
-## Set up
+**New here? [How to use it](HOW-TO.md)**: short, simple steps for every flow. **[The full guide](GUIDE.md)** has every detail.
 
-Try `/founder:ceo` on one idea first. It needs no setup. When you're ready:
+## Everyday use
 
-```
-/founder:setup
-```
+Just talk to `/founder:ceo`. These words work:
 
-- **It checks your machine** and lists what's ready, what it installs, and what needs you.
-- **Claude installs** the tools (Git, Node, the GitHub CLI and more) in one batch you approve.
-- **You do** only the sign-ins and accounts, one step at a time. No passwords in chat.
-- **You choose:**
-  - your folders
-  - a free `.vercel.app` site, or your own domain (about $10 a year)
-  - a local media folder, or Google Drive
-- **Set up in stages:** ideas, then build, then showcase, each only when you need it.
-
-**New here? [How to use it](HOW-TO.md)**: short, simple steps for every flow, from your first idea to customers.
-
-**[The guide](GUIDE.md)** walks through every step, from setup to your first launch.
-
-## The commands
-
-Start with these. Everything else runs behind them.
-
-| | |
+| Say | You get |
 |---|---|
-| `/founder:ceo` | The front door. A portfolio brief, or any request in plain words |
-| `/founder:hunt` | Find product ideas from real complaints, reviews and competitor gaps |
-| `/founder:check` · `/founder:prove` | Is it worth a closer look? Will people want it and pay? |
-| `/founder:board` | Your board of directors for any decision |
-| `/founder:ask` | Answers from everything already researched and decided |
-| `/founder:setup` | Get this machine ready for the next stage |
-| `/founder:pause` · `/founder:resume` | Stop everything; start only what's needed |
-| `/founder:update` | Get the latest version. New releases are announced in one line when a session starts |
+| "check my idea: …" | The verdict, in about 10 minutes |
+| "prove <idea>" | Customers, pricing, your conversations, the board's vote |
+| "build <idea>" | Spec, design, tested build, final checks |
+| "my app is in this folder" / a GitHub link | Your code brought in, set up, tested and planned |
+| "launch <product>" | Case study, demo, posts and video, as drafts |
+| "find customers for <product>" | People to talk to, and messages to send |
+| "add <feature> to <product>" | Reviewed, planned, built and released |
+| "can <product> make money?" | Pricing, costs and break-even, with sources |
+| "find me ideas in <topic>" | Real problems people would pay to fix |
+| `/founder:ceo` on its own | Every product and idea, and what's waiting on you |
+
+**Daily habits:** `/founder:resume` to pick up where you left off, and `/founder:pause` to save everything and free your computer's memory.
+
+**On GitHub:** each idea has a card showing its stage (Idea → Checked → Proven → Built → Live), its verdict and what to say next. Each idea's folder opens with a "start here" page.
+
+**Staying current:** a session tells you when a new version is out. Say "update founder".
 
 <details>
 <summary>Every command, for direct control</summary>
 
 | | |
 |---|---|
+| `/founder:ceo` | The front door: a brief, or any request in plain words |
+| `/founder:capture` · `/founder:check` · `/founder:prove` | Your idea as it stands; is it worth a look; will people pay |
+| `/founder:hunt` | Find ideas from real complaints, reviews and competitor gaps |
+| `/founder:board` | Three advisors vote on any big decision |
+| `/founder:ask` | Answers from everything already researched and decided |
+| `/founder:adopt` | Shortcut for bringing in code |
 | `/founder:run <playbook>` | A whole journey: validate, idea-to-launch, feature, customer-test, finance-check, first-customers, showcase, health, weekly, monthly-review, raise, graduate |
-| `/founder:idea` · `/founder:portfolio` · `/founder:next` | Capture ideas and enhancements; the detailed portfolio view; "what should I do now?" on one product |
+| `/founder:idea` · `/founder:portfolio` · `/founder:next` | Save ideas and features; the detailed portfolio; the next step for one product |
 | `/founder:research` · `/founder:finance` · `/founder:discover` · `/founder:market` · `/founder:sales` · `/founder:listen` · `/founder:support` · `/founder:legal` | The departments, each runnable on its own |
-| `/founder:adopt` | Bring in code you already have, from GitHub or a folder: your ideas first, a brief, a plan, your ideas reviewed, installed and tested, one home for every copy |
-| `/founder:setup-product` · `/founder:spec` · `/founder:design` · `/founder:build` · `/founder:verify` · `/founder:release` · `/founder:showcase` | Engineering, built on Matt Pocock's skills and Impeccable, and the showcase |
+| `/founder:setup-product` · `/founder:spec` · `/founder:design` · `/founder:build` · `/founder:verify` · `/founder:release` · `/founder:showcase` | Engineering and the showcase |
+| `/founder:setup` · `/founder:pause` · `/founder:resume` · `/founder:update` | Setup, stop, start, update |
 
 </details>
 
-Run `/founder:portfolio help` for one line per command, or ask `/founder:ceo` in plain words.
+---
+
+## Why it holds up
+
+- **Specialists, not one average tool.** 52 proven open-source skills, 650,000+ GitHub stars between them:
+  - **Ideas, checks and proof:** startup-design, founder-board
+  - **Build:** Matt Pocock (spec, test-first, code review)
+  - **Design:** Impeccable, Meng To
+  - **Research, marketing, sales:** Corey Haines
+  - **Security, legal and support:** Cloudflare, Anthropic
+- **Pinned and tested.** Each release ships the exact skill versions it was tested with. Upstream changes reach you only after they pass.
+- **Light on your usage.** About 700 tokens added to a session, against 3,400 for the same 52 skills installed the usual way. Research is gathered once by a lighter model and judged from notes. You see the time and cost before every journey, and each stage tells you to start a fresh chat, which costs far less.
+- **You stay in control.** Nothing is posted, sent, deployed or paid for without your yes. Posts and outreach arrive as drafts.
+- **Frees your computer.** `/founder:pause` stops Docker, WSL and every service (1.9 GB freed in testing); `/founder:resume` starts only what's needed.
+- **Free until it earns.** Case studies, demos and posts run on free hosting. Paid hosting only once real customers ask.
 
 ## What it doesn't do
 
-- **Act in public for you.** You send every post and message. Nothing is published, deployed or paid for without your yes.
-- **Replace a lawyer, an accountant or real customers.** Legal output is "not legal advice". Simulated customers never count as evidence.
+- **Act in public for you.** You send every post and message.
+- **Replace a lawyer, an accountant or real customers.** Legal output is not legal advice. Simulated customers never count as evidence.
 - **Scrape or sign in anywhere.** Blocked sites are read through your own browser, read-only.
-- **Make big jobs free.** Most single steps take 0.2–2M tokens (mostly cached re-reads), and a full validation a few million. You see the estimate first, measured per flow in [costs.md](plugin/references/costs.md).
+- **Make big jobs free.** A Check is about 1.2M tokens and Prove about 4M (mostly cached re-reads). Measured per flow in [costs.md](plugin/references/costs.md).
 - **Run on a server.** It runs in your Claude Code, with your files and your GitHub.
 - **Speak for the skills' authors.** It ships their open-source skills with credit and licences. They haven't endorsed it.
-- **Run paid production yet.** Hosting, billing and monitoring for paying customers come in a later release.
+- **Run paid production yet.** Billing and monitoring for paying customers come in a later release.
 
 ## Tested
 
-- **Tested end to end on Windows.**
-- **Built for macOS and Linux too.** Automated install checks pass on both on every change. Full end-to-end testing there is still to come.
-- **Automated tests** run every script end to end against a stand-in GitHub, and check every flow's references and plain-language rules, on Windows, macOS and Linux on every change ([`plugin/tests/`](plugin/tests/)).
-- **Evals** check the first run, routing, honest verdicts, pinned skills and plain-language onboarding ([`plugin/evals/`](plugin/evals/)).
-- **Smoke runs** drive every flow headless in a sandbox before each release (`plugin/tests/smoke.mjs`).
+- **Every flow, headless, before each release,** including a brand-new computer starting from an idea, notes, a code folder, a GitHub link, and a mix of all of them.
+- **Automated tests** on Windows, macOS and Linux on every change: every script end to end against a stand-in GitHub, every flow's references, and the plain-language rules ([`plugin/tests/`](plugin/tests/)).
+- **Evals** for the first run, routing, honest verdicts, pinned skills and plain-language onboarding ([`plugin/evals/`](plugin/evals/)).
+- **Tested end to end on Windows.** macOS and Linux pass the automated checks; full end-to-end runs there are still to come.
 
 ## Credits
 
-- Built on open-source skills by Matt Pocock, Corey Haines, ferdinandobons, Paul Bakaus (Impeccable), Cloudflare, GreenSock, HeyGen, Meng To, Anthropic and others.
+- Built on open-source skills by ferdinandobons (startup-design), Jake Schincariol (founder-board), Matt Pocock, Corey Haines, Paul Bakaus (Impeccable), Meng To, Cloudflare, GreenSock, HeyGen, Anthropic and others.
 - Pinned, unchanged copies ship with their original licences in [`plugin/vendor/`](plugin/vendor/). See [CREDITS.md](CREDITS.md).
 - Want a skill outside Full Stack Founder? Install the original from its author.
 
