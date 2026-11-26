@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.7.1 · 2026-11-27
+
+- **Bring any mix.** "What are you bringing?" is no longer a pick-one: the idea in your head, your goals, notes or documents, and code can all come together. Capture brings the code in, reads every source you name (a separate notes folder as well as the code), and always asks once for what's only in your head.
+
 ## 0.7.0 · 2026-11-27
 
 - **One front door for everything.** Say what you're bringing to `/founder:ceo` (an idea, an idea with goals, notes or documents, a folder of code or a GitHub link) and the flow adapts. There's no longer a choice between "a new idea" and "adopting": Capture notices code and brings it in on the way (one home, a private backup, setup and tests), then Check, then the plan forward. `/founder:adopt` still works as a shortcut.

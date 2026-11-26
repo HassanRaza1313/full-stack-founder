@@ -16,7 +16,7 @@ You can build it. Full Stack Founder runs the other half of a startup: research,
 
 ## Your journey
 
-1. **Say what you're bringing** to `/founder:ceo`: an idea, notes, documents, a folder of code or a GitHub link. One door for all of them.
+1. **Say what you're bringing** to `/founder:ceo`: any mix of an idea, notes, documents, a folder of code and a GitHub link. One door for all of them.
 2. **Nothing to set up first.** Each step sets up only what it needs, when it needs it, and says why.
 3. **It runs the journey** and stops for your decisions. The verdict is advice: you can always build it anyway.
 

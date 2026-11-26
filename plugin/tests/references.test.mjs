@@ -92,7 +92,7 @@ test('no flow points at a mode that no longer exists', () => {
 test('capture: what are you bringing first, intent not facts, "not sure" welcome, short, then check and adopt build on it', () => {
   const read = (p) => readFileSync(join(plugin, p), 'utf8');
   const c = read('skills/capture/SKILL.md');
-  for (const s of ['What are you bringing?', '**An idea.**', '**An idea with goals.**', '**Notes or documents:**', '**Code:**', 'skills/adopt/SKILL.md', 'trialDir', 'Gate', '**What we ask about: intent, never facts.**', '"Not sure" is always a good answer', 'up to 3 questions', '6 at most', 'at most 2 rounds and 8 questions', 'grilling', 'plan-vs-code.md', '"that\'s enough"', 'Is this right?']) assert.ok(c.includes(s), `capture: ${s}`);
+  for (const s of ['What are you bringing? Any mix is fine', '**The idea itself**', '**Goals:**', '**Notes or documents:**', '**Code:**', 'once **per source**', 'only in their head', 'skills/adopt/SKILL.md', 'trialDir', 'Gate', '**What we ask about: intent, never facts.**', '"Not sure" is always a good answer', 'up to 3 questions', '6 at most', 'at most 2 rounds and 8 questions', 'grilling', 'plan-vs-code.md', '"that\'s enough"', 'Is this right?']) assert.ok(c.includes(s), `capture: ${s}`);
   assert.ok(read('skills/check/SKILL.md').includes('skills/capture/SKILL.md'), 'check runs capture');
   const adopt = read('skills/adopt/SKILL.md');
   for (const s of ['skills/capture/SKILL.md', '/founder:check', 'your-call']) assert.ok(adopt.includes(s), `adopt: ${s}`);

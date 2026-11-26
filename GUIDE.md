@@ -41,7 +41,7 @@ Then type `/exit` and start `claude` again.
 /founder:ceo
 ```
 
-- **It asks one thing first:** an idea, an idea with goals, notes or documents, or code (a folder or a GitHub link). Or just tell it.
+- **It asks one thing first: what are you bringing?** Any mix of the idea in your head, your goals, notes or documents, and code (a folder or a GitHub link). Most people have more than one. Or just tell it.
 - **Nothing to set up for an idea or documents.** You get the verdict in about 10 minutes: what's promising, what's risky, and better versions.
 - **Want to keep it?** Say "keep it". It sets up a private place on GitHub then (about 5 minutes) and moves the idea in.
 - **Code?** It brings it in properly on the way: one home, a private backup, and a check that it runs.
